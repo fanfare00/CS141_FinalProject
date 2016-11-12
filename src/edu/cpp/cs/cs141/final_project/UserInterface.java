@@ -6,10 +6,15 @@ public class UserInterface
 {
     
     private Scanner scan;
+    private Application app;
     
     public UserInterface()
     {
 	scan = new Scanner(System.in);
+    }
+    
+    public void addApplication(Application app){
+    	this.app = app;
     }
     
     /**
