@@ -16,7 +16,7 @@ public class Application {
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
 		
 		for (GameObject o : game.getActiveEntities()) {
-			UI.addToGrid(o.getXPos(), o.getYPos(), o.getSymbol());
+			UI.addToGrid(o.getRow(), o.getCol(), o.getSymbol());
 		}
 		
 		UI.beginGame();

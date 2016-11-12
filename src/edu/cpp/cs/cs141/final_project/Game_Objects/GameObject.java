@@ -12,11 +12,11 @@ public class GameObject {
 		this.yPos = yPos;
 	}
 	
-	public int getXPos(){
+	public int getRow(){
 		return xPos;
 	}
 	
-	public int getYPos() {
+	public int getCol() {
 		return yPos;
 	}
 
