@@ -4,7 +4,7 @@ public class GameObject {
 	
 	private int xPos;
 	private int yPos;
-	private char symbol;
+	protected char symbol;
 	private String name;
 	
 	public GameObject(int xPos, int yPos) {

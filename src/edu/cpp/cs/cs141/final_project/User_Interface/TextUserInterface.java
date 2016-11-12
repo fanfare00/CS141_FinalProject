@@ -11,10 +11,10 @@ public class TextUserInterface
     private Application app;
     private char grid[][];
     
+    
     public TextUserInterface()
     {
     	scan = new Scanner(System.in);
- 
     }
     
     public void createGrid(int rows, int cols) {
@@ -28,6 +28,20 @@ public class TextUserInterface
     public void addToGrid(int xIndex, int yIndex, char symbol) {
     	grid[xIndex][yIndex] = symbol;
     }
+    
+    private String gridToString() {
+    	String str ="";
+    	
+    	for (int m = 0; m < grid[0].length; m++) {
+    		for(int n = 0; n < grid.length; n++) {
+    			str += "[ " + grid[m][n] + " ]";
+    		}
+    		str+= "\n";
+    	}
+    	
+    	return str;
+    }
+    
     
     /**
      * Runs the game.
@@ -63,6 +77,8 @@ public class TextUserInterface
     {
 	System.out.println("Please enter a command. Type \"help\" or \"?\" for a list of commands you can perform.");
 	
+	System.out.println(gridToString());
+	
 	boolean success = false;
 	
 	while (!success)
@@ -82,6 +98,7 @@ public class TextUserInterface
 		case "shoot":
 		case "s":
 		    // call shoot method on game
+			
 		    break;
 		case "look":
 		case "l":
