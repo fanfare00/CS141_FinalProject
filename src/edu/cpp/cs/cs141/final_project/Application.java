@@ -9,8 +9,21 @@ public class Application {
 		this.game = game;
 	}
 
-
 	public void startGame() {
 		UI.beginGame();
 	}
+	
+	public void playerMove() {
+		//if(game.attemptPlayerMove()) 
+	}
+	
+	public void playerLook() {
+		
+	}
+	
+	public void playerShoot() {
+		
+	}
+	
+	
 }
