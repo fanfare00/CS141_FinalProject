@@ -1,4 +1,4 @@
-package edu.cpp.cs.cs141.final_project.Actors;
+package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
 public class Player extends Actor{
 	private boolean isInvincible;

@@ -1,20 +1,32 @@
-package edu.cpp.cs.cs141.final_project;
+package edu.cpp.cs.cs141.final_project.User_Interface;
 
 import java.util.Scanner;
 
-public class UserInterface
+import edu.cpp.cs.cs141.final_project.Application;
+
+public class TextUserInterface
 {
     
     private Scanner scan;
     private Application app;
+    private char grid[][];
     
-    public UserInterface()
+    public TextUserInterface()
     {
-	scan = new Scanner(System.in);
+    	scan = new Scanner(System.in);
+ 
+    }
+    
+    public void createGrid(int rows, int cols) {
+    	grid = new char[rows][cols];
     }
     
     public void addApplication(Application app){
     	this.app = app;
+    }
+    
+    public void addToGrid(int xIndex, int yIndex, char symbol) {
+    	grid[xIndex][yIndex] = symbol;
     }
     
     /**

@@ -1,6 +1,6 @@
-package edu.cpp.cs.cs141.final_project.Powerups;
+package edu.cpp.cs.cs141.final_project.Game_Objects.Powerups;
 
-import edu.cpp.cs.cs141.final_project.Actors.Actor;
+import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 
 public class Radar implements Powerup{
 
