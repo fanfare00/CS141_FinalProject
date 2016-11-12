@@ -14,7 +14,7 @@ public class Application {
 	}
 	
 	public void playerMove() {
-		//if(game.attemptPlayerMove()) 
+		///if(game.attemptPlayerMove()) 
 	}
 	
 	public void playerLook() {
