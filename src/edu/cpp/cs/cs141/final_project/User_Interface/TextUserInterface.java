@@ -33,12 +33,11 @@ public class TextUserInterface
     	String str ="";
     	
     	for (int m = 0; m < grid[0].length; m++) {
-    		for(int n = 0; n < grid.length; n++) {
+    		for (int n = 0; n < grid.length; n++) {
     			str += "[ " + grid[m][n] + " ]";
     		}
     		str+= "\n";
     	}
-    	
     	return str;
     }
     
@@ -98,7 +97,7 @@ public class TextUserInterface
 		case "shoot":
 		case "s":
 		    // call shoot method on game
-			
+			app.saveGameData();
 		    break;
 		case "look":
 		case "l":
@@ -119,6 +118,7 @@ public class TextUserInterface
 		    break;
 		case "reprint":
 		case "r":
+			app.loadGameData();
 		    break;
 		case "hard":
 		    break;

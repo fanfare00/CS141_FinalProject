@@ -1,23 +1,25 @@
 package edu.cpp.cs.cs141.final_project.Game_Objects;
 
-public class GameObject {
+import java.io.Serializable;
+
+public class GameObject implements Serializable{
 	
-	private int xPos;
-	private int yPos;
+	protected int row;
+	protected int col;
 	protected char symbol;
-	private String name;
+	protected String name;
 	
 	public GameObject(int xPos, int yPos) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+		this.row = xPos;
+		this.col = yPos;
 	}
 	
 	public int getRow(){
-		return xPos;
+		return row;
 	}
 	
 	public int getCol() {
-		return yPos;
+		return col;
 	}
 
 	public char getSymbol() {

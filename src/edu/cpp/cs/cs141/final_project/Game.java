@@ -24,6 +24,7 @@ public class Game {
 	
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Enemy> enemies = new ArrayList<Enemy>();
+	List<GameObject> activeEntities = new ArrayList<GameObject>();
 	private Player player;
 	
 	public Game() {
@@ -81,7 +82,7 @@ public class Game {
 		return false;
 	}
 
-	public boolean isSpawnTooClose(int row, int col) {
+	private boolean isSpawnTooClose(int row, int col) {
 		int closeRow = GAME_ROWS - ENEMY_SPAWN_DISTANCE - 1;
 		int closeCol = ENEMY_SPAWN_DISTANCE;
 		
@@ -93,11 +94,17 @@ public class Game {
 
 	
 	public List<GameObject> getActiveEntities() {
-	    List<GameObject> activeEntities = new ArrayList<GameObject>();
+	    
+	    
 	    activeEntities.addAll(rooms);
 	    activeEntities.addAll(enemies);
 	    activeEntities.add(player);
 		
 		return activeEntities;
+	}
+
+	public void setActiveEntities(List<GameObject> activeEntities) {
+		this.activeEntities.clear();
+		this.activeEntities.addAll(activeEntities);
 	}
 }
