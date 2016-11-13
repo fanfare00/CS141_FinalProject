@@ -126,7 +126,7 @@ public class TextUserInterface
 		    break;
 		default:
 		    success = false;
-		    System.out.println("That was not a valid command. Please try again.");
+		    System.out.println("That was not a valid command. Type \"help\" or \"?\" for a list of commands you can perform.");
 		    break;
 	    }
 	}
