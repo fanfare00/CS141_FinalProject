@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import edu.cpp.cs.cs141.final_project.Application;
 
+/**
+ * The text implementation of {@link IUserInterface}. It uses plain text to display the game to the user.
+ */
 public class TextUserInterface implements IUserInterface
 {
     
@@ -31,6 +34,9 @@ public class TextUserInterface implements IUserInterface
 	grid[xIndex][yIndex] = symbol;
     }
     
+    /**
+     * Returns a string representation of the grid.
+     */
     private String gridToString()
     {
 	String str = "";
@@ -46,9 +52,6 @@ public class TextUserInterface implements IUserInterface
 	return str;
     }
     
-    /**
-     * Runs the game.
-     */
     public void beginGame()
     {
 	printHelpMessage();
@@ -64,9 +67,6 @@ public class TextUserInterface implements IUserInterface
 	System.out.println("move (m), shoot (s), look (l), save, load, help (?), quit, reprint (r), hard, debug");
     }
     
-    /**
-     * Prompts for, verifies, and executes a command from the user.
-     */
     public void promptCommand()
     {
 	System.out.println("Please enter a command. Type \"help\" or \"?\" for a list of commands you can perform.");
@@ -84,13 +84,6 @@ public class TextUserInterface implements IUserInterface
 		case "m":
 		    while (!app.playerMove(getMoveDirection()))
 			System.out.println("You can't move in that direction!");
-		    // boolean moveSuccess = false;
-		    // while (!moveSuccess)
-		    // {
-		    // moveSuccess = app.playerMove(getMoveDirection());
-		    // if (!moveSuccess) System.out.println("You can't move in
-		    // that direction!");
-		    // }
 		    break;
 		case "shoot":
 		case "s":
@@ -128,7 +121,6 @@ public class TextUserInterface implements IUserInterface
 		    break;
 	    }
 	}
-	
     }
     
     /**
@@ -160,6 +152,9 @@ public class TextUserInterface implements IUserInterface
 	return direction;
     }
     
+    /**
+     * Prints a text representation of the game grid.
+     */
     @Override
     public void drawGrid()
     {

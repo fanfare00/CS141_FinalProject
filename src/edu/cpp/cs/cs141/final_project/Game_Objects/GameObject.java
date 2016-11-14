@@ -2,6 +2,9 @@ package edu.cpp.cs.cs141.final_project.Game_Objects;
 
 import java.io.Serializable;
 
+/**
+ * An object that has some position and appearance in the game.
+ */
 public class GameObject implements Serializable{
 	
 	protected int row;
@@ -14,14 +17,23 @@ public class GameObject implements Serializable{
 		this.col = yPos;
 	}
 	
+	/**
+	 * Returns the row of this {@link GameObject}.
+	 */
 	public int getRow(){
 		return row;
 	}
 	
+	/**
+	 * Returns the column of this {@link GameObject}.
+	 */
 	public int getCol() {
 		return col;
 	}
 
+	/**
+	 * Returns the symbol of this {@link GameObject}.
+	 */
 	public char getSymbol() {
 		return symbol;
 	}

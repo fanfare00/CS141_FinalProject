@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
-import edu.cpp.cs.cs141.final_project.User_Interface.SaveFileManager;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
 
+/**
+ * The {@link Application} class receives commands from the UI and controls the game.
+ */
 public class Application {
 	private IUserInterface UI;
 	private Game game;
@@ -18,6 +20,9 @@ public class Application {
 		UI.addApplication(this);
 	}
 
+	/**
+	 * Initializes a new game.
+	 */
 	public void startNewGame() {
 		
 		loadGame(game.getActiveEntities());
@@ -26,11 +31,18 @@ public class Application {
 		gameLoop();
 	}
 	
+	/**
+	 * Loads game state from the disk.
+	 */
 	@SuppressWarnings("unchecked")
 	public void loadGameData() {		
 		loadGame((List<GameObject>) SaveFileManager.load());
 	}
 	
+	/**
+	 * Creates the game with the specified entities.
+	 * @param activeEntities The list of entities to add to the game.
+	 */
 	public void loadGame(List<GameObject> activeEntities) {
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
 		
@@ -39,10 +51,17 @@ public class Application {
 		game.setActiveEntities(activeEntities);
 	}
 	
+	/**
+	 * Saves the current game state to the disk.
+	 */
 	public void saveGameData() {
 		SaveFileManager.save(game.getActiveEntities());
 	}
 	
+	/**
+	 * Updates the UI with the currently active entities.
+	 * @param activeEntities The entities to be displayed on the UI.
+	 */
 	public void updateUI(List<GameObject> activeEntities)
 	{
 	    for (int i = 0; i < Game.GAME_ROWS; i++)
@@ -58,6 +77,9 @@ public class Application {
 	    UI.drawGrid();
 	}
 	
+	/**
+	 * The main game loop.
+	 */
 	private void gameLoop()
 	{
 	    while (!game.isGameOver())
@@ -77,10 +99,16 @@ public class Application {
 	    return game.movePlayer(direction);
 	}
 	
+	/**
+	 * Makes the player look.
+	 */
 	public void playerLook() {
 		
 	}
 	
+	/**
+	 * Makes the player shoot.
+	 */
 	public void playerShoot() {
 		
 	}

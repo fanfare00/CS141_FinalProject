@@ -8,6 +8,9 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.*;
 
+/**
+ * The game engine. It stores the game state and controls the mechanics of the game.
+ */
 public class Game {
 
 	public static final int GAME_ROWS = 9;
@@ -37,17 +40,27 @@ public class Game {
 		spawnBriefcase();
 	}
 	
+	/**
+	 * Checks if the game is over.
+	 * @return True if the game is over, false if it is still going.
+	 */
 	public boolean isGameOver()
 	{
 	    return gameOver;
 	}
 	
+	/**
+	 * Places the briefcase in a random room.
+	 */
 	private void spawnBriefcase() {
 		int randomRoomNumber = (int) (Math.random() * MAX_ROOM_COUNT);
 		
 		 rooms.get(randomRoomNumber).placeIntel();
 	}
 	
+	/**
+	 * Spawns the rooms. They will spawn in the same place each time.
+	 */
 	private void spawnRooms() {
 		for (int i = 1; i < MAX_ROOM_COUNT; i+=ROOM_SPACING) {
 			for (int j = 1; j < MAX_ROOM_COUNT; j+=ROOM_SPACING) {
@@ -56,6 +69,9 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Randomly spawns enemies around the map.
+	 */
 	private void spawnEnemiesRandomly() {
 		int randomRow;
 		int randomCol;
@@ -74,6 +90,12 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Checks if the specified location is valid for spawning an enemy.
+	 * @param row The row of the target location.
+	 * @param col The column of the target location.
+	 * @return True if this location is valid, false if it is not.
+	 */
 	private boolean isValidSpawnLocation(int row, int col) {
 		if (isSpawnOccupied(row, col)) return false;
 		if (isSpawnTooClose(row, col)) return false;
@@ -81,6 +103,12 @@ public class Game {
 		return true;
 	}
 	
+	/**
+	 * Checks if this location is occupied by a room.
+	 * @param row The row of the target location.
+	 * @param col The column of the target location.
+	 * @return True if the spawn is occupied, false otherwise.
+	 */
 	private boolean isSpawnOccupied(int row, int col) {
 		for (Room r : rooms){
 			if ((r.getRow() == row) && r.getCol() == col) {
@@ -90,6 +118,12 @@ public class Game {
 		return false;
 	}
 
+	/**
+	 * Checks if the specified enemy spawn location is too close to the player.
+	 * @param row The row of the enemy spawn location.
+	 * @param col The column of the enemy spawn location.
+	 * @return True of the spawn is too close, false otherwise.
+	 */
 	private boolean isSpawnTooClose(int row, int col) {
 		int closeRow = GAME_ROWS - ENEMY_SPAWN_DISTANCE - 1;
 		int closeCol = ENEMY_SPAWN_DISTANCE;
@@ -100,7 +134,9 @@ public class Game {
 		return false;
 	}
 
-	
+	/**
+	 * Gets the list of currently active entities.
+	 */
 	public List<GameObject> getActiveEntities() {
 	    
 	    
@@ -111,6 +147,10 @@ public class Game {
 		return activeEntities;
 	}
 
+	/**
+	 * Replaces the currently active entities with a new list of entities.
+	 * @param activeEntities The list of entities to make active.
+	 */
 	public void setActiveEntities(List<GameObject> activeEntities) {
 		List<GameObject> entities = new ArrayList<GameObject>();
 		entities.addAll(activeEntities);
@@ -127,7 +167,7 @@ public class Game {
 	public boolean movePlayer(int direction)
 	{
 	    boolean success = false;
-	    switch (direction) //check if other entities are there
+	    switch (direction)
 	    {
 		case 1:
 		    if (isPlayerMovePossible(player.getRow() - 1, player.getCol(), false))
@@ -162,6 +202,13 @@ public class Game {
 	    return success;
 	}
 	
+	/**
+	 * Performs collision checking to ensure it is possible for the player to move to the requested location.
+	 * @param row The row of the target location.
+	 * @param col The column of the target location.
+	 * @param movingDown Set this to true if the player is moving downwards. This affects the player's ability to move into a room.
+	 * @return True if the player could successfully move to the specified location.
+	 */
 	private boolean isPlayerMovePossible(int row, int col, boolean movingDown)
 	{
 	    if (row >= 0 && row < GAME_ROWS && col >= 0 && col < GAME_COLS)
@@ -181,6 +228,9 @@ public class Game {
 	    return false;
 	}
 	
+	/**
+	 * Executes enemy actions like moving and attacking.
+	 */
 	public void performEnemyActions()
 	{
 	    

@@ -1,5 +1,8 @@
 package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
+/**
+ * The {@link Actor} that the user controls.
+ */
 public class Player extends Actor{
 	private boolean isInvincible;
 

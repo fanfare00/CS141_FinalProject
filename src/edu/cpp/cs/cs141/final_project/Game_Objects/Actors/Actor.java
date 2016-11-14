@@ -2,6 +2,9 @@ package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 
+/**
+ * A {@link GameObject} that is capable of moving around.
+ */
 public class Actor extends GameObject{
 
 	boolean isAlive;
