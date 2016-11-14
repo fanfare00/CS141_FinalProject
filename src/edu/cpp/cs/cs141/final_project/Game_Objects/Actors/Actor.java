@@ -5,18 +5,36 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 public class Actor extends GameObject{
 
 	boolean isAlive;
+	boolean invincible;
 	int ammo;
 	
 	public Actor(int row, int col) {
 		super(row, col);
 	}
 	
+	/**
+	 * Moves the {@link Actor} by the specified number of rows down.
+	 * @param distance The number of rows to move the {@link Actor} down. A negative number moves it up. 
+	 */
 	public void moveRow(int distance) {
 		this.row+=distance;
 	}
 	
+	/**
+	 * Moves the {@link Actor} by the specified number of columns to the right.
+	 * @param distance The number of columns to move the {@link Actor} to the right. A negative number moves it left. 
+	 */
 	public void moveCol(int distance) {
 		this.col+=distance;
+	}
+	
+	/**
+	 * Changes the {@link Actor}'s invincibility status.
+	 * @param invincible If true, makes the {@link Actor} invincible. If false, makes it vulnerable.
+	 */
+	public void setInvincibility(boolean invincible)
+	{
+	    this.invincible = invincible;
 	}
 
 }

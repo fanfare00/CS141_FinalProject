@@ -4,43 +4,47 @@ import java.util.Scanner;
 
 import edu.cpp.cs.cs141.final_project.Application;
 
-public class TextUserInterface
+public class TextUserInterface implements IUserInterface
 {
     
     private Scanner scan;
     private Application app;
     private char grid[][];
     
-    
     public TextUserInterface()
     {
-    	scan = new Scanner(System.in);
+	scan = new Scanner(System.in);
     }
     
-    public void createGrid(int rows, int cols) {
-    	grid = new char[rows][cols];
+    public void createGrid(int rows, int cols)
+    {
+	grid = new char[rows][cols];
     }
     
-    public void addApplication(Application app){
-    	this.app = app;
+    public void addApplication(Application app)
+    {
+	this.app = app;
     }
     
-    public void addToGrid(int xIndex, int yIndex, char symbol) {
-    	grid[xIndex][yIndex] = symbol;
+    public void addToGrid(int xIndex, int yIndex, char symbol)
+    {
+	grid[xIndex][yIndex] = symbol;
     }
     
-    private String gridToString() {
-    	String str ="";
-    	
-    	for (int m = 0; m < grid[0].length; m++) {
-    		for (int n = 0; n < grid.length; n++) {
-    			str += "[ " + grid[m][n] + " ]";
-    		}
-    		str+= "\n";
-    	}
-    	return str;
+    private String gridToString()
+    {
+	String str = "";
+	
+	for (int m = 0; m < grid[0].length; m++)
+	{
+	    for (int n = 0; n < grid.length; n++)
+	    {
+		str += "[ " + grid[m][n] + " ]";
+	    }
+	    str += "\n";
+	}
+	return str;
     }
-    
     
     /**
      * Runs the game.
@@ -48,7 +52,7 @@ public class TextUserInterface
     public void beginGame()
     {
 	printHelpMessage();
-	gameLoop();
+	// gameLoop();
     }
     
     /**
@@ -60,23 +64,12 @@ public class TextUserInterface
 	System.out.println("move (m), shoot (s), look (l), save, load, help (?), quit, reprint (r), hard, debug");
     }
     
-    private void gameLoop()
-    {
-	while (true) // todo: make this a call to Game/Application to check if
-		     // the game is not yet over
-	{
-	    promptCommand();
-	}
-    }
-    
     /**
      * Prompts for, verifies, and executes a command from the user.
      */
-    private void promptCommand()
+    public void promptCommand()
     {
 	System.out.println("Please enter a command. Type \"help\" or \"?\" for a list of commands you can perform.");
-	
-	System.out.println(gridToString());
 	
 	boolean success = false;
 	
@@ -89,26 +82,30 @@ public class TextUserInterface
 	    {
 		case "move":
 		case "m":
-		    int moveDirection = getMoveDirection(); // call move method
-							    // on Game, passing
-							    // this direction as
-							    // argument
+		    while (!app.playerMove(getMoveDirection()))
+			System.out.println("You can't move in that direction!");
+		    // boolean moveSuccess = false;
+		    // while (!moveSuccess)
+		    // {
+		    // moveSuccess = app.playerMove(getMoveDirection());
+		    // if (!moveSuccess) System.out.println("You can't move in
+		    // that direction!");
+		    // }
 		    break;
 		case "shoot":
 		case "s":
 		    // call shoot method on game
-			app.saveGameData();
 		    break;
 		case "look":
 		case "l":
 		    break;
 		case "save":
-		    // todo: prompt for save name and call save method on
-		    // SaveData class
+		    // todo: prompt for save name
+		    app.saveGameData();
 		    break;
 		case "load":
-		    // todo: prompt for save name and call load method on
-		    // SaveData class
+		    // todo: prompt for save name
+		    app.loadGameData();
 		    break;
 		case "help":
 		case "?":
@@ -118,7 +115,7 @@ public class TextUserInterface
 		    break;
 		case "reprint":
 		case "r":
-			app.loadGameData();
+		    drawGrid();
 		    break;
 		case "hard":
 		    break;
@@ -126,7 +123,8 @@ public class TextUserInterface
 		    break;
 		default:
 		    success = false;
-		    System.out.println("That was not a valid command. Type \"help\" or \"?\" for a list of commands you can perform.");
+		    System.out.println(
+			    "That was not a valid command. Type \"help\" or \"?\" for a list of commands you can perform.");
 		    break;
 	    }
 	}
@@ -147,7 +145,8 @@ public class TextUserInterface
 	
 	while (!valid)
 	{
-	    direction = scan.nextInt(); //throws InputMismatchException if not an int
+	    direction = scan.nextInt(); // throws InputMismatchException if not
+					// an int
 	    scan.nextLine();
 	    if (direction < 5 && direction > 0)
 	    {
@@ -160,4 +159,11 @@ public class TextUserInterface
 	}
 	return direction;
     }
+    
+    @Override
+    public void drawGrid()
+    {
+	System.out.println(gridToString());
+    }
+    
 }

@@ -7,7 +7,7 @@ public class Invincibility implements Powerup{
 	@Override
 	public void consume(Actor consumer) {
 		// TODO Auto-generated method stub
-		
+		consumer.setInvincibility(true);
 	}
 
 }

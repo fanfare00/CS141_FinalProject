@@ -17,6 +17,11 @@ public class Room extends GameObject {
 		hasIntel = true;
 		this.symbol = 'I';
 	}
+	
+	public boolean hasIntel()
+	{
+	    return hasIntel;
+	}
 
 
 }

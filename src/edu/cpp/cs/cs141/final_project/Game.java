@@ -27,11 +27,19 @@ public class Game {
 	List<GameObject> activeEntities = new ArrayList<GameObject>();
 	private Player player;
 	
+	private boolean gameOver;
+	private int turnNumber;
+	
 	public Game() {
 		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL);
 		spawnEnemiesRandomly();
 		spawnRooms();
 		spawnBriefcase();
+	}
+	
+	public boolean isGameOver()
+	{
+	    return gameOver;
 	}
 	
 	private void spawnBriefcase() {
@@ -104,7 +112,77 @@ public class Game {
 	}
 
 	public void setActiveEntities(List<GameObject> activeEntities) {
-		this.activeEntities.clear();
-		this.activeEntities.addAll(activeEntities);
+		List<GameObject> entities = new ArrayList<GameObject>();
+		entities.addAll(activeEntities);
+		this.activeEntities = entities;
+	    //this.activeEntities.clear();
+		//this.activeEntities.addAll(activeEntities);
+	}
+	
+	/**
+	 * Attempts to move the player in the specified direction.
+	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
+	 * @return True if the player was able to move in this direction, and false otherwise.
+	 */
+	public boolean movePlayer(int direction)
+	{
+	    boolean success = false;
+	    switch (direction) //check if other entities are there
+	    {
+		case 1:
+		    if (isPlayerMovePossible(player.getRow() - 1, player.getCol(), false))
+		    {
+			success = true;
+			player.moveRow(-1);
+		    }
+		    break;
+		case 2:
+		    if (isPlayerMovePossible(player.getRow() + 1, player.getCol(), true))
+		    {
+			success = true;
+			player.moveRow(1);
+		    }
+		    break;
+		case 3:
+		    if (isPlayerMovePossible(player.getRow(), player.getCol() - 1, false))
+		    {
+			success = true;
+			player.moveCol(-1);
+		    }
+		    break;
+		case 4:
+		    if (isPlayerMovePossible(player.getRow(), player.getCol() + 1, false))
+		    {
+			success = true;
+			player.moveCol(1);
+		    }
+		default:
+		    break;
+	    }
+	    return success;
+	}
+	
+	private boolean isPlayerMovePossible(int row, int col, boolean movingDown)
+	{
+	    if (row >= 0 && row < GAME_ROWS && col >= 0 && col < GAME_COLS)
+	    {
+		for (GameObject o : activeEntities)
+		{
+		    if (o.getRow() == row && o.getCol() == col)
+		    {
+			if (o instanceof Room && movingDown && ((Room)o).hasIntel())
+			    return true;
+			else
+			    return false;
+		    }
+		}
+		return true;
+	    }
+	    return false;
+	}
+	
+	public void performEnemyActions()
+	{
+	    
 	}
 }
