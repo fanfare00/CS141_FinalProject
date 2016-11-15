@@ -37,4 +37,8 @@ public class GameObject implements Serializable{
 	public char getSymbol() {
 		return symbol;
 	}
+	
+	public boolean checkCollision(GameObject o) {
+		return (o.getCol() == this.col) && (o.getRow() == this.row);
+	}
 }
