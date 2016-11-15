@@ -128,10 +128,7 @@ public class Game {
 		int closeRow = GAME_ROWS - ENEMY_SPAWN_DISTANCE - 1;
 		int closeCol = ENEMY_SPAWN_DISTANCE;
 		
-		if ((row > closeRow) && (col < closeCol)){
-			return true;
-		}
-		return false;
+		return ((row > closeRow) && (col < closeCol));
 	}
 
 	/**
