@@ -159,6 +159,11 @@ public class Game {
 		//this.activeEntities.addAll(activeEntities);
 	}
 	
+	/**
+	 * Attempts to move the {@link Player} in the specified direction.
+	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
+	 * @return True if the {@link Player} was able to move in the specified direction, and false otherwise.
+	 */
 	public boolean movePlayer(int direction)
 	{
 	    return moveActor(direction, player);
@@ -167,9 +172,9 @@ public class Game {
 	/**
 	 * Attempts to move the {@link Actor} in the specified direction.
 	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
-	 * @return True if the {@link Actor} was able to move in this direction, and false otherwise.
+	 * @return True if the {@link Actor} was able to move in the specified direction, and false otherwise.
 	 */
-	public boolean moveActor(int direction, Actor actor)
+	private boolean moveActor(int direction, Actor actor)
 	{
 	    boolean success = false;
 	    switch (direction)
@@ -209,11 +214,11 @@ public class Game {
 	}
 	
 	/**
-	 * Performs collision checking to ensure it is possible for the player to move to the requested location.
+	 * Performs collision checking to ensure it is possible for the {@link Actor} to move to the specified location.
 	 * @param row The row of the target location.
 	 * @param col The column of the target location.
-	 * @param canEnterRoom Set this to true if the player is moving downwards. This affects the player's ability to move into a room.
-	 * @return True if the player could successfully move to the specified location.
+	 * @param canEnterRoom Set this to true if the {@link Actor} should be allowed to enter a room if one exists in the target location.
+	 * @return True if the {@link Actor} could successfully move to the specified location.
 	 */
 	private boolean isActorMovePossible(int row, int col, boolean canEnterRoom)
 	{
