@@ -254,4 +254,13 @@ public class Game {
 	{
 	    
 	}
+	
+	/**
+	 * Checks the proximity between the player and all enemies
+	 * @return -1 = player isn't close to an enemy, anything else = array index of enemy that's close to player
+	 */
+	public int checkPlayerProximity()
+	{
+		
+	}
 }
