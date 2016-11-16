@@ -252,14 +252,24 @@ public class Game {
 	 */
 	public void performEnemyActions()
 	{
-	    
+		checkPlayerProximity();
+		moveEnemies();
+		checkPlayerProximity();
 	}
 	
 	/**
 	 * Checks the proximity between the player and all enemies
 	 * @return -1 = player isn't close to an enemy, anything else = array index of enemy that's close to player
 	 */
-	public int checkPlayerProximity()
+	private int checkPlayerProximity()
+	{
+		return -1; //temporarily added to get rid of error
+	}
+	
+	/**
+	 * Randomly moves enemies around
+	 */
+	private void moveEnemies()
 	{
 		
 	}
