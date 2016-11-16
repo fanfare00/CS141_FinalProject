@@ -167,6 +167,17 @@ public class Game {
 	}
 	
 	/**
+	 * Attempts to move the {@link Enemy} in the specified direction.
+	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
+	 * @param enemyID The array index of the enemy that should be moved
+	 * @return True if the {@link Enemy} was able to move in the specified direction, and false otherwise.
+	 */
+	public boolean moveEnemy(int direction, int enemyID)
+	{
+	    return moveActor(direction, enemies.get(enemyID));
+	}
+	
+	/**
 	 * Attempts to move the {@link Actor} in the specified direction.
 	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
 	 * @return True if the {@link Actor} was able to move in the specified direction, and false otherwise.
@@ -241,6 +252,6 @@ public class Game {
 	 */
 	public void performEnemyActions()
 	{
-	    
+		
 	}
 }
