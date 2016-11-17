@@ -266,11 +266,14 @@ public class Game {
 		return -1; //temporarily added to get rid of error
 	}
 	
-	/**
-	 * Randomly moves enemies around
-	 */
-	private void moveEnemies()
+    /**
+     * Randomly moves enemies around
+     */
+    private void moveEnemies()
+    {
+	for (int i = 0; i < enemies.size(); i++)
 	{
-		
+	    while (!moveEnemy((int)(Math.random() * 5), i));
 	}
+    }
 }
