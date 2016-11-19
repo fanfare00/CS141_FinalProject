@@ -31,6 +31,15 @@ public class Application {
 		gameLoop();
 	}
 	
+	public void moveCurrentActor(int row, int col) {
+		game.moveCurrentActor(row, col);
+	}
+	
+	public void lookCurrentActor(int row, int col) {
+		game.lookCurrentActor(row, col);
+	}
+	
+	
 	/**
 	 * Loads game state from the disk.
 	 */
@@ -99,12 +108,7 @@ public class Application {
 	    return game.movePlayer(direction);
 	}
 	
-	/**
-	 * Makes the player look.
-	 */
-	public void playerLook() {
-		
-	}
+
 	
 	/**
 	 * Makes the player shoot.

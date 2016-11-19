@@ -1,21 +1,22 @@
 package edu.cpp.cs.cs141.final_project.Utilities.Commands;
 
-import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
+import edu.cpp.cs.cs141.final_project.Application;
+
 
 public class MoveCommand implements Command {
 
-	private Actor actor;
+	private Application app;
 	private int row, col;
 	
-	public MoveCommand(Actor actor, int row, int col) {
-		this.actor = actor;
+	public MoveCommand(Application app, int row, int col) {
+		this.app = app;
 		this.row = row;
 		this.col = col;
 	}
 	
 	@Override
 	public void execute() {
-		//actor.move(row, col);
+		app.moveCurrentActor(row, col);
 	}
 
 }

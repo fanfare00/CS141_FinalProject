@@ -3,8 +3,6 @@ package edu.cpp.cs.cs141.final_project.Utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
-import edu.cpp.cs.cs141.final_project.Utilities.Commands.*;
 
 public abstract class InputHandler {	
 	

@@ -276,4 +276,14 @@ public class Game {
 	    while (!moveEnemy((int)(Math.random() * 5), i));
 	}
     }
+
+	public void moveCurrentActor(int row, int col) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void lookCurrentActor(int row, int col) {
+		// TODO Auto-generated method stub
+		
+	}
 }
