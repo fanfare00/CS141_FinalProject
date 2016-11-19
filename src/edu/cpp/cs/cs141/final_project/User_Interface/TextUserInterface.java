@@ -1,8 +1,12 @@
 package edu.cpp.cs.cs141.final_project.User_Interface;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import edu.cpp.cs.cs141.final_project.Application;
+import edu.cpp.cs.cs141.final_project.Utilities.Key;
+import edu.cpp.cs.cs141.final_project.Utilities.Commands.MoveCommand;
 
 /**
  * The text implementation of {@link IUserInterface}. It uses plain text to display the game to the user.
@@ -10,13 +14,31 @@ import edu.cpp.cs.cs141.final_project.Application;
 public class TextUserInterface implements IUserInterface
 {
     
+	private List<Key> allKeys = new ArrayList<Key>();
+	private List<Key> activeKeys = new ArrayList<Key>();
+	
     private Scanner scan;
     private Application app;
     private char grid[][];
     
-    public TextUserInterface()
-    {
-	scan = new Scanner(System.in);
+    public TextUserInterface() {
+		scan = new Scanner(System.in);
+		
+		allKeys.add(new Key('W'));
+		allKeys.add(new Key('A'));
+		allKeys.add(new Key('S'));
+		allKeys.add(new Key('D'));
+		allKeys.add(new Key('Z'));
+		allKeys.add(new Key('C'));
+		allKeys.add(new Key('M'));
+		allKeys.add(new Key('1'));
+		allKeys.add(new Key('2'));
+		allKeys.add(new Key('3'));
+		
+    }
+    
+    public void update() {
+    	
     }
     
     public void createGrid(int rows, int cols)
@@ -37,19 +59,16 @@ public class TextUserInterface implements IUserInterface
     /**
      * Returns a string representation of the grid.
      */
-    private String gridToString()
-    {
-	String str = "";
-	
-	for (int m = 0; m < grid[0].length; m++)
-	{
-	    for (int n = 0; n < grid.length; n++)
-	    {
-		str += "[ " + grid[m][n] + " ]";
-	    }
-	    str += "\n";
-	}
-	return str;
+    private String gridToString() {
+		String str = "";
+		
+		for (int m = 0; m < grid[0].length; m++) {
+		    for (int n = 0; n < grid.length; n++) {
+		    	str += "[ " + grid[m][n] + " ]";
+		    }
+		    	str += "\n";
+		}
+			return str;
     }
     
     public void beginGame()

@@ -13,6 +13,7 @@ public class Application {
 	private IUserInterface UI;
 	private Game game;
 	
+	
 	public Application(IUserInterface UI, Game game) {
 		this.UI = UI;
 		this.game = game;
