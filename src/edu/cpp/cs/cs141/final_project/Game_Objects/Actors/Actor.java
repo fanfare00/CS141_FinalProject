@@ -15,6 +15,10 @@ public class Actor extends GameObject{
 		super(row, col);
 	}
 	
+	public void move(int row, int col){
+		
+	}
+	
 	/**
 	 * Moves the {@link Actor} by the specified number of rows down.
 	 * @param distance The number of rows to move the {@link Actor} down. A negative number moves it up. 
@@ -38,6 +42,11 @@ public class Actor extends GameObject{
 	public void setInvincibility(boolean invincible)
 	{
 	    this.invincible = invincible;
+	}
+
+	public void look(int row, int col) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
