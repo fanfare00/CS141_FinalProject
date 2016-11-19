@@ -1,45 +1,31 @@
 package edu.cpp.cs.cs141.final_project.Utilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 import edu.cpp.cs.cs141.final_project.Utilities.Commands.*;
 
-public class InputHandler {
-	private Command key_W;
-	private Command key_A;
-	private Command key_S;
-	private Command key_D;
-	private Command key_Z;
-	private Command key_C;
-	private Command key_M;
+public abstract class InputHandler {	
 	
-	private Actor actor;
+	private List<Key> allKeys = new ArrayList<Key>();
+	private List<Key> activeKeys = new ArrayList<Key>();
 	
-	
-	public InputHandler(Actor actor){
-		this.actor = actor;
-		
+	public void setAllKeys(List<Key> allKeys) {
+		this.allKeys = allKeys;
 	}
 	
-	private void bindInitialCommands() {
-		
-		
-		bindMoveCommands();
+	public void setActiveKeys(List<Key> activeKeys) {
+		this.activeKeys = activeKeys;
 	}
 	
-	public void bindMoveCommands() {
-		key_W = new MoveCommand(actor, 1, 0);
-		key_A = new MoveCommand(actor, 0, -1);
-		key_S = new MoveCommand(actor, -1, 0);
-		key_D = new MoveCommand(actor, 0, 1);
+	public void handleInput(char input){
+		for (Key key : activeKeys) {
+			if (wasTyped(input, key)) key.executeCommand();
+		}
 	}
 	
-	public void bindLookCommands() {
-		key_W = new LookCommand(actor, 1, 0);
-		key_A = new LookCommand(actor, 0, -1);
-		key_S = new LookCommand(actor, -1, 0);
-		key_D = new LookCommand(actor, 0, 1);
-	}
-	
-	public void handleInput(){	
+	private static boolean wasTyped(char input, Key key) {
+		return (input == key.getSymbol());
 	}
 }

@@ -14,8 +14,8 @@ public class MoveCommand implements Command {
 	}
 	
 	@Override
-	public void execute(Actor actor) {
-		actor.move(row, col);
+	public void execute() {
+		//actor.move(row, col);
 	}
 
 }
