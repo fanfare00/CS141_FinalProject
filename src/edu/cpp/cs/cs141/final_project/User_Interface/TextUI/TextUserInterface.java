@@ -1,12 +1,15 @@
-package edu.cpp.cs.cs141.final_project.User_Interface;
+package edu.cpp.cs.cs141.final_project.User_Interface.TextUI;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import edu.cpp.cs.cs141.final_project.Application;
-import edu.cpp.cs.cs141.final_project.Utilities.Key;
-import edu.cpp.cs.cs141.final_project.Utilities.Commands.MoveCommand;
+import edu.cpp.cs.cs141.final_project.Commands.MoveCommand;
+import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
+import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
+import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.TextUIStateManager;
+import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.States.TextUIState;
 
 /**
  * The text implementation of {@link IUserInterface}. It uses plain text to display the game to the user.
@@ -21,24 +24,18 @@ public class TextUserInterface implements IUserInterface
     private Application app;
     private char grid[][];
     
+    private TextUIState state;
+    
     public TextUserInterface() {
-		scan = new Scanner(System.in);
-		
-		allKeys.add(new Key('W'));
-		allKeys.add(new Key('A'));
-		allKeys.add(new Key('S'));
-		allKeys.add(new Key('D'));
-		allKeys.add(new Key('Z'));
-		allKeys.add(new Key('C'));
-		allKeys.add(new Key('M'));
-		allKeys.add(new Key('1'));
-		allKeys.add(new Key('2'));
-		allKeys.add(new Key('3'));
-		
+		scan = new Scanner(System.in);	
     }
     
     public void update() {
     	
+    }
+    
+    public void setState(TextUIState state) {
+    	this.state = state;
     }
     
     public void createGrid(int rows, int cols)

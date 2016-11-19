@@ -1,6 +1,6 @@
-package edu.cpp.cs.cs141.final_project.Utilities;
+package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities;
 
-import edu.cpp.cs.cs141.final_project.Utilities.Commands.Command;
+import edu.cpp.cs.cs141.final_project.Commands.Command;
 
 public class Key {
 	private char symbol;
