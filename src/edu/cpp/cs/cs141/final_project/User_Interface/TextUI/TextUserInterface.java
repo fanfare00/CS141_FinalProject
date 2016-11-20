@@ -41,7 +41,7 @@ public class TextUserInterface implements IUserInterface
     }
     
     public void update() {
-    	state.update(gridConditions);
+    	state.update(getGridConditions());
     	
     	
     	drawGrid();
@@ -98,6 +98,11 @@ public class TextUserInterface implements IUserInterface
 			return str;
     }
     
+    private boolean[] getGridConditions() {
+    	
+    	if(state.equals(shooting)) return app.getProximityConditions();
+    	return app.getDirectionalConditions();
+    }
     
     /**
      * Prints a text representation of the game grid.
@@ -115,7 +120,7 @@ public class TextUserInterface implements IUserInterface
 	public void toggleMoveState() {
 		state = moving;
 		
-		gridConditions = app.getDirectionalConditions();
+		//gridConditions = app.getDirectionalConditions();
 		
 		update();
 	}
@@ -124,7 +129,7 @@ public class TextUserInterface implements IUserInterface
 	public void toggleLookState() {
 		state = looking;
 		
-		gridConditions = app.getDirectionalConditions();
+		//gridConditions = app.getDirectionalConditions();
 		
 		update();
 	}
@@ -133,7 +138,7 @@ public class TextUserInterface implements IUserInterface
 	public void toggleShootState() {
 		state = shooting;
 		
-		gridConditions = app.getProximityConditions();
+		//gridConditions = app.getProximityConditions();
 		
 		update();
 	}
