@@ -33,12 +33,12 @@ public class TextUserInterface implements IUserInterface
     	inMenus = new MenuState(app);
     	looking = new LookingState(app);
     	
-    	toggleMoveState();
+    	
     }
     
     public void update() {
-
     	
+    	toggleMoveState();
     	
     	drawGrid();
     	drawInstructions();
@@ -55,7 +55,7 @@ public class TextUserInterface implements IUserInterface
     private String keyTextToString() {
 		String str = "Commands: ";
     	for (Key key : state.getActiveKeys()){
-			str+= "\n" + key.getText();
+			str+= "\n" + key.getSymbol() + " - " + key.getText();
 		}
     	
     	return str;

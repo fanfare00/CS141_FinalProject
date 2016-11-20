@@ -25,13 +25,18 @@ public class Game {
 	private static final int PLAYER_SPAWN_ROW = 8;
 	private static final int PLAYER_SPAWN_COL = 0;
 	
+	//private static final int MAX_DIRECTIONS = Direction.values().length;
+	
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Enemy> enemies = new ArrayList<Enemy>();
 	List<GameObject> activeEntities = new ArrayList<GameObject>();
+	
 	private Player player;
 	
 	private boolean gameOver;
 	private int turnNumber;
+	
+	private boolean debugMode;
 	
 	public Game() {
 		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL);
@@ -39,7 +44,13 @@ public class Game {
 		spawnRooms();
 		spawnBriefcase();
 		
-		player.setState(new ActorState(new boolean[]{true,true,true,true}, new boolean[]{true, true, true, true}));
+		activeEntities.add(player);
+		activeEntities.addAll(enemies);
+		activeEntities.addAll(rooms);
+		
+		for (GameObject obj : activeEntities) {
+			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
+		}
 	}
 	
 	/**
@@ -137,10 +148,6 @@ public class Game {
 	 * Gets the list of currently active entities.
 	 */
 	public List<GameObject> getActiveEntities() {
-	    
-	    
-	    activeEntities.addAll(rooms);
-	    activeEntities.addAll(enemies);
 	    activeEntities.add(player);
 		
 		return activeEntities;
@@ -158,167 +165,32 @@ public class Game {
 		//this.activeEntities.addAll(activeEntities);
 	}
 	
-	/**
-	 * Attempts to move the {@link Player} in the specified direction.
-	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
-	 * @return True if the {@link Player} was able to move in the specified direction, and false otherwise.
-	 */
-	public boolean movePlayer(int direction)
-	{
-	    return moveActor(direction, player);
-	}
-	
-	/**
-	 * Attempts to move the {@link Enemy} in the specified direction.
-	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
-	 * @param enemyID The array index of the enemy that should be moved
-	 * @return True if the {@link Enemy} was able to move in the specified direction, and false otherwise.
-	 */
-	public boolean moveEnemy(int direction, int enemyID)
-	{
-	    return moveActor(direction, enemies.get(enemyID));
-	}
-	
-	/**
-	 * Attempts to move the {@link Actor} in the specified direction.
-	 * @param direction 1 = up, 2 = down, 3 = left, 4 = right
-	 * @return True if the {@link Actor} was able to move in the specified direction, and false otherwise.
-	 */
-	private boolean moveActor(int direction, Actor actor)
-	{
-	    boolean success = false;
-	    switch (direction)
-	    {
-		case 1:
-		    if (isActorMovePossible(actor.getRow() - 1, actor.getCol(), false))
-		    {
-			success = true;
-			actor.moveRow(-1);
-		    }
-		    break;
-		case 2:
-		    boolean canEnterRoom = actor instanceof Player;
-		    if (isActorMovePossible(actor.getRow() + 1, actor.getCol(), canEnterRoom))
-		    {
-			success = true;
-			actor.moveRow(1);
-		    }
-		    break;
-		case 3:
-		    if (isActorMovePossible(actor.getRow(), actor.getCol() - 1, false))
-		    {
-			success = true;
-			actor.moveCol(-1);
-		    }
-		    break;
-		case 4:
-		    if (isActorMovePossible(actor.getRow(), actor.getCol() + 1, false))
-		    {
-			success = true;
-			actor.moveCol(1);
-		    }
-		default:
-		    break;
-	    }
-	    return success;
-	}
-	
-	/**
-	 * Performs collision checking to ensure it is possible for the {@link Actor} to move to the specified location.
-	 * @param row The row of the target location.
-	 * @param col The column of the target location.
-	 * @param canEnterRoom Set this to true if the {@link Actor} should be allowed to enter a room if one exists in the target location.
-	 * @return True if the {@link Actor} could successfully move to the specified location.
-	 */
-	private boolean isActorMovePossible(int row, int col, boolean canEnterRoom)
-	{
-	    if (row >= 0 && row < GAME_ROWS && col >= 0 && col < GAME_COLS)
-	    {
-		for (GameObject o : activeEntities)
-		{
-		    if (o.getRow() == row && o.getCol() == col)
-		    {
-			if (o instanceof Room && canEnterRoom && ((Room)o).hasIntel())
-			    return true;
-			else
-			    return false;
-		    }
-		}
-		return true;
-	    }
-	    return false;
-	}
-	
-	/**
-	 * Executes enemy actions like moving and attacking.
-	 */
-	public void performEnemyActions()
-	{
-		checkPlayerProximity();
-		moveEnemies();
-		checkPlayerProximity();
-	}
-	
-	/**
-	 * Checks the proximity between the player and all enemies
-	 * @return -1 = player isn't close to an enemy, anything else = array index of enemy that's close to player
-	 */
-	private int checkPlayerProximity()
-	{
-		return -1; //temporarily added to get rid of error
-	}
-	
-    /**
-     * Randomly moves enemies around
-     */
-    private void moveEnemies()
-    {
-	for (int i = 0; i < enemies.size(); i++)
-	{
-	    while (!moveEnemy((int)(Math.random() * 5), i));
-	}
-    }
-
-	public void moveCurrentActor(int row, int col) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void lookCurrentActor(int row, int col) {
-		// TODO Auto-generated method stub
-		
+	private void setDebugMode(boolean flag) {
+		this.debugMode = flag;
 	}
 
 	public void update() {
-		updateState(player);
-		//move player
 		
-		//update enemy state
-		//move enemies
-	}
-	
-	private void updateState(Actor currentActor) {
-		//proximity boolean array
-		//set to true
+		removeInactiveObjects();
 		
-		
-		for (GameObject obj : activeEntities) {
-			for (Direction dir : Direction.values()){
-				checkCollision(currentActor, obj, dir);
-			}
+		for (GameObject obj : activeEntities){
+			obj.update(activeEntities);
+			
+			if(debugMode) obj.setVisible(true);
 		}
 	}
-
-	private void checkCollision(Actor currentActor, GameObject obj, Direction dir) {
-		//if ((currentActor.getRow() + dir.row()) == obj.getRow()) && 
+	
+	private void removeInactiveObjects() {
+		List<GameObject> inactiveEntities = new ArrayList<GameObject>();
 		
+		for (GameObject obj : activeEntities){
+			if (!obj.isActive()) inactiveEntities.add(obj);
+		}
+		
+		activeEntities.removeAll(inactiveEntities);
 	}
 
-	public void attackCurrentActor() {
-		// TODO Auto-generated method stub
-	}
-
-	public ActorState getPlayerState() {
-		return player.getState();
+	public Player getPlayer() {
+		return player;
 	}
 }

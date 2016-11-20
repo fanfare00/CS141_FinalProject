@@ -1,20 +1,20 @@
 package edu.cpp.cs.cs141.final_project.Commands;
 
 import edu.cpp.cs.cs141.final_project.Application;
+import edu.cpp.cs.cs141.final_project.Direction;
 
 
 public class MoveCommand implements Command {
 
-	private int row, col;
+	private Direction dir;
 	
-	public MoveCommand(int row, int col) {
-		this.row = row;
-		this.col = col;
+	public MoveCommand(Direction dir) {
+		this.dir = dir;
 	}
 	
 	@Override
 	public void execute(Application app) {
-		app.moveCurrentActor(row, col);
+		app.playerMove(dir);
 	}
 
 }

@@ -2,6 +2,7 @@ package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 
 
 import edu.cpp.cs.cs141.final_project.Application;
+import edu.cpp.cs.cs141.final_project.Direction;
 import edu.cpp.cs.cs141.final_project.Commands.LookCommand;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
 
@@ -11,16 +12,16 @@ public class LookingState extends TextUIState {
 		super(app);
 		
 		key_W.setText("Look UP");
-		key_W.setCommand(new LookCommand(1, 0));
+		key_W.setCommand(new LookCommand(Direction.UP));
 		
 		key_A.setText("Look LEFT");
-		key_A.setCommand(new LookCommand(0, -1));
+		key_A.setCommand(new LookCommand(Direction.LEFT));
 		
 		key_S.setText("Look DOWN");
-		key_S.setCommand(new LookCommand(-1, 0));
+		key_S.setCommand(new LookCommand(Direction.DOWN));
 		
 		key_D.setText("Look RIGHT");
-		key_D.setCommand( new LookCommand(0, 1));
+		key_D.setCommand( new LookCommand(Direction.RIGHT));
 		
 		
 		

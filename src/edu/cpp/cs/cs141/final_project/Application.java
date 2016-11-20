@@ -23,8 +23,8 @@ public class Application {
 	}
 
 	public void run() {
-		game.update();
 		UI.update();
+		game.update();
 		
 		if (!close) run();
 	}
@@ -37,14 +37,17 @@ public class Application {
 		run();
 	}
 	
-	public void moveCurrentActor(int row, int col) {
-		game.moveCurrentActor(row, col);
+	public void playerMove(Direction dir) {
+		game.getPlayer().setMoveDirection(dir);
 	}
 	
-	public void lookCurrentActor(int row, int col) {
-		game.lookCurrentActor(row, col);
+	public void playerLook(Direction dir) {
+		game.getPlayer().setLookDir(dir);
 	}
 	
+	public void playerAttack(Direction dir) {
+		game.getPlayer().attack(dir);
+	}
 	
 	/**
 	 * Loads game state from the disk.
@@ -88,20 +91,18 @@ public class Application {
 		this.close = true;
 	}
 	
-	public void attackCurrentActor(int row, int col) {
-		game.attackCurrentActor();
-	}
+
 	
 	public void getShootConditions() {
 		
 	}
 
 	public boolean[] getDirectionalConditions() {
-		return game.getPlayerState().getMoveConditions();
+		return game.getPlayer().getState().getMoveConditions();
 	}
 	
 	public boolean[] getProximityConditions() {
-		return game.getPlayerState().getProximityConditions();
+		return game.getPlayer().getState().getProximityConditions();
 	}
 
 	public void toggleMenuMode() {
@@ -130,6 +131,7 @@ public class Application {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
 
 
 

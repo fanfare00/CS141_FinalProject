@@ -17,5 +17,6 @@ public enum Direction {
 	public int row(){return row;}
 	public int col(){return col;}
 	
+	
 }
 

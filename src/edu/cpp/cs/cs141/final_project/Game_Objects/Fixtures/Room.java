@@ -1,5 +1,7 @@
 package edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures;
 
+import java.util.List;
+
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 
 /**
@@ -31,6 +33,12 @@ public class Room extends GameObject {
 	public boolean hasIntel()
 	{
 	    return hasIntel;
+	}
+
+	@Override
+	public void update(List<GameObject> activeEntities) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

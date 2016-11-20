@@ -1,19 +1,19 @@
 package edu.cpp.cs.cs141.final_project.Commands;
 
 import edu.cpp.cs.cs141.final_project.Application;
+import edu.cpp.cs.cs141.final_project.Direction;
 
 public class LookCommand implements Command {
 
-	private int row, col;
+	Direction dir;
 	
-	public LookCommand(int row, int col) {
-		this.row = row;
-		this.col = col;
+	public LookCommand(Direction dir) {
+		this.dir = dir;
 	}
 	
 	@Override
 	public void execute(Application app) {
-		app.lookCurrentActor(row, col);
+		app.playerLook(dir);
 	}
 
 }
