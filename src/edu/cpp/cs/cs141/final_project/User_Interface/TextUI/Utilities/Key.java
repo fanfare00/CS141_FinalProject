@@ -1,5 +1,6 @@
 package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities;
 
+import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.Command;
 
 public class Key {
@@ -35,7 +36,7 @@ public class Key {
 	
 	public boolean getIsActive() {return this.isActive;}
 	
-	public void executeCommand() {
-		if (isActive) command.execute();
+	public void executeCommand(Application app) {
+		if (isActive) command.execute(app);
 	}
 }

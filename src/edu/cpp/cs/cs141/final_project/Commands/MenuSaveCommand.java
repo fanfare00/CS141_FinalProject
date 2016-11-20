@@ -2,11 +2,12 @@ package edu.cpp.cs.cs141.final_project.Commands;
 
 import edu.cpp.cs.cs141.final_project.Application;
 
-public class ToggleLookCommand implements Command {
-	
+public class MenuSaveCommand implements Command {
+
 	@Override
 	public void execute(Application app) {
-		app.toggleLookMode();
+		// TODO Auto-generated method stub
+		
 	}
 
 }

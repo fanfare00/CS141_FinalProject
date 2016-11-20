@@ -7,9 +7,12 @@ import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
 public class MenuState extends TextUIState{
 	
 	public MenuState(Application app) {
+		super(app);
+		key_1.setText("1 - Save Game");
+		//key_1.setCommand(command);
 		
-		keys.add(new Key('1', "W - Move UP", new LookCommand(app, 1, 0)));
-		keys.add(new Key('2', "A - Move LEFT", new LookCommand(app, 0, -1)));
-		keys.add(new Key('3', "S - Move DOWN", new LookCommand(app, -1, 0)));
+		key_2.setText("2 - Load Game");
+		key_3.setText("3 - New Game");
+		key_4.setText("4 - Quit Game");
 	}
 }

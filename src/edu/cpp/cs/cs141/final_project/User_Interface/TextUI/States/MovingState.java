@@ -7,12 +7,18 @@ import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.*;
 public class MovingState extends TextUIState {
 	
 	public MovingState(Application app) {
-		keys.add(new Key('W', "W - Move UP", new MoveCommand(app, 1, 0)));
-		keys.add(new Key('A', "A - Move LEFT", new MoveCommand(app, 0, -1)));
-		keys.add(new Key('S', "S - Move DOWN", new MoveCommand(app, -1, 0)));
-		keys.add(new Key('D', "D - Move RIGHT", new MoveCommand(app, 0, 1)));
-		keys.add(new Key('C', "C - Look", new ToggleLookCommand(app)));
-		keys.add(new Key('Z', "Z - Shoot", new ToggleShootCommand(app)));
-		keys.add(new Key('M', "M - Menu", new MenuCommand(app)));
+		super(app);
+		
+		key_W.setText("Move UP");
+		key_W.setCommand(new LookCommand(1, 0));
+		
+		key_A.setText("Move LEFT");
+		key_A.setCommand(new LookCommand(0, -1));
+		
+		key_S.setText("Move DOWN");
+		key_S.setCommand(new LookCommand(-1, 0));
+		
+		key_D.setText("Move RIGHT");
+		key_D.setCommand( new LookCommand(0, 1));
 	}
 }

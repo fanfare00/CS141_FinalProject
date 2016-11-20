@@ -4,7 +4,6 @@ import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
-import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.TextUserInterface;
 
 /**
  * The {@link Application} class receives commands from the UI and controls the game.
@@ -120,6 +119,16 @@ public class Application {
 	public void toggleShootMode() {
 		UI.toggleShootState();
 		
+	}
+
+	public boolean getCanLook() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getCanShoot() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

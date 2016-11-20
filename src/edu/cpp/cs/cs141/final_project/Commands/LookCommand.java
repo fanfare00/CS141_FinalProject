@@ -5,16 +5,14 @@ import edu.cpp.cs.cs141.final_project.Application;
 public class LookCommand implements Command {
 
 	private int row, col;
-	private Application app;
 	
-	public LookCommand(Application app, int row, int col) {
+	public LookCommand(int row, int col) {
 		this.row = row;
 		this.col = col;
-		this.app = app;
 	}
 	
 	@Override
-	public void execute() {
+	public void execute(Application app) {
 		app.lookCurrentActor(row, col);
 	}
 

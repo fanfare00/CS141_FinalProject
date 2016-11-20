@@ -4,17 +4,15 @@ import edu.cpp.cs.cs141.final_project.Application;
 
 public class ShootCommand implements Command {
 
-	Application app;
 	private int row, col;
 	
-	public ShootCommand(Application app, int row, int col) {
-		this.app = app;
+	public ShootCommand(int row, int col) {
 		this.row = row;
 		this.col = col;
 	}
 	
 	@Override
-	public void execute() {
+	public void execute(Application app) {
 		app.attackCurrentActor(row, col);
 	}
 
