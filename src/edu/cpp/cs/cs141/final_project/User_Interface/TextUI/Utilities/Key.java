@@ -6,7 +6,7 @@ public class Key {
 	private char symbol;
 	private String text;
 	private Command command;
-	private boolean isActive;
+	private boolean isActive = true;
 	
 	public Key(char symbol) {
 		this.symbol = symbol;
@@ -23,23 +23,19 @@ public class Key {
 		this.command = command;
 	}
 	
-	public void setCommand(Command command){
-		this.command = command;
-	}
+	public void setCommand(Command command){this.command = command;}
 	
-	public void setText(String text) {
-		this.text = text;
-	}
+	public void setText(String text) {this.text = text;}
 	
-	public void setActive(boolean flag) {
-		this.isActive = flag;
-	}
+	public void setActive(boolean flag) {this.isActive = flag;}
 	
-	public char getSymbol() {
-		return this.symbol;
-	}
+	public char getSymbol() {return this.symbol;}
+	
+	public String getText() {return this.text;}
+	
+	public boolean getIsActive() {return this.isActive;}
 	
 	public void executeCommand() {
-		this.command.execute();
+		if (isActive) command.execute();
 	}
 }

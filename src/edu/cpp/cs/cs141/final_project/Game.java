@@ -286,4 +286,22 @@ public class Game {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public static void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void attackCurrentActor() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ActorState getPlayerState() {
+		return player.getState();
+	}
 }

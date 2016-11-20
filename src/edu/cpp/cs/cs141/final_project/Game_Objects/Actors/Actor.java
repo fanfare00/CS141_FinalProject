@@ -10,9 +10,11 @@ public class Actor extends GameObject{
 	boolean isAlive;
 	boolean invincible;
 	int ammo;
+	private ActorState state;
 	
 	public Actor(int row, int col) {
 		super(row, col);
+		
 	}
 	
 	public void move(int row, int col){
@@ -48,5 +50,14 @@ public class Actor extends GameObject{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void setState(ActorState state) {
+		this.state = state;
+	}
+	
+	public ActorState getState() {
+		return state;
+	}
+
 
 }

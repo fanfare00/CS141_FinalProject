@@ -1,56 +1,82 @@
 package edu.cpp.cs.cs141.final_project.User_Interface.TextUI;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import edu.cpp.cs.cs141.final_project.Application;
-import edu.cpp.cs.cs141.final_project.Commands.MoveCommand;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
+import edu.cpp.cs.cs141.final_project.User_Interface.UIState;
+import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
-import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.TextUIStateManager;
-import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.States.TextUIState;
 
-/**
- * The text implementation of {@link IUserInterface}. It uses plain text to display the game to the user.
- */
+
 public class TextUserInterface implements IUserInterface
 {
-    
-	private List<Key> allKeys = new ArrayList<Key>();
-	private List<Key> activeKeys = new ArrayList<Key>();
-	
     private Scanner scan;
     private Application app;
     private char grid[][];
     
     private TextUIState state;
     
+    private static MovingState moving;
+    private static LookingState looking;
+    private static MenuState inMenus;
+    private static ShootingState shooting;
+    
     public TextUserInterface() {
 		scan = new Scanner(System.in);	
     }
     
+    public void init(Application app) {
+    	this.app = app;
+    	
+    	moving = new MovingState(app);
+    	inMenus = new MenuState(app);
+    	looking = new LookingState(app);
+    	
+    	this.state = moving;
+    }
+    
     public void update() {
+
+    	
+    	
+    	drawGrid();
+    	drawInstructions();
+
+    	
+    	state.handleInput(getUserInput());
     	
     }
     
-    public void setState(TextUIState state) {
-    	this.state = state;
+    private void drawInstructions(){
+    	System.out.println(keyTextToString());
     }
     
-    public void createGrid(int rows, int cols)
-    {
-	grid = new char[rows][cols];
+    private String keyTextToString() {
+		String str = "Commands: ";
+    	for (Key key : state.getActiveKeys()){
+			str+= "\n" + key.getText();
+		}
+    	
+    	return str;
+	}
+    
+    public char getUserInput(){
+    	return Character.toLowerCase(scan.next().trim().charAt(0));
     }
     
-    public void addApplication(Application app)
-    {
-	this.app = app;
+    public void changeState(UIState state) {
+    	this.state = (TextUIState) state;
     }
     
-    public void addToGrid(int xIndex, int yIndex, char symbol)
-    {
-	grid[xIndex][yIndex] = symbol;
+    public void createGrid(int rows, int cols) {
+    	grid = new char[rows][cols];
+    }
+    
+
+    
+    public void addToGrid(int xIndex, int yIndex, char symbol) {
+    	grid[xIndex][yIndex] = symbol;
     }
     
     /**
@@ -68,113 +94,37 @@ public class TextUserInterface implements IUserInterface
 			return str;
     }
     
-    public void beginGame()
-    {
-	printHelpMessage();
-	// gameLoop();
-    }
-    
-    /**
-     * Prints a list of commands that the user can perform.
-     */
-    private void printHelpMessage()
-    {
-	System.out.println("Here are the commands you can use while playing:");
-	System.out.println("move (m), shoot (s), look (l), save, load, help (?), quit, reprint (r), hard, debug");
-    }
-    
-    public void promptCommand()
-    {
-	System.out.println("Please enter a command. Type \"help\" or \"?\" for a list of commands you can perform.");
-	
-	boolean success = false;
-	
-	while (!success)
-	{
-	    String command = scan.nextLine().toLowerCase();
-	    success = true;
-	    
-	    switch (command)
-	    {
-		case "move":
-		case "m":
-		    while (!app.playerMove(getMoveDirection()))
-			System.out.println("You can't move in that direction!");
-		    break;
-		case "shoot":
-		case "s":
-		    // call shoot method on game
-		    break;
-		case "look":
-		case "l":
-		    break;
-		case "save":
-		    // todo: prompt for save name
-		    app.saveGameData();
-		    break;
-		case "load":
-		    // todo: prompt for save name
-		    app.loadGameData();
-		    break;
-		case "help":
-		case "?":
-		    printHelpMessage();
-		    break;
-		case "quit":
-		    break;
-		case "reprint":
-		case "r":
-		    drawGrid();
-		    break;
-		case "hard":
-		    break;
-		case "debug":
-		    break;
-		default:
-		    success = false;
-		    System.out.println(
-			    "That was not a valid command. Type \"help\" or \"?\" for a list of commands you can perform.");
-		    break;
-	    }
-	}
-    }
-    
-    /**
-     * Prompts the user for the direction in which they would like to move.
-     * 
-     * @return The player's chosen direction
-     */
-    private int getMoveDirection()
-    {
-	System.out.println(
-		"Please enter the direction in which you would like to move.\n1 = up, 2 = down, 3 = left, 4 = right");
-	int direction = 0;
-	boolean valid = false;
-	
-	while (!valid)
-	{
-	    direction = scan.nextInt(); // throws InputMismatchException if not
-					// an int
-	    scan.nextLine();
-	    if (direction < 5 && direction > 0)
-	    {
-		valid = true;
-	    }
-	    else
-	    {
-		System.out.println("That is not a valid direction. Please try again.");
-	    }
-	}
-	return direction;
-    }
     
     /**
      * Prints a text representation of the game grid.
      */
-    @Override
-    public void drawGrid()
-    {
-	System.out.println(gridToString());
+    public void drawGrid() {
+    	System.out.println(gridToString());
     }
+
+	@Override
+	public void toggleMenuState() {
+		state = inMenus;
+	}
+
+	@Override
+	public void toggleMoveState() {
+		state = moving;
+		state.update(app.getDirectionalConditions());
+	}
+
+	@Override
+	public void toggleLookState() {
+		state = looking;
+		state.update(app.getDirectionalConditions());
+	}
+
+	@Override
+	public void toggleShootState() {
+		state = shooting;
+		state.update(app.getProximityConditions());
+	}
+
     
+
 }
