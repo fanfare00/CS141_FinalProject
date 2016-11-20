@@ -23,7 +23,7 @@ public class Application {
 	}
 
 	public void run() {
-		Game.update();
+		game.update();
 		UI.update();
 		
 		if (!close) run();
@@ -123,12 +123,12 @@ public class Application {
 
 	public boolean getCanLook() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public boolean getCanShoot() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 

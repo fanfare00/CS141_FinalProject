@@ -38,6 +38,8 @@ public class Game {
 		spawnEnemiesRandomly();
 		spawnRooms();
 		spawnBriefcase();
+		
+		player.setState(new ActorState(new boolean[]{true,true,true,true}, new boolean[]{true, true, true, true}));
 	}
 	
 	/**
@@ -287,18 +289,33 @@ public class Game {
 		
 	}
 
-	public static void update() {
-		// TODO Auto-generated method stub
+	public void update() {
+		updateState(player);
+		//move player
 		
+		//update enemy state
+		//move enemies
+	}
+	
+	private void updateState(Actor currentActor) {
+		//proximity boolean array
+		//set to true
+		
+		
+		for (GameObject obj : activeEntities) {
+			for (Direction dir : Direction.values()){
+				checkCollision(currentActor, obj, dir);
+			}
+		}
 	}
 
-	public Player getPlayer() {
-		return player;
+	private void checkCollision(Actor currentActor, GameObject obj, Direction dir) {
+		//if ((currentActor.getRow() + dir.row()) == obj.getRow()) && 
+		
 	}
 
 	public void attackCurrentActor() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public ActorState getPlayerState() {

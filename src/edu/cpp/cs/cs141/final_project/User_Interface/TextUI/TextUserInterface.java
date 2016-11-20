@@ -33,7 +33,7 @@ public class TextUserInterface implements IUserInterface
     	inMenus = new MenuState(app);
     	looking = new LookingState(app);
     	
-    	this.state = moving;
+    	toggleMoveState();
     }
     
     public void update() {

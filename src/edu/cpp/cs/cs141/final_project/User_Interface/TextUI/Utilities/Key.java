@@ -7,7 +7,7 @@ public class Key {
 	private char symbol;
 	private String text;
 	private Command command;
-	private boolean isActive = true;
+	private boolean isActive = false;
 	
 	public Key(char symbol) {
 		this.symbol = symbol;

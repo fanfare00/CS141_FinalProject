@@ -15,6 +15,4 @@ public class Player extends Actor{
 		this.name = PLAYER_NAME;
 	}
 
-
-
 }
