@@ -69,8 +69,8 @@ public class Actor extends GameObject{
 	
 	public void move(){
 		
-		row = moveDir.row();
-		col = moveDir.col();
+		row += moveDir.row();
+		col += moveDir.col();
 	}
 	
 	public ActorState getState() {
@@ -81,7 +81,6 @@ public class Actor extends GameObject{
 	public void update(List<GameObject> activeEntities) {
 		updateState(activeEntities);
 		move();
-		
 	}
 
 

@@ -148,7 +148,6 @@ public class Game {
 	 * Gets the list of currently active entities.
 	 */
 	public List<GameObject> getActiveEntities() {
-		
 		return activeEntities;
 	}
 
@@ -169,13 +168,10 @@ public class Game {
 	}
 
 	public void update() {
-		
 		removeInactiveObjects();
 		
-		player.update(activeEntities);
-		
 		for (GameObject obj : activeEntities){
-			//obj.update(activeEntities);
+			obj.update(activeEntities);
 			
 			if(debugMode) obj.setVisible(true);
 		}

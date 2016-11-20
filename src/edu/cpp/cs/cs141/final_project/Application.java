@@ -24,8 +24,8 @@ public class Application {
 
 	public void run() {
 		UI.update();
-		
 		game.update();
+		updateUIGrid(game.getActiveEntities());
 		
 		if (!close) run();
 	}
@@ -83,6 +83,7 @@ public class Application {
 	 */
 	public void updateUIGrid(List<GameObject> activeEntities)
 	{  
+		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
 	    for (GameObject o : activeEntities) {
 	    	UI.addToGrid(o.getRow(), o.getCol(), o.getSymbol());
 	    }
