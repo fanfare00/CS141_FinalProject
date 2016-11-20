@@ -39,8 +39,8 @@ public class Player extends Actor{
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		updateState(activeEntities);
 		move();
+		updateState(activeEntities);
 		revealNearby(activeEntities);
 		setLookDir(null);
 	}

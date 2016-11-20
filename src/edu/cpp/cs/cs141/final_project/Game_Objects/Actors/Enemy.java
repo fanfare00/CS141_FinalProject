@@ -33,11 +33,16 @@ public class Enemy extends Actor {
 		this.setMoveDirection(availableDirs.get(new Random().nextInt(availableDirs.size())));
 	}
 	
+	private void attackPlayer() {
+		
+	}
+	
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		updateState(activeEntities);
+		
 		getRandomMovement();
 		move();
+		updateState(activeEntities);
 	}
 
 }

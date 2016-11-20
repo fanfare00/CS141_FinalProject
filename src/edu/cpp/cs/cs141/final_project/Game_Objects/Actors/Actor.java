@@ -26,23 +26,32 @@ public class Actor extends GameObject{
 	}
 	
 	public boolean checkValidMove(int maxRow, int maxCol, GameObject obj, Direction dir) {
-		return (!checkCollision(obj, dir)) &&
+		return (checkCollision(obj, dir)) &&
 			   (!checkOutOfBounds(maxRow, maxCol, dir));
 	}
 	
 	public void updateState(List<GameObject> activeEntities){
-		boolean[] moveConditions = new boolean[MAX_DIRECTIONS];
+
 		boolean[] proximityConditions = new boolean[MAX_DIRECTIONS];
+		boolean[] moveConditions = new boolean[MAX_DIRECTIONS];
+		
+		for(Direction dir : Direction.values()) {
+			moveConditions[dir.ordinal()] = !checkOutOfBounds(MAX_ROW, MAX_COL, dir);
+		}
 		
 		for (GameObject obj : activeEntities) {
 			if (obj.equals(this)) continue;
 			
-			for (Direction dir: Direction.values()) {
-					moveConditions[dir.ordinal()] = (checkValidMove(MAX_ROW, MAX_COL, obj, dir));
-					proximityConditions[dir.ordinal()] = (obj instanceof Enemy) && (checkCollision(obj, dir));
+			for(Direction dir : Direction.values()) {
+				if (checkCollision( obj, dir) && obj instanceof Actor) { 
+					proximityConditions[dir.ordinal()] = true;
+					moveConditions[dir.ordinal()] = false;
+				}
+				else if (checkCollision( obj, dir)) moveConditions[dir.ordinal()] = false;
 			}
 		}
 		
+		//System.out.println(proximityConditions[0] + ", " + proximityConditions[1] + ", " + proximityConditions[2] + ", " + proximityConditions[3]);
 		state = new ActorState(moveConditions, proximityConditions);
 	}
 	

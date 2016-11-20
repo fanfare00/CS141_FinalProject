@@ -48,6 +48,8 @@ public class Game {
 		activeEntities.addAll(enemies);
 		activeEntities.addAll(rooms);
 		
+		//player.init(activeEntities);
+		
 		for (GameObject obj : activeEntities) {
 			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
 		}
@@ -170,11 +172,13 @@ public class Game {
 	public void update() {
 		removeInactiveObjects();
 		
-		for (GameObject obj : activeEntities){
-			obj.update(activeEntities);
-			
-			if(debugMode) obj.setVisible(true);
-		}
+		player.update(activeEntities);
+		
+//		for (GameObject obj : activeEntities){
+//			obj.update(activeEntities);
+//			
+//			if(debugMode) obj.setVisible(true);
+//		}
 	}
 	
 	private void removeInactiveObjects() {

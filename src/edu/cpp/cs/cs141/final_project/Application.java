@@ -123,9 +123,14 @@ public class Application {
 		return true;
 	}
 
-	public boolean getCanShoot() {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean getShootStatus() {
+		boolean canShoot = false;
+		
+		for (int i = 0; i < game.getPlayer().getState().getProximityConditions().length; i++) {
+			if (game.getPlayer().getState().getProximityConditions()[i]) canShoot = true;
+		}
+		
+		return canShoot;
 	}
 
 
