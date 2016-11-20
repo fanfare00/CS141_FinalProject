@@ -13,7 +13,9 @@ public class TextUserInterface implements IUserInterface
 {
     private Scanner scan;
     private Application app;
+    
     private char grid[][];
+    private boolean[] gridConditions;
     
     private TextUIState state;
     
@@ -30,15 +32,17 @@ public class TextUserInterface implements IUserInterface
     	this.app = app;
     	
     	moving = new MovingState(app);
+    	shooting = new ShootingState(app);
     	inMenus = new MenuState(app);
     	looking = new LookingState(app);
     	
-    	
+    	gridConditions = app.getDirectionalConditions();
+    	state = moving;
     }
     
     public void update() {
+    	state.update(gridConditions);
     	
-    	toggleMoveState();
     	
     	drawGrid();
     	drawInstructions();
@@ -62,7 +66,7 @@ public class TextUserInterface implements IUserInterface
 	}
     
     public char getUserInput(){
-    	return Character.toLowerCase(scan.next().trim().charAt(0));
+    	return Character.toUpperCase(scan.next().trim().charAt(0));
     }
     
     public void changeState(UIState state) {
@@ -110,19 +114,28 @@ public class TextUserInterface implements IUserInterface
 	@Override
 	public void toggleMoveState() {
 		state = moving;
-		state.update(app.getDirectionalConditions());
+		
+		gridConditions = app.getDirectionalConditions();
+		
+		update();
 	}
 
 	@Override
 	public void toggleLookState() {
 		state = looking;
-		state.update(app.getDirectionalConditions());
+		
+		gridConditions = app.getDirectionalConditions();
+		
+		update();
 	}
 
 	@Override
 	public void toggleShootState() {
 		state = shooting;
-		state.update(app.getProximityConditions());
+		
+		gridConditions = app.getProximityConditions();
+		
+		update();
 	}
 
     

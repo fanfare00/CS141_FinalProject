@@ -54,11 +54,6 @@ public class Actor extends GameObject{
 	{
 	    this.invincible = invincible;
 	}
-
-	public void look(int row, int col) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void setMoveDirection(Direction dir){
 		this.moveDir = dir;
@@ -73,8 +68,9 @@ public class Actor extends GameObject{
 	}
 	
 	public void move(){
-		this.row = moveDir.row();
-		this.col = moveDir.col();
+		
+		row = moveDir.row();
+		col = moveDir.col();
 	}
 	
 	public ActorState getState() {

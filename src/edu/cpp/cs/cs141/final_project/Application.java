@@ -63,7 +63,6 @@ public class Application {
 	 */
 	public void loadGame(List<GameObject> activeEntities) {
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
-		
 		updateUIGrid(activeEntities);
 		
 		game.setActiveEntities(activeEntities);
