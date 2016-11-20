@@ -8,11 +8,11 @@ import edu.cpp.cs.cs141.final_project.Application;
 
 public class InputHandler {	
 	
-	public static List<Key> keys = new ArrayList<Key>();
+	private List<Key> keys = new ArrayList<Key>();
 	
 	public void handleInput(Application app, char input){
-		for (Key key : keys) {
-			if (wasTyped(input, key)) key.executeCommand(app);
+		for (int i = 0; i < keys.size(); i++) {
+			if (wasTyped(input, keys.get(i))) keys.get(i).executeCommand(app);
 		}
 	}
 	
