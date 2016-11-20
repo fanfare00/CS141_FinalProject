@@ -3,8 +3,7 @@ package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Direction;
-import edu.cpp.cs.cs141.final_project.Commands.LookCommand;
-import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
+import edu.cpp.cs.cs141.final_project.Commands.*;
 
 public class LookingState extends TextUIState {
 
@@ -23,7 +22,11 @@ public class LookingState extends TextUIState {
 		key_D.setText("Look RIGHT");
 		key_D.setCommand( new LookCommand(Direction.RIGHT));
 		
+		key_C.setText("Move");
+		key_C.setCommand(new ToggleMoveCommand());
 		
+		key_Z.setText("Shoot");
+		key_Z.setCommand(new ToggleShootCommand());
 		
 		
 //		keys.add(new Key('W', "W - Move UP", new LookCommand(app, 1, 0)));

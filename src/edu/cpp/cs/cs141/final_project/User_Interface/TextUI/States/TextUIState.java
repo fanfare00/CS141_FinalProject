@@ -1,10 +1,11 @@
 package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Application;
-import edu.cpp.cs.cs141.final_project.Commands.ToggleLookCommand;
+import edu.cpp.cs.cs141.final_project.Commands.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.UIState;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.InputHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
@@ -25,6 +26,7 @@ public class TextUIState implements UIState {
 	
 	protected List<Key> keys = new ArrayList<Key>();
 	protected List<Key> activeKeys = new ArrayList<Key>();
+	
 	protected InputHandler inputHandler = new InputHandler();
 	protected Application app;
 	
@@ -66,7 +68,7 @@ public class TextUIState implements UIState {
 		keys.get(keys.indexOf(key_S)).setActive(activeDirections[2]);
 		keys.get(keys.indexOf(key_D)).setActive(activeDirections[3]);
 		
-		keys.get(keys.indexOf(key_C)).setActive(app.getCanLook());
-		keys.get(keys.indexOf(key_Z)).setActive(app.getCanShoot());
+		keys.get(keys.indexOf(key_C)).setActive(true);
+		keys.get(keys.indexOf(key_Z)).setActive(true);
 	}
 }
