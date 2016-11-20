@@ -24,6 +24,7 @@ public class Application {
 
 	public void run() {
 		UI.update();
+		
 		game.update();
 		
 		if (!close) run();
@@ -38,6 +39,7 @@ public class Application {
 	}
 	
 	public void playerMove(Direction dir) {
+		
 		game.getPlayer().setMoveDirection(dir);
 	}
 	
@@ -90,12 +92,6 @@ public class Application {
 		this.close = true;
 	}
 	
-
-	
-	public void getShootConditions() {
-		
-	}
-
 	public boolean[] getDirectionalConditions() {
 		return game.getPlayer().getState().getMoveConditions();
 	}

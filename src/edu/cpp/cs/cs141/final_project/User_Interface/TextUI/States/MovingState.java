@@ -11,16 +11,16 @@ public class MovingState extends TextUIState {
 		super(app);
 		
 		key_W.setText("Move UP");
-		key_W.setCommand(new LookCommand(Direction.UP));
+		key_W.setCommand(new MoveCommand(Direction.UP));
 		
 		key_A.setText("Move LEFT");
-		key_A.setCommand(new LookCommand(Direction.LEFT));
+		key_A.setCommand(new MoveCommand(Direction.LEFT));
 		
 		key_S.setText("Move DOWN");
-		key_S.setCommand(new LookCommand(Direction.DOWN));
+		key_S.setCommand(new MoveCommand(Direction.DOWN));
 		
 		key_D.setText("Move RIGHT");
-		key_D.setCommand( new LookCommand(Direction.RIGHT));
+		key_D.setCommand( new MoveCommand(Direction.RIGHT));
 		
 		key_Z.setText("Shoot");
 		key_Z.setCommand(new ToggleShootCommand());
