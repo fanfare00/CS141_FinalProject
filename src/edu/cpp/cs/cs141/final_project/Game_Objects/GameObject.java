@@ -10,8 +10,8 @@ import edu.cpp.cs.cs141.final_project.Direction;
  */
 public abstract class GameObject implements Serializable{
 	
-	protected static final int MAX_ROW = 9;
-	protected static final int MAX_COL = 9;
+	protected static final int MAX_ROW = 8;
+	protected static final int MAX_COL = 8;
 	
 	protected int row;
 	protected int col;
@@ -78,9 +78,9 @@ public abstract class GameObject implements Serializable{
 	}
 	
 	public boolean checkOutOfBounds(int maxRow, int maxCol, Direction dir) {	
-		return (dir.row() < (maxRow-maxRow))   || 
-			   (dir.row() > (maxRow))          ||
-			   (dir.col() < (maxCol-maxCol))   ||
-			   (dir.col() > (maxCol));
+		return (this.row+dir.row() < (maxRow-maxRow))   || 
+			   (this.row+dir.row() >  (maxRow))         ||
+			   (this.col+dir.col() < (maxCol-maxCol))   ||
+			   (this.col+dir.col() > (maxCol));
 	}
 }
