@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Application;
-import edu.cpp.cs.cs141.final_project.Commands.ToggleDebugCommand;
+import edu.cpp.cs.cs141.final_project.Commands.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.UIState;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.InputHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
@@ -39,16 +39,22 @@ public class TextUIState implements UIState {
 		keys.add(key_D);
 		keys.add(key_C);
 		keys.add(key_Z);
-		keys.add(key_M);
 		keys.add(key_1);
 		keys.add(key_2);
 		keys.add(key_3);
 		keys.add(key_4);
 		
-		keys.add(key_9);
+		
+		key_M.setText("Menu");
+		key_M.setCommand(new ToggleMenuCommand());
+		key_M.setActive(true);
+		keys.add(key_M);
+		
 		key_9.setCommand(new ToggleDebugCommand());
 		key_9.setVisible(false);
 		key_9.setActive(true);
+		keys.add(key_9);
+		
 	}
 	
 	public void handleInput(char input) {
@@ -73,7 +79,7 @@ public class TextUIState implements UIState {
 		keys.get(keys.indexOf(key_S)).setActive(activeDirections[2]);
 		keys.get(keys.indexOf(key_D)).setActive(activeDirections[3]);
 		
-		keys.get(keys.indexOf(key_C)).setActive(true);
-		if (app.getShootStatus()) keys.get(keys.indexOf(key_Z)).setActive(true);
+		keys.get(keys.indexOf(key_C)).setActive(app.getLookStatus());
+		keys.get(keys.indexOf(key_Z)).setActive(app.getShootStatus());
 	}
 }

@@ -45,7 +45,6 @@ public class TextUserInterface implements IUserInterface
     public void update() {
     	state.update(getGridConditions());
     	
-    	
     	drawGrid();
     	//drawStatusText();
     	drawCommandList();
@@ -139,19 +138,16 @@ public class TextUserInterface implements IUserInterface
 	@Override
 	public void toggleMoveState() {
 		state = moving;
-		update();
 	}
 
 	@Override
 	public void toggleLookState() {
 		state = looking;
-		update();
 	}
 
 	@Override
 	public void toggleShootState() {
 		state = shooting;
-		update();
 	}
 
     

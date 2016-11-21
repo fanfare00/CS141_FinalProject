@@ -15,7 +15,7 @@ public class Player extends Actor{
 	private static final char PLAYER_SYMBOL = 'P';
 	
 	private Direction lookDir;
-	private boolean canLook;
+	private boolean canLook = true;
 	
 	public Player(int row, int col) {
 		super(row, col);
@@ -34,6 +34,8 @@ public class Player extends Actor{
 			
 			obj.setVisible(checkCollision(obj, lookDir.row()*2, lookDir.col()*2));
 		}
+		
+		canLook = false;
 	}
 	
 	public void revealNearby(List<GameObject> activeEntities) {
@@ -48,8 +50,13 @@ public class Player extends Actor{
 		}
 	}
 	
+	public boolean getCanLook() {
+		return this.canLook;
+	}
+	
 	@Override
 	public void update(List<GameObject> activeEntities) {
+		canLook = true;
 		setVisible(true);
 		move();
 		updateState(activeEntities);

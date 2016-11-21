@@ -47,6 +47,10 @@ public class Application {
 	
 	public void playerLook(Direction dir) {
 		game.playerLook(dir);
+		updateUIGrid();
+		UI.toggleMoveState();
+		UI.update();
+		
 	}
 	
 	public void playerAttack(Direction dir) {
@@ -110,18 +114,22 @@ public class Application {
 
 	public void toggleMenuMode() {
 		UI.toggleMenuState();
+		UI.update();
 	}
 
 	public void toggleMoveMode() {
 		UI.toggleMoveState();
+		UI.update();
 	}
 
 	public void toggleLookMode() {
 		UI.toggleLookState();
+		UI.update();
 	}
 
 	public void toggleShootMode() {
 		UI.toggleShootState();
+		UI.update();
 		
 	}
 	
@@ -131,9 +139,8 @@ public class Application {
 		UI.update();
 	}
 
-	public boolean getCanLook() {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean getLookStatus() {
+		return game.getPlayer().getCanLook();
 	}
 
 	public boolean getShootStatus() {
