@@ -30,7 +30,8 @@ public class Enemy extends Actor {
 			if (moveConditions[dir.ordinal()]) availableDirs.add(dir);
 		}
 		
-		this.setMoveDirection(availableDirs.get(new Random().nextInt(availableDirs.size())));
+		if (availableDirs.isEmpty()) setMoveDirection(null);
+		else this.setMoveDirection(availableDirs.get(new Random().nextInt(availableDirs.size())));
 	}
 	
 //	private void attackPlayer(List<GameObject> activeEntities) {

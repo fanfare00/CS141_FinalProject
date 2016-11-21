@@ -74,6 +74,8 @@ public class Application {
 		updateUIGrid();
 		
 		game.setActiveEntities(activeEntities);
+		
+		//UI.update();
 	}
 	
 	/**
@@ -81,6 +83,7 @@ public class Application {
 	 */
 	public void saveGameData() {
 		SaveFileManager.save(game.getActiveEntities());
+		UI.update();
 	}
 	
 	/**

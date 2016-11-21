@@ -72,12 +72,15 @@ public class Actor extends GameObject{
 	}
 	
 	public void move(){
+		if (moveDir == null) return;
 		
 		row += moveDir.row();
 		col += moveDir.col();
 	}
 	
 	protected void updateAttackStatus() {
+		canAttack = false;
+		
 		for (int i = 0; i < state.getProximityConditions().length; i++) {
 			if (state.getProximityConditions()[i]) canAttack = true;
 		}
