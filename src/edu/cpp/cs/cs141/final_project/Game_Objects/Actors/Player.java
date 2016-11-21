@@ -40,7 +40,7 @@ public class Player extends Actor{
 		for (GameObject obj : activeEntities) {
 			if(obj.equals(this)) continue;
 
-			obj.setVisible(false);
+			//obj.setVisible(false);
 			
 			for (Direction dir : Direction.values()){
 				if (checkCollision(obj, dir.row(), dir.col())) obj.setVisible(true);	

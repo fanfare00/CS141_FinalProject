@@ -171,15 +171,27 @@ public class Game {
 	public void setDebugMode(boolean flag) {
 		this.debugMode = flag;
 		
-		if (flag){
-			for (GameObject obj : activeEntities){
-				obj.setVisible(true);
-			}
+		if (flag) toggleEntityVisibility(true);
+		else toggleEntityVisibility(false);
+		
+		player.setVisible(true);
+		player.revealNearby(activeEntities);
+	}
+	
+	private void toggleEntityVisibility(boolean flag) {
+		for (GameObject obj : activeEntities){
+			if(obj instanceof Player) continue;
+			obj.setVisible(flag);
 		}
+	}
+	
+	public boolean getDebugMode() {
+		return debugMode;
 	}
 
 	public void update() {
 		removeInactiveObjects();
+		toggleEntityVisibility(false);
 		
 		for (GameObject obj : activeEntities){
 			

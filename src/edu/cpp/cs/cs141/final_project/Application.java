@@ -126,7 +126,7 @@ public class Application {
 	}
 	
 	public void toggleDebugMode() {
-		game.setDebugMode(true);
+		game.setDebugMode(!game.getDebugMode());
 		updateUIGrid();
 		UI.update();
 	}
