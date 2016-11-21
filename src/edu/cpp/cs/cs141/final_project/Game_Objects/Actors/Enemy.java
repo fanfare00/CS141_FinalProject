@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import edu.cpp.cs.cs141.final_project.Direction;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
  * A hostile {@link Actor} that tries to attack the {@link Player}.

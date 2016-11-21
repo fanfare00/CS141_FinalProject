@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Application;
+import edu.cpp.cs.cs141.final_project.Commands.ToggleDebugCommand;
 import edu.cpp.cs.cs141.final_project.User_Interface.UIState;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.InputHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
@@ -21,6 +22,7 @@ public class TextUIState implements UIState {
 	protected Key key_2 = new Key('2');
 	protected Key key_3 = new Key('3');
 	protected Key key_4 = new Key('4');
+	protected Key key_9 = new Key('9');
 	
 	protected List<Key> keys = new ArrayList<Key>();
 	protected List<Key> activeKeys = new ArrayList<Key>();
@@ -42,6 +44,11 @@ public class TextUIState implements UIState {
 		keys.add(key_2);
 		keys.add(key_3);
 		keys.add(key_4);
+		
+		keys.add(key_9);
+		key_9.setCommand(new ToggleDebugCommand());
+		key_9.setVisible(false);
+		key_9.setActive(true);
 	}
 	
 	public void handleInput(char input) {

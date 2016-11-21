@@ -8,6 +8,11 @@ public class Key {
 	private String text;
 	private Command command;
 	private boolean isActive = false;
+	private boolean isVisible = true;
+	
+	public Key() {
+
+	}
 	
 	public Key(char symbol) {
 		this.symbol = symbol;
@@ -39,4 +44,7 @@ public class Key {
 	public void executeCommand(Application app) {
 		if (isActive) command.execute(app);
 	}
+
+	public boolean getVisible() {return this.isVisible;}
+	public void setVisible(boolean flag) {this.isVisible = flag;}
 }

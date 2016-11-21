@@ -1,4 +1,4 @@
-package edu.cpp.cs.cs141.final_project;
+package edu.cpp.cs.cs141.final_project.Utilities;
 
 public enum Direction {
     UP 		(-1,  0),

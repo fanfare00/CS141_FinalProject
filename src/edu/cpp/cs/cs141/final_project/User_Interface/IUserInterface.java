@@ -25,4 +25,9 @@ public interface IUserInterface {
 
 	void toggleShootState();
 
+	void getAndHandleInput();
+
+	void setStatusText(String string);
+
+	
 }

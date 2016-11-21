@@ -3,7 +3,7 @@ package edu.cpp.cs.cs141.final_project.Game_Objects;
 import java.io.Serializable;
 import java.util.List;
 
-import edu.cpp.cs.cs141.final_project.Direction;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
  * An object that has some position and appearance in the game.

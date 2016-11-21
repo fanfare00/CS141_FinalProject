@@ -1,8 +1,8 @@
 package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 
 import edu.cpp.cs.cs141.final_project.Application;
-import edu.cpp.cs.cs141.final_project.Direction;
 import edu.cpp.cs.cs141.final_project.Commands.*;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 public class ShootingState extends TextUIState {
 	public ShootingState(Application app) {
@@ -21,9 +21,9 @@ public class ShootingState extends TextUIState {
 		key_D.setCommand( new ShootCommand(Direction.RIGHT));
 		
 		key_C.setText("Look");
-		key_C.setCommand(new ToggleMoveCommand());
+		key_C.setCommand(new ToggleLookCommand());
 		
-		key_Z.setText("Shoot");
-		key_Z.setCommand(new ToggleShootCommand());
+		key_Z.setText("Move");
+		key_Z.setCommand(new ToggleMoveCommand());
 	}
 }

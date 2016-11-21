@@ -4,6 +4,8 @@ import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
+import edu.cpp.cs.cs141.final_project.Utilities.SaveFileManager;
 
 /**
  * The {@link Application} class receives commands from the UI and controls the game.
@@ -25,7 +27,7 @@ public class Application {
 	public void run() {
 		UI.update();
 		game.update();
-		updateUIGrid(game.getActiveEntities());
+		updateUIGrid();
 		
 		if (!close) run();
 	}
@@ -44,7 +46,7 @@ public class Application {
 	}
 	
 	public void playerLook(Direction dir) {
-		game.getPlayer().setLookDir(dir);
+		game.playerLook(dir);
 	}
 	
 	public void playerAttack(Direction dir) {
@@ -65,7 +67,7 @@ public class Application {
 	 */
 	public void loadGame(List<GameObject> activeEntities) {
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
-		updateUIGrid(activeEntities);
+		updateUIGrid();
 		
 		game.setActiveEntities(activeEntities);
 	}
@@ -81,12 +83,17 @@ public class Application {
 	 * Updates the UI with the currently active entities.
 	 * @param activeEntities The entities to be displayed on the UI.
 	 */
-	public void updateUIGrid(List<GameObject> activeEntities)
+	public void updateUIGrid()
 	{  
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
-	    for (GameObject o : activeEntities) {
-	    	UI.addToGrid(o.getRow(), o.getCol(), o.getSymbol());
+	    for (GameObject o : game.getActiveEntities()) {
+	    	if (o.isVisible()) UI.addToGrid(o.getRow(), o.getCol(), o.getSymbol());
 	    }
+	}
+	
+	public void getNewCommand() {
+		UI.setStatusText("Invalid Entry - See the above list for valid commands.");
+		UI.getAndHandleInput();
 	}
 	
 	public void close() {
@@ -116,6 +123,12 @@ public class Application {
 	public void toggleShootMode() {
 		UI.toggleShootState();
 		
+	}
+	
+	public void toggleDebugMode() {
+		game.setDebugMode(true);
+		updateUIGrid();
+		UI.update();
 	}
 
 	public boolean getCanLook() {

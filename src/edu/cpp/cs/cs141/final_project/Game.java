@@ -7,6 +7,7 @@ import java.util.Random;
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.*;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
  * The game engine. It stores the game state and controls the mechanics of the game.
@@ -34,9 +35,8 @@ public class Game {
 	private Player player;
 	
 	private boolean gameOver;
-	private int turnNumber;
 	
-	private boolean debugMode;
+	private boolean debugMode = false;
 	
 	public Game() {
 		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL);
@@ -47,8 +47,6 @@ public class Game {
 		activeEntities.add(player);
 		activeEntities.addAll(enemies);
 		activeEntities.addAll(rooms);
-		
-		//player.init(activeEntities);
 		
 		for (GameObject obj : activeEntities) {
 			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
@@ -165,20 +163,30 @@ public class Game {
 		//this.activeEntities.addAll(activeEntities);
 	}
 	
-	private void setDebugMode(boolean flag) {
+	public void playerLook(Direction dir) {
+		player.setLookDir(dir);
+		player.look(activeEntities);
+	}
+	
+	public void setDebugMode(boolean flag) {
 		this.debugMode = flag;
+		
+		if (flag){
+			for (GameObject obj : activeEntities){
+				obj.setVisible(true);
+			}
+		}
 	}
 
 	public void update() {
 		removeInactiveObjects();
 		
-		player.update(activeEntities);
-		
-//		for (GameObject obj : activeEntities){
-//			obj.update(activeEntities);
-//			
-//			if(debugMode) obj.setVisible(true);
-//		}
+		for (GameObject obj : activeEntities){
+			
+			obj.update(activeEntities);
+			
+			if(debugMode) obj.setVisible(true);
+		}
 	}
 	
 	private void removeInactiveObjects() {
@@ -190,7 +198,7 @@ public class Game {
 		
 		activeEntities.removeAll(inactiveEntities);
 	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}

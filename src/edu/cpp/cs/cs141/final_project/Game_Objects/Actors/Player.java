@@ -2,8 +2,8 @@ package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
 import java.util.List;
 
-import edu.cpp.cs.cs141.final_project.Direction;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
  * The {@link Actor} that the user controls.
@@ -15,30 +15,42 @@ public class Player extends Actor{
 	private static final char PLAYER_SYMBOL = 'P';
 	
 	private Direction lookDir;
+	private boolean canLook;
 	
 	public Player(int row, int col) {
 		super(row, col);
 		this.symbol = PLAYER_SYMBOL;
 		this.name = PLAYER_NAME;
+		this.setVisible(true);
 	}
 	
 	public void setLookDir(Direction dir) {
 		this.lookDir = dir;
 	}
 	
+	public void look(List<GameObject> activeEntities) {
+		for (GameObject obj : activeEntities) {
+			if(obj.equals(this)) continue;
+			
+			obj.setVisible(checkCollision(obj, lookDir.row()*2, lookDir.col()*2));
+		}
+	}
+	
 	public void revealNearby(List<GameObject> activeEntities) {
 		for (GameObject obj : activeEntities) {
 			if(obj.equals(this)) continue;
 
+			obj.setVisible(false);
+			
 			for (Direction dir : Direction.values()){
-				if (dir.equals(lookDir)) obj.setVisible(checkCollision(obj, lookDir.row()*2, lookDir.col()*2));
-				else obj.setVisible(checkCollision(obj, dir.row(), dir.col()));
+				if (checkCollision(obj, dir.row(), dir.col())) obj.setVisible(true);	
 			}
 		}
 	}
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
+		setVisible(true);
 		move();
 		updateState(activeEntities);
 		revealNearby(activeEntities);

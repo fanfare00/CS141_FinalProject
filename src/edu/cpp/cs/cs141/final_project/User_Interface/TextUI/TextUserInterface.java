@@ -15,7 +15,6 @@ public class TextUserInterface implements IUserInterface
     private Application app;
     
     private char grid[][];
-    private boolean[] gridConditions;
     
     private TextUIState state;
     
@@ -23,6 +22,9 @@ public class TextUserInterface implements IUserInterface
     private static LookingState looking;
     private static MenuState inMenus;
     private static ShootingState shooting;
+    
+    //private String instructionText;
+    private String statusText;
     
     public TextUserInterface() {
 		scan = new Scanner(System.in);	
@@ -36,8 +38,8 @@ public class TextUserInterface implements IUserInterface
     	inMenus = new MenuState(app);
     	looking = new LookingState(app);
     	
-    	gridConditions = app.getDirectionalConditions();
     	state = moving;
+    	statusText = "Find the Intelligence";
     }
     
     public void update() {
@@ -45,20 +47,40 @@ public class TextUserInterface implements IUserInterface
     	
     	
     	drawGrid();
-    	drawInstructions();
-
+    	//drawStatusText();
+    	drawCommandList();
+    	//drawInstructions();
+    	
     	
     	state.handleInput(getUserInput());
     	
     }
     
-    private void drawInstructions(){
+    public void setStatusText(String statusText){
+    	this.statusText = statusText;
+    }
+    
+    private void drawStatusText() {
+    	System.out.println(statusText);
+    }
+    
+    public void getAndHandleInput(){
+    	drawStatusText();
+    	state.handleInput(getUserInput());
+    }
+    
+    private void drawInstructions() {
+		// TODO Auto-generated method stub
+	}
+
+	private void drawCommandList(){
     	System.out.println(keyTextToString());
     }
     
     private String keyTextToString() {
 		String str = "Commands: ";
     	for (Key key : state.getActiveKeys()){
+    		if(!key.getVisible()) continue;
 			str+= "\n" + key.getSymbol() + " - " + key.getText();
 		}
     	
@@ -76,8 +98,6 @@ public class TextUserInterface implements IUserInterface
     public void createGrid(int rows, int cols) {
     	grid = new char[rows][cols];
     }
-    
-
     
     public void addToGrid(int xIndex, int yIndex, char symbol) {
     	grid[xIndex][yIndex] = symbol;
@@ -119,27 +139,18 @@ public class TextUserInterface implements IUserInterface
 	@Override
 	public void toggleMoveState() {
 		state = moving;
-		
-		//gridConditions = app.getDirectionalConditions();
-		
 		update();
 	}
 
 	@Override
 	public void toggleLookState() {
 		state = looking;
-		
-		//gridConditions = app.getDirectionalConditions();
-		
 		update();
 	}
 
 	@Override
 	public void toggleShootState() {
 		state = shooting;
-		
-		//gridConditions = app.getProximityConditions();
-		
 		update();
 	}
 

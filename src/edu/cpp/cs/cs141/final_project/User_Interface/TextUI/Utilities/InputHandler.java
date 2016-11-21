@@ -11,9 +11,16 @@ public class InputHandler {
 	private List<Key> keys = new ArrayList<Key>();
 	
 	public void handleInput(Application app, char input){
+		boolean isValid = false;
+		
 		for (int i = 0; i < keys.size(); i++) {
-			if (wasTyped(input, keys.get(i))) keys.get(i).executeCommand(app);
+			if (wasTyped(input, keys.get(i))) { 
+				keys.get(i).executeCommand(app);
+				isValid = true;
+			}
 		}
+		
+		if (!isValid) app.getNewCommand();
 	}
 	
 	private static boolean wasTyped(char input, Key key) {

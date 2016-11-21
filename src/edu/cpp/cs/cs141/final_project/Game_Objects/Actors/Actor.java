@@ -2,8 +2,8 @@ package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
 import java.util.List;
 
-import edu.cpp.cs.cs141.final_project.Direction;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
  * A {@link GameObject} that is capable of moving around.
@@ -24,12 +24,6 @@ public class Actor extends GameObject{
 		super(row, col);
 		
 	}
-	
-	public boolean checkValidMove(int maxRow, int maxCol, GameObject obj, Direction dir) {
-		return (checkCollision(obj, dir)) &&
-			   (!checkOutOfBounds(maxRow, maxCol, dir));
-	}
-	
 	public void updateState(List<GameObject> activeEntities){
 
 		boolean[] proximityConditions = new boolean[MAX_DIRECTIONS];
@@ -51,7 +45,6 @@ public class Actor extends GameObject{
 			}
 		}
 		
-		//System.out.println(proximityConditions[0] + ", " + proximityConditions[1] + ", " + proximityConditions[2] + ", " + proximityConditions[3]);
 		state = new ActorState(moveConditions, proximityConditions);
 	}
 	
