@@ -22,7 +22,7 @@ public class Enemy extends Actor {
 		this.name = ENEMY_NAME;
 	}
 
-	private void getRandomMovement() {
+	public void getRandomMovement() {
 		List<Direction> availableDirs = new ArrayList<Direction>();
 		boolean[] moveConditions = this.getState().getMoveConditions();
 		
@@ -40,9 +40,10 @@ public class Enemy extends Actor {
 	@Override
 	public void update(List<GameObject> activeEntities) {
 		
+		updateState(activeEntities);
 		getRandomMovement();
 		move();
-		updateState(activeEntities);
+		//updateState(activeEntities);
 	}
 
 }

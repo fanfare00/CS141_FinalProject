@@ -58,8 +58,9 @@ public class Player extends Actor{
 	public void update(List<GameObject> activeEntities) {
 		canLook = true;
 		setVisible(true);
-		move();
 		updateState(activeEntities);
+		move();
+		//updateState(activeEntities);
 		revealNearby(activeEntities);
 		setLookDir(null);
 	}

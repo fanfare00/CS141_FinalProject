@@ -189,17 +189,6 @@ public class Game {
 		return debugMode;
 	}
 
-	public void update() {
-		removeInactiveObjects();
-		toggleEntityVisibility(false);
-		
-		for (GameObject obj : activeEntities){
-			
-			obj.update(activeEntities);
-			
-			if(debugMode) obj.setVisible(true);
-		}
-	}
 	
 	private void removeInactiveObjects() {
 		List<GameObject> inactiveEntities = new ArrayList<GameObject>();
@@ -213,5 +202,21 @@ public class Game {
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public void update() {
+		removeInactiveObjects();
+		toggleEntityVisibility(false);
+		
+		for (GameObject obj : activeEntities){
+			
+			obj.update(activeEntities);
+			
+			if(debugMode) obj.setVisible(true);
+		}
+		
+		for (GameObject obj : activeEntities){
+			if (obj instanceof Actor) ((Actor) obj).updateState(activeEntities);
+		}		
 	}
 }

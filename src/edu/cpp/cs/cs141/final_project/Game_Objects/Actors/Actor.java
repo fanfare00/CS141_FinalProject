@@ -81,8 +81,8 @@ public class Actor extends GameObject{
 
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		updateState(activeEntities);
-		move();
+		//move();
+		//updateState(activeEntities);
 	}
 
 
