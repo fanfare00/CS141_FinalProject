@@ -204,6 +204,8 @@ public class Game {
 		return player;
 	}
 	
+	
+	
 	public void update() {
 		removeInactiveObjects();
 		toggleEntityVisibility(false);

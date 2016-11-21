@@ -43,6 +43,7 @@ public class Enemy extends Actor {
 		updateState(activeEntities);
 		getRandomMovement();
 		move();
+		//updateAttackStatus();
 		//updateState(activeEntities);
 	}
 

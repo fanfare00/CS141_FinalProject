@@ -38,6 +38,8 @@ public class Player extends Actor{
 		canLook = false;
 	}
 	
+	
+	
 	public void revealNearby(List<GameObject> activeEntities) {
 		for (GameObject obj : activeEntities) {
 			if(obj.equals(this)) continue;
@@ -60,6 +62,7 @@ public class Player extends Actor{
 		setVisible(true);
 		updateState(activeEntities);
 		move();
+		//updateAttackStatus();
 		//updateState(activeEntities);
 		revealNearby(activeEntities);
 		setLookDir(null);

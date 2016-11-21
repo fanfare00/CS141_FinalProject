@@ -14,6 +14,7 @@ public class Actor extends GameObject{
 	
 	boolean isAlive;
 	boolean invincible;
+	boolean canAttack = false;
 	int ammo;
 	
 	private ActorState state;
@@ -46,6 +47,7 @@ public class Actor extends GameObject{
 		}
 		
 		state = new ActorState(moveConditions, proximityConditions);
+		updateAttackStatus();
 	}
 	
 	/**
@@ -75,6 +77,16 @@ public class Actor extends GameObject{
 		col += moveDir.col();
 	}
 	
+	protected void updateAttackStatus() {
+		for (int i = 0; i < state.getProximityConditions().length; i++) {
+			if (state.getProximityConditions()[i]) canAttack = true;
+		}
+	}
+	
+	public boolean getCanAttack() {	
+		return canAttack;
+	}
+	
 	public ActorState getState() {
 		return state;
 	}
@@ -83,6 +95,7 @@ public class Actor extends GameObject{
 	public void update(List<GameObject> activeEntities) {
 		//move();
 		//updateState(activeEntities);
+		//updateShootStatus();
 	}
 
 
