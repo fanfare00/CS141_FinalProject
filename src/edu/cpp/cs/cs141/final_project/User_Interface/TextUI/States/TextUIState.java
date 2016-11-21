@@ -30,6 +30,8 @@ public class TextUIState implements UIState {
 	protected InputHandler inputHandler = new InputHandler();
 	protected Application app;
 	
+
+	
 	public TextUIState(Application app) {
 		this.app = app;
 		
@@ -72,14 +74,19 @@ public class TextUIState implements UIState {
 		return activeKeys;
 	}
 
-	public void update(boolean[] activeDirections) {
+	public void update(boolean[] activeDirections) {	
+		key_1.setActive(false);
+		key_2.setActive(false);
+		key_3.setActive(false);
+		key_4.setActive(false);
 		
 		keys.get(keys.indexOf(key_W)).setActive(activeDirections[0]);
 		keys.get(keys.indexOf(key_A)).setActive(activeDirections[1]);
 		keys.get(keys.indexOf(key_S)).setActive(activeDirections[2]);
 		keys.get(keys.indexOf(key_D)).setActive(activeDirections[3]);
-		
+			
 		keys.get(keys.indexOf(key_C)).setActive(app.getLookStatus());
 		keys.get(keys.indexOf(key_Z)).setActive(app.getShootStatus());
+		
 	}
 }

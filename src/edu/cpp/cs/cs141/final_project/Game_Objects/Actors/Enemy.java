@@ -33,9 +33,9 @@ public class Enemy extends Actor {
 		this.setMoveDirection(availableDirs.get(new Random().nextInt(availableDirs.size())));
 	}
 	
-	private void attackPlayer() {
-		
-	}
+//	private void attackPlayer(List<GameObject> activeEntities) {
+//		//if (canAttack) activeEntities.get
+//	}
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
