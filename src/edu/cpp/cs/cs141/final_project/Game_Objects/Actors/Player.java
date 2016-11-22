@@ -68,8 +68,13 @@ public class Player extends Actor{
 	
 	public void attack() {
 		this.canAttack = false;
-		nearbyActors.get(0).setActive(false);
-		nearbyActors.clear();
+		
+	    if(remainingAmmo > 0) {
+			nearbyActors.get(0).setActive(false);
+			nearbyActors.clear();
+			
+			this.remainingAmmo -= 1;
+	    }
 	}
 	
 	public void revealNearby(List<GameObject> activeEntities) {

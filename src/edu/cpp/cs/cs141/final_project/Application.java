@@ -167,7 +167,7 @@ public class Application {
 	}
 
 	public boolean getShootStatus() {
-		return game.getPlayer().getCanAttack();
+		return (game.getPlayer().getRemainingAmmo() > 0 ) && (game.getPlayer().getCanAttack());
 	}
 	
 	public boolean getDeathStatus() {
