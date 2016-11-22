@@ -27,7 +27,7 @@ public class Application {
 	public void run() {
 		UI.update();
 		game.update();
-		updateUIGrid();
+		redrawUI();
 		
 		if (!close) run();
 	}
@@ -47,7 +47,7 @@ public class Application {
 	
 	public void playerLook(Direction dir) {
 		game.playerLook(dir);
-		updateUIGrid();
+		redrawUI();
 		UI.toggleMoveState();
 		UI.update();
 		
@@ -56,7 +56,7 @@ public class Application {
 	public void playerAttack() {
 		game.getPlayer().setMoveDirection(null);
 		game.playerAttack();
-		updateUIGrid();
+		redrawUI();
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class Application {
 	 */
 	public void loadGame(List<GameObject> activeEntities) {
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
-		updateUIGrid();
+		redrawUI();
 		
 		game.setActiveEntities(activeEntities);
 		
@@ -92,8 +92,15 @@ public class Application {
 	 * Updates the UI with the currently active entities.
 	 * @param activeEntities The entities to be displayed on the UI.
 	 */
-	public void updateUIGrid()
+	public void redrawUI()
 	{  
+		updateUIAlertText();
+		updateUIStatusText();
+		updateUIGrid();
+
+	}
+	
+	public void updateUIGrid(){
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
 	    for (GameObject o : game.getActiveEntities()) {
 	    	if (o.isVisible()) UI.addToGrid(o.getRow(), o.getCol(), o.getSymbol());
@@ -140,7 +147,7 @@ public class Application {
 	
 	public void toggleDebugMode() {
 		game.setDebugMode(!game.getDebugMode());
-		updateUIGrid();
+		redrawUI();
 		UI.update();
 	}
 
@@ -151,8 +158,27 @@ public class Application {
 	public boolean getShootStatus() {
 		return game.getPlayer().getCanAttack();
 	}
+	
+	public boolean getDeathStatus() {
+		return game.getPlayer().getHasDiedRecently();
+	}
+	
+	public void updateUIAlertText() {
+		String alertText = null;
+		
+		if (getShootStatus()) alertText = "You've spotted an enemy ninja!";
+		if (getDeathStatus()) alertText = "An enemy ninja killed you!";
+		UI.setAlertText(alertText);
+	}
 
-
+	public void updateUIStatusText() {
+		String statusText = "";
+		
+		statusText += "You have " + game.getPlayer().getRemainingLives() + " lives left. ";
+		statusText += "Your gun has " + game.getPlayer().getRemainingAmmo() + " shots left.";
+		
+		UI.setStatusText(statusText);
+	}
 
 
 }

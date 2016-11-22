@@ -23,8 +23,9 @@ public class TextUserInterface implements IUserInterface
     private static MenuState inMenus;
     private static ShootingState shooting;
     
-    //private String instructionText;
+    private String instructionText;
     private String statusText;
+    private String alertText;
     
     public TextUserInterface() {
 		scan = new Scanner(System.in);	
@@ -38,18 +39,17 @@ public class TextUserInterface implements IUserInterface
     	inMenus = new MenuState(app);
     	looking = new LookingState(app);
     	
-    	state = moving;
-    	statusText = "Find the Intelligence";
+    	toggleMoveState();
     }
     
     public void update() {
     	state.update(getGridConditions());
     	
     	drawGrid();
-    	//drawStatusText();
+    	drawAlertText();
+    	drawStatusText();
+    	drawInstructions();
     	drawCommandList();
-    	//drawInstructions();
-    	
     	
     	state.handleInput(getUserInput());
     	
@@ -57,6 +57,10 @@ public class TextUserInterface implements IUserInterface
     
     public void setStatusText(String statusText){
     	this.statusText = statusText;
+    }
+    
+    public void setAlertText(String alertText){
+    	this.alertText = alertText;
     }
     
     private void drawStatusText() {
@@ -68,8 +72,14 @@ public class TextUserInterface implements IUserInterface
     	state.handleInput(getUserInput());
     }
     
+    private void drawAlertText() {
+    	
+    	if (alertText != null) System.out.println(alertText);
+    	alertText = null;
+    }
+    
     private void drawInstructions() {
-		// TODO Auto-generated method stub
+    	System.out.println(instructionText);
 	}
 
 	private void drawCommandList(){
@@ -132,16 +142,19 @@ public class TextUserInterface implements IUserInterface
 
 	@Override
 	public void toggleMenuState() {
+		instructionText = "Choose a menu option from the command list below";
 		state = inMenus;
 	}
 
 	@Override
 	public void toggleMoveState() {
+		instructionText = "Choose a direction to move from the command list below";
 		state = moving;
 	}
 
 	@Override
 	public void toggleLookState() {
+		instructionText = "Choose a direction to look from the command list below";
 		state = looking;
 	}
 

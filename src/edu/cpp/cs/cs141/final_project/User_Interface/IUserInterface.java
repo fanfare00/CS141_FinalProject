@@ -29,5 +29,7 @@ public interface IUserInterface {
 
 	void setStatusText(String string);
 
+	void setAlertText(String string);
+
 	
 }

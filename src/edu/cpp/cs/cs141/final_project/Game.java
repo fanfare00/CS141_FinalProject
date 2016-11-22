@@ -27,6 +27,7 @@ public class Game {
 	private static final int PLAYER_SPAWN_COL = 0;
 	
 	private static final int MAX_LIVES = 3;
+	private static final int MAX_PLAYER_AMMO = 1;
 	
 	//private static final int MAX_DIRECTIONS = Direction.values().length;
 	
@@ -43,7 +44,7 @@ public class Game {
 	
 	public Game() {
 		
-		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES);
+		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES, MAX_PLAYER_AMMO);
 		spawnEnemiesRandomly();
 		spawnRooms();
 		spawnBriefcase();

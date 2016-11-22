@@ -18,17 +18,20 @@ public class Player extends Actor{
 	
 	private Direction lookDir;
 	private boolean canLook = true;
+	private boolean hasDiedRecently;
 	
 	private int startingRow;
 	private int startingCol;
 	
 	private int remainingLives;
+	private int remainingAmmo;
 	
-	public Player(int row, int col, int lives) {
+	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
 		this.startingRow = row;
 		this.startingCol = col;
-		this.remainingLives = lives;
+		this.remainingLives = maxLives;
+		this.remainingAmmo = maxAmmo;
 		
 		this.symbol = PLAYER_SYMBOL;
 		this.name = PLAYER_NAME;
@@ -88,16 +91,22 @@ public class Player extends Actor{
 		return this.canLook;
 	}
 	
+	public boolean getHasDiedRecently() {
+		return this.hasDiedRecently;
+	}
+	
 	public void reset() {
 		this.row = startingRow;
 		this.col = startingCol;
 		this.remainingLives-=1;
+		this.hasDiedRecently = true;
 	}
 	
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
 		canLook = true;
+		hasDiedRecently = false;
 		setVisible(true);
 		updateState(activeEntities);
 		move();
@@ -109,6 +118,10 @@ public class Player extends Actor{
 
 	public int getRemainingLives() {
 		return remainingLives;
+	}
+	
+	public int getRemainingAmmo() {
+		return remainingAmmo;
 	}
 
 }
