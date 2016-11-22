@@ -20,9 +20,9 @@ public abstract class GameObject implements Serializable{
 	protected boolean isActive;
 	protected boolean isVisible;
 	
-	public GameObject(int xPos, int yPos) {
-		this.row = xPos;
-		this.col = yPos;
+	public GameObject(int row, int col) {
+		this.row = row;
+		this.col = col;
 		this.isActive = true;
 		this.isVisible = false;
 	}
@@ -46,6 +46,14 @@ public abstract class GameObject implements Serializable{
 	 */
 	public char getSymbol() {
 		return symbol;
+	}
+	
+	public void setRow(int row) {
+		this.row = row;
+	}
+	
+	public void setCol(int col) {
+		this.col = col;
 	}
 	
 	public void setActive(boolean flag) {

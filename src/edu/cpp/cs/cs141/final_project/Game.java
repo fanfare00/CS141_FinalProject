@@ -7,6 +7,7 @@ import java.util.Random;
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.*;
+import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
@@ -46,10 +47,6 @@ public class Game {
 		spawnEnemiesRandomly();
 		spawnRooms();
 		spawnBriefcase();
-		
-		
-		
-		
 		
 		for (GameObject obj : activeEntities) {
 			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
@@ -91,25 +88,33 @@ public class Game {
 			}
 		}
 	}
+	
+	private void spawnRandomly(GameObject obj) {
+		Random rand = new Random();
+		
+		int randomRow = rand.nextInt(GAME_ROWS);
+		int randomCol = rand.nextInt(GAME_COLS);
+		
+		obj.setRow(randomRow);
+		obj.setCol(randomCol);
+		
+		if(isValidSpawnLocation(randomRow, randomCol)) activeEntities.add(obj);
+		else spawnRandomly(obj);
+	}
+	
+	private void spawnPowerupsRandomly() {
+		spawnRandomly(new Radar(0,0));
+		spawnRandomly(new ExtraBullet(0,0));
+		spawnRandomly(new Invincibility(0,0));
+	}
 
 	/**
 	 * Randomly spawns enemies around the map.
 	 */
-	private void spawnEnemiesRandomly() {
-		int randomRow;
-		int randomCol;
-		
-	    Random rand = new Random();
-		
+	private void spawnEnemiesRandomly() {	
 		for (int i = 0; i < MAX_ENEMY_COUNT; i++) {
-			randomRow = rand.nextInt(GAME_ROWS);
-			randomCol = rand.nextInt(GAME_COLS);
 			
-			if (isValidSpawnLocation(randomRow, randomCol)) {
-				activeEntities.add(new Enemy(randomRow, randomCol));
-			} else {
-				i--;
-			}
+			spawnRandomly(new Enemy(0,0));
 		}
 	}
 	
