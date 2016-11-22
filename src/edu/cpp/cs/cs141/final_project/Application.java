@@ -21,7 +21,6 @@ public class Application {
 		this.UI = UI;
 		this.game = game;
 		
-		
 		start();
 	}
 
@@ -179,7 +178,6 @@ public class Application {
 		return game.getGameOver();
 	}
 	
-	
 	public void updateUIAlertText() {
 		String alertText = null;
 		
@@ -197,6 +195,4 @@ public class Application {
 		
 		UI.setStatusText(statusText);
 	}
-
-
 }

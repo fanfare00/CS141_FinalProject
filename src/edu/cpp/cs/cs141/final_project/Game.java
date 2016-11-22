@@ -29,8 +29,6 @@ public class Game {
 	private static final int MAX_LIVES = 3;
 	private static final int MAX_PLAYER_AMMO = 1;
 	
-	private List<Room> rooms = new ArrayList<Room>();
-	private List<Enemy> enemies = new ArrayList<Enemy>();
 	List<GameObject> activeEntities = new ArrayList<GameObject>();
 	
 	private Player player;
@@ -43,13 +41,15 @@ public class Game {
 	public Game() {
 		
 		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES, MAX_PLAYER_AMMO);
+		activeEntities.add(player);
+		
 		spawnEnemiesRandomly();
 		spawnRooms();
 		spawnBriefcase();
 		
-		activeEntities.add(player);
-		activeEntities.addAll(enemies);
-		activeEntities.addAll(rooms);
+		
+		
+		
 		
 		for (GameObject obj : activeEntities) {
 			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
@@ -65,19 +65,20 @@ public class Game {
 	    return gameOver;
 	}
 	
-	private void spawnPlayer(int livesRemaining) {
-		
-		player.setRemainingLives(livesRemaining-1);
-		player.init(activeEntities);
-	}
-	
 	/**
 	 * Places the briefcase in a random room.
 	 */
 	private void spawnBriefcase() {
+		
+		List<Room> rooms = new ArrayList<Room>();
+
 		int randomRoomNumber = (int) (Math.random() * MAX_ROOM_COUNT);
 		
-		 rooms.get(randomRoomNumber).placeIntel();
+		for (GameObject obj : activeEntities) {
+			if (obj instanceof Room) rooms.add((Room)obj);
+		}
+		 
+		rooms.get(randomRoomNumber).placeIntel();
 	}
 	
 	/**
@@ -86,7 +87,7 @@ public class Game {
 	private void spawnRooms() {
 		for (int i = 1; i < MAX_ROOM_COUNT; i+=ROOM_SPACING) {
 			for (int j = 1; j < MAX_ROOM_COUNT; j+=ROOM_SPACING) {
-				rooms.add(new Room(i,j));
+				activeEntities.add(new Room(i,j));
 			}
 		}
 	}
@@ -105,7 +106,7 @@ public class Game {
 			randomCol = rand.nextInt(GAME_COLS);
 			
 			if (isValidSpawnLocation(randomRow, randomCol)) {
-				enemies.add(new Enemy(randomRow, randomCol));
+				activeEntities.add(new Enemy(randomRow, randomCol));
 			} else {
 				i--;
 			}
@@ -132,8 +133,8 @@ public class Game {
 	 * @return True if the spawn is occupied, false otherwise.
 	 */
 	private boolean isSpawnOccupied(int row, int col) {
-		for (Room r : rooms){
-			if ((r.getRow() == row) && r.getCol() == col) {
+		for (GameObject obj : activeEntities){
+			if ((obj.getRow() == row) && obj.getCol() == col) {
 				return true;
 			}
 		}
@@ -168,8 +169,6 @@ public class Game {
 		List<GameObject> entities = new ArrayList<GameObject>();
 		entities.addAll(activeEntities);
 		this.activeEntities = entities;
-	    //this.activeEntities.clear();
-		//this.activeEntities.addAll(activeEntities);
 	}
 	
 	public void playerLook(Direction dir) {
@@ -208,10 +207,7 @@ public class Game {
 		List<GameObject> inactiveEntities = new ArrayList<GameObject>();
 		
 		for (GameObject obj : activeEntities){
-			if (!obj.isActive()) {
-				inactiveEntities.add(obj);
-			
-			}
+			if (!obj.isActive()) inactiveEntities.add(obj);
 		}
 		
 		activeEntities.removeAll(inactiveEntities);
@@ -261,7 +257,6 @@ public class Game {
 	
 	public void update() {
 		
-		
 		updateEntities();
 		
 		updateEnemyStates();
@@ -273,8 +268,6 @@ public class Game {
 		removeInactiveObjects();
 		
 		checkGameOver();
-		
-		
 	}
 
 	private void revealEntitiesNearPlayer() {
