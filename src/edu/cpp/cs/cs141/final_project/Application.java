@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
+import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.TextUserInterface;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 import edu.cpp.cs.cs141.final_project.Utilities.SaveFileManager;
 
@@ -20,11 +21,13 @@ public class Application {
 		this.UI = UI;
 		this.game = game;
 		
-		UI.init(this);
-		startNewGame();
+		
+		start();
 	}
 
 	public void run() {
+		if (getGameOverStatus()) UI.toggleMenuState();
+		
 		UI.update();
 		game.update();
 		redrawUI();
@@ -35,9 +38,17 @@ public class Application {
 	/**
 	 * Initializes a new game.
 	 */
-	public void startNewGame() {	
+	public void start() {	
+		UI.init(this);
 		loadGame(game.getActiveEntities());
 		run();
+	}
+	
+	public void startNewGame() {
+		UI = new TextUserInterface();
+		game = new Game();
+		
+		start();
 	}
 	
 	public void playerMove(Direction dir) {
@@ -114,6 +125,7 @@ public class Application {
 	
 	public void close() {
 		this.close = true;
+		System.exit(0);
 	}
 	
 	public boolean[] getDirectionalConditions() {
@@ -163,11 +175,17 @@ public class Application {
 		return game.getPlayer().getHasDiedRecently();
 	}
 	
+	public boolean getGameOverStatus() {
+		return game.getGameOver();
+	}
+	
+	
 	public void updateUIAlertText() {
 		String alertText = null;
 		
 		if (getShootStatus()) alertText = "You've spotted an enemy ninja!";
 		if (getDeathStatus()) alertText = "An enemy ninja killed you!";
+		if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
 		UI.setAlertText(alertText);
 	}
 

@@ -6,7 +6,7 @@ public class MenuNewCommand implements Command {
 
 	@Override
 	public void execute(Application app) {
-		// TODO Auto-generated method stub
+		app.startNewGame();
 		
 	}
 

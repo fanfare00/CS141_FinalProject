@@ -6,8 +6,7 @@ public class MenuQuitCommand implements Command {
 
 	@Override
 	public void execute(Application app) {
-		// TODO Auto-generated method stub
-		
+		app.close();
 	}
 
 }

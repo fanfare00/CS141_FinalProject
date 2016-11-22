@@ -29,15 +29,13 @@ public class Game {
 	private static final int MAX_LIVES = 3;
 	private static final int MAX_PLAYER_AMMO = 1;
 	
-	//private static final int MAX_DIRECTIONS = Direction.values().length;
-	
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Enemy> enemies = new ArrayList<Enemy>();
 	List<GameObject> activeEntities = new ArrayList<GameObject>();
 	
 	private Player player;
 	
-	private boolean gameOver;
+	private boolean gameOver = false;
 	
 	private boolean debugMode = false;
 	
@@ -253,7 +251,16 @@ public class Game {
 		}
 	}
 	
+	private void checkGameOver() {
+		if (player.getRemainingLives() == 0) gameOver = true;
+	}
+	
+	public boolean getGameOver() {
+		return gameOver;
+	}
+	
 	public void update() {
+		
 		
 		updateEntities();
 		
@@ -263,9 +270,9 @@ public class Game {
 		
 		handleEnemyCombat();
 		
-		
-		
 		removeInactiveObjects();
+		
+		checkGameOver();
 		
 		
 	}

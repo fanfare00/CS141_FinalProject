@@ -26,15 +26,19 @@ public class Player extends Actor{
 	private int remainingLives;
 	private int remainingAmmo;
 	
+	private boolean isAlive;
+	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
 		this.startingRow = row;
 		this.startingCol = col;
+
 		this.remainingLives = maxLives;
 		this.remainingAmmo = maxAmmo;
 		
 		this.symbol = PLAYER_SYMBOL;
 		this.name = PLAYER_NAME;
+		this.isAlive = true;
 		this.setVisible(true);
 	}
 	
