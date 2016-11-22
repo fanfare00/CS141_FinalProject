@@ -1,5 +1,6 @@
 package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
@@ -8,16 +9,18 @@ import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 /**
  * A {@link GameObject} that is capable of moving around.
  */
-public class Actor extends GameObject{
+public abstract class Actor extends GameObject{
 
-	private static final int MAX_DIRECTIONS = Direction.values().length;
+	protected static final int MAX_DIRECTIONS = Direction.values().length;
+	
+	protected List<Actor> nearbyActors = new ArrayList<Actor>();
 	
 	boolean isAlive;
 	boolean invincible;
 	boolean canAttack = false;
 	int ammo;
 	
-	private ActorState state;
+	protected ActorState state;
 	
 	private Direction moveDir;
 	
@@ -25,10 +28,13 @@ public class Actor extends GameObject{
 		super(row, col);
 		
 	}
-	public void updateState(List<GameObject> activeEntities){
+	public void updateState(List<GameObject> activeEntities) {
 
+		canAttack = false;
+		
 		boolean[] proximityConditions = new boolean[MAX_DIRECTIONS];
 		boolean[] moveConditions = new boolean[MAX_DIRECTIONS];
+		
 		
 		for(Direction dir : Direction.values()) {
 			moveConditions[dir.ordinal()] = !checkOutOfBounds(MAX_ROW, MAX_COL, dir);
@@ -41,13 +47,14 @@ public class Actor extends GameObject{
 				if (checkCollision( obj, dir) && obj instanceof Actor) { 
 					proximityConditions[dir.ordinal()] = true;
 					moveConditions[dir.ordinal()] = false;
+					nearbyActors.add((Actor) obj);
+					this.updateAttackStatus();
 				}
 				else if (checkCollision( obj, dir)) moveConditions[dir.ordinal()] = false;
 			}
 		}
 		
 		state = new ActorState(moveConditions, proximityConditions);
-		updateAttackStatus();
 	}
 	
 	/**
@@ -79,11 +86,14 @@ public class Actor extends GameObject{
 	}
 	
 	protected void updateAttackStatus() {
-		canAttack = false;
+		//canAttack = !(nearbyActors.isEmpty());
+		//nearbyActors.clear();
 		
-		for (int i = 0; i < state.getProximityConditions().length; i++) {
-			if (state.getProximityConditions()[i]) canAttack = true;
-		}
+//		canAttack = false;
+//		
+//		for (int i = 0; i < state.getProximityConditions().length; i++) {
+//			if (state.getProximityConditions()[i]) canAttack = true;
+//		}
 	}
 	
 	public boolean getCanAttack() {	

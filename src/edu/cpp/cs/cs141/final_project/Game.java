@@ -26,6 +26,8 @@ public class Game {
 	private static final int PLAYER_SPAWN_ROW = 8;
 	private static final int PLAYER_SPAWN_COL = 0;
 	
+	private static final int MAX_LIVES = 3;
+	
 	//private static final int MAX_DIRECTIONS = Direction.values().length;
 	
 	private List<Room> rooms = new ArrayList<Room>();
@@ -38,8 +40,10 @@ public class Game {
 	
 	private boolean debugMode = false;
 	
+	
 	public Game() {
-		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL);
+		
+		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES);
 		spawnEnemiesRandomly();
 		spawnRooms();
 		spawnBriefcase();
@@ -60,6 +64,12 @@ public class Game {
 	public boolean isGameOver()
 	{
 	    return gameOver;
+	}
+	
+	private void spawnPlayer(int livesRemaining) {
+		
+		player.setRemainingLives(livesRemaining-1);
+		player.init(activeEntities);
 	}
 	
 	/**
@@ -168,6 +178,11 @@ public class Game {
 		player.look(activeEntities);
 	}
 	
+	public void playerAttack() {
+		player.attack();
+		removeInactiveObjects();
+	}
+	
 	public void setDebugMode(boolean flag) {
 		this.debugMode = flag;
 		
@@ -194,7 +209,10 @@ public class Game {
 		List<GameObject> inactiveEntities = new ArrayList<GameObject>();
 		
 		for (GameObject obj : activeEntities){
-			if (!obj.isActive()) inactiveEntities.add(obj);
+			if (!obj.isActive()) {
+				inactiveEntities.add(obj);
+			
+			}
 		}
 		
 		activeEntities.removeAll(inactiveEntities);
@@ -204,10 +222,7 @@ public class Game {
 		return player;
 	}
 	
-	
-	
-	public void update() {
-		removeInactiveObjects();
+	private void updateEntities() {
 		toggleEntityVisibility(false);
 		
 		for (GameObject obj : activeEntities){
@@ -216,9 +231,46 @@ public class Game {
 			
 			if(debugMode) obj.setVisible(true);
 		}
-		
+	}
+	
+	private void updateEnemyStates() {
 		for (GameObject obj : activeEntities){
 			if (obj instanceof Actor) ((Actor) obj).updateState(activeEntities);
-		}		
+		}
+	}
+	
+	private void resetPlayer() {
+		player.reset();
+		player.updateState(activeEntities);
+	}
+	
+	private void handleEnemyCombat() {
+		for (GameObject obj : activeEntities){
+			if (obj instanceof Enemy) {
+				if (( (Enemy) obj).getCanAttack()) resetPlayer();
+			}
+		}
+	}
+	
+	public void update() {
+		
+		updateEntities();
+		
+		updateEnemyStates();
+		
+		revealEntitiesNearPlayer();
+		
+		handleEnemyCombat();
+		
+		
+		
+		removeInactiveObjects();
+		
+		
+	}
+
+	private void revealEntitiesNearPlayer() {
+		player.revealNearby(activeEntities);
+		
 	}
 }

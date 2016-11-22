@@ -22,9 +22,6 @@ public class MovingState extends TextUIState {
 		key_D.setText("Move RIGHT");
 		key_D.setCommand( new MoveCommand(Direction.RIGHT));
 		
-		key_Z.setText("Shoot");
-		key_Z.setCommand(new ToggleShootCommand());
-		
 		key_C.setText("Look");
 		key_C.setCommand(new ToggleLookCommand());
 	}

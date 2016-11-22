@@ -1,5 +1,6 @@
 package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
@@ -14,11 +15,21 @@ public class Player extends Actor{
 	private static final String PLAYER_NAME = "Player";
 	private static final char PLAYER_SYMBOL = 'P';
 	
+	
 	private Direction lookDir;
 	private boolean canLook = true;
 	
-	public Player(int row, int col) {
+	private int startingRow;
+	private int startingCol;
+	
+	private int remainingLives;
+	
+	public Player(int row, int col, int lives) {
 		super(row, col);
+		this.startingRow = row;
+		this.startingCol = col;
+		this.remainingLives = lives;
+		
 		this.symbol = PLAYER_SYMBOL;
 		this.name = PLAYER_NAME;
 		this.setVisible(true);
@@ -29,16 +40,30 @@ public class Player extends Actor{
 	}
 	
 	public void look(List<GameObject> activeEntities) {
+		revealNearby(activeEntities);
+		
 		for (GameObject obj : activeEntities) {
 			if(obj.equals(this)) continue;
 			
-			obj.setVisible(checkCollision(obj, lookDir.row()*2, lookDir.col()*2));
+			if (checkCollision(obj, lookDir.row()*2, lookDir.col()*2)) { 
+				obj.setVisible(true);
+				
+				if (obj instanceof Enemy) {
+					this.nearbyActors.add((Enemy)obj);
+					this.canAttack = true;
+				}
+				
+			}
 		}
 		
 		canLook = false;
 	}
 	
-	
+	public void attack() {
+		this.canAttack = false;
+		nearbyActors.get(0).setActive(false);
+		nearbyActors.clear();
+	}
 	
 	public void revealNearby(List<GameObject> activeEntities) {
 		for (GameObject obj : activeEntities) {
@@ -47,14 +72,28 @@ public class Player extends Actor{
 			//obj.setVisible(false);
 			
 			for (Direction dir : Direction.values()){
-				if (checkCollision(obj, dir.row(), dir.col())) obj.setVisible(true);	
+				if (checkCollision(obj, dir.row(), dir.col())) {
+					obj.setVisible(true);
+				}
+				
 			}
 		}
+	}
+	
+	public void setRemainingLives(int remainingLives){
+		this.remainingLives = remainingLives;
 	}
 	
 	public boolean getCanLook() {
 		return this.canLook;
 	}
+	
+	public void reset() {
+		this.row = startingRow;
+		this.col = startingCol;
+		this.remainingLives-=1;
+	}
+	
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
@@ -64,8 +103,12 @@ public class Player extends Actor{
 		move();
 		//updateAttackStatus();
 		//updateState(activeEntities);
-		revealNearby(activeEntities);
+		//revealNearby(activeEntities);
 		setLookDir(null);
+	}
+
+	public int getRemainingLives() {
+		return remainingLives;
 	}
 
 }

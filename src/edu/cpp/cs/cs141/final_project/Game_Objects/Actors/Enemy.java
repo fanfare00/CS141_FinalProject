@@ -16,6 +16,8 @@ public class Enemy extends Actor {
 	private static final String ENEMY_NAME = "Ninja";
 	private static final char ENEMY_SYMBOL = 'N';
 	
+
+	
 	public Enemy(int xPos, int yPos) {
 		super(xPos, yPos);
 		this.symbol = ENEMY_SYMBOL;
@@ -34,13 +36,21 @@ public class Enemy extends Actor {
 		else this.setMoveDirection(availableDirs.get(new Random().nextInt(availableDirs.size())));
 	}
 	
-//	private void attackPlayer(List<GameObject> activeEntities) {
-//		//if (canAttack) activeEntities.get
-//	}
+	protected void updateAttackStatus() {
+
+		if (nearbyActors.isEmpty()) return;
+		
+		for (int i = 0; i < nearbyActors.size(); i++) {
+			if (nearbyActors.get(i) instanceof Player) { 
+				canAttack = true;
+			}
+		}
+		
+		nearbyActors.clear();
+	}
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		
 		updateState(activeEntities);
 		getRandomMovement();
 		move();

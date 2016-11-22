@@ -25,9 +25,6 @@ public class LookingState extends TextUIState {
 		key_C.setText("Move");
 		key_C.setCommand(new ToggleMoveCommand());
 		
-		key_Z.setText("Shoot");
-		key_Z.setCommand(new ToggleShootCommand());
-		
 		
 //		keys.add(new Key('W', "W - Move UP", new LookCommand(app, 1, 0)));
 //		keys.add(new Key('A', "A - Move LEFT", new LookCommand(app, 0, -1)));

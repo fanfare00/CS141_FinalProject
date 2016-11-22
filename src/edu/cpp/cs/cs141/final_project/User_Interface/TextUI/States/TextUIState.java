@@ -46,6 +46,8 @@ public class TextUIState implements UIState {
 		keys.add(key_3);
 		keys.add(key_4);
 		
+		key_Z.setText("Shoot");
+		key_Z.setCommand(new ShootCommand());
 		
 		key_M.setText("Menu");
 		key_M.setCommand(new ToggleMenuCommand());

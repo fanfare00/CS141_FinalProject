@@ -53,8 +53,10 @@ public class Application {
 		
 	}
 	
-	public void playerAttack(Direction dir) {
-		game.getPlayer().attack(dir);
+	public void playerAttack() {
+		game.getPlayer().setMoveDirection(null);
+		game.playerAttack();
+		updateUIGrid();
 	}
 	
 	/**
@@ -131,7 +133,7 @@ public class Application {
 	}
 
 	public void toggleShootMode() {
-		UI.toggleShootState();
+		//UI.toggleShootState();
 		UI.update();
 		
 	}
