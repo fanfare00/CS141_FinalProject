@@ -5,20 +5,20 @@ import java.util.List;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 
-public class ExtraBullet extends GameObject implements Powerup {
+public class ExtraAmmo extends GameObject implements Powerup {
 	
-	private static final char EXTRA_BULLET_SYMBOL = 'a';
+	private static final char EXTRA_AMMO_SYMBOL = 'a';
 
-	public ExtraBullet(int xPos, int yPos) {
+	public ExtraAmmo(int xPos, int yPos) {
 		super(xPos, yPos);
-		this.symbol = EXTRA_BULLET_SYMBOL;
+		this.symbol = EXTRA_AMMO_SYMBOL;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void consume(Actor consumer) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("TEST AMM CONSUME");
 	}
 
 	@Override

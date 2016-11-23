@@ -21,7 +21,7 @@ public class Invincibility extends GameObject implements Powerup{
 	@Override
 	public void consume(Actor consumer) {
 		// TODO Auto-generated method stub
-		consumer.setInvincibility(true);
+		System.out.println("TEST INVC CONSUME");
 		// need to notify the Application to disable invincibility on this Actor in 5 turns.
 	}
 

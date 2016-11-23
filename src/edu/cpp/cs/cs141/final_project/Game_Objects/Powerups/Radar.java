@@ -18,7 +18,7 @@ public class Radar extends GameObject implements Powerup{
 	@Override
 	public void consume(Actor consumer) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("TEST RADAR CONSUME");
 	}
 
 	@Override

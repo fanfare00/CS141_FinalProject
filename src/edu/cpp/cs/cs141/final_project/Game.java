@@ -40,19 +40,14 @@ public class Game {
 	
 	
 	public Game() {
-		
-		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES, MAX_PLAYER_AMMO);
-		activeEntities.add(player);
-		
-		
+
 		spawnRooms();
-		spawnEnemies();
 		spawnPowerups();
+		spawnPlayer();
+		spawnEnemies();
 		spawnBriefcase();
 		
-		for (GameObject obj : activeEntities) {
-			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
-		}
+		initializeEntities();
 	}
 	
 	/**
@@ -62,6 +57,17 @@ public class Game {
 	public boolean isGameOver()
 	{
 	    return gameOver;
+	}
+	
+	private void spawnPlayer() {
+		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES, MAX_PLAYER_AMMO);
+		activeEntities.add(player);
+	}
+	
+	private void initializeEntities() {
+		for (GameObject obj : activeEntities) {
+			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
+		}
 	}
 	
 	/**
@@ -106,7 +112,7 @@ public class Game {
 	
 	private void spawnPowerups() {
 		spawnRandomly(new Radar(0,0));
-		spawnRandomly(new ExtraBullet(0,0));
+		spawnRandomly(new ExtraAmmo(0,0));
 		spawnRandomly(new Invincibility(0,0));
 	}
 

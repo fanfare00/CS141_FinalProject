@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
+import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.Powerup;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
@@ -25,6 +26,8 @@ public abstract class Actor extends GameObject{
 	//protected ActorState state;
 	
 	private Direction moveDir;
+	
+	protected Powerup currentPowerup = null;
 	
 	public Actor(int row, int col) {
 		super(row, col);
@@ -49,7 +52,8 @@ public abstract class Actor extends GameObject{
 					nearbyActors.add((Actor) obj);
 					this.updateAttackStatus();
 				}
-				else if (checkCollision( obj, dir)) _moveConditions[dir.ordinal()] = false;
+				else if (checkCollision( obj, dir) && !(obj instanceof Powerup)) _moveConditions[dir.ordinal()] = false;
+				else if (checkCollision( obj, dir) && (obj instanceof Powerup)) currentPowerup = (Powerup) obj;
 			}
 		}
 		

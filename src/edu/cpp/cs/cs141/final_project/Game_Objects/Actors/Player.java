@@ -111,6 +111,14 @@ public class Player extends Actor{
 		this.hasDiedRecently = true;
 	}
 	
+	public void updatePowerup() {
+		if (this.currentPowerup == null) return;
+		
+		currentPowerup.consume(this);
+		((GameObject) currentPowerup).setActive(false);
+		currentPowerup = null;
+	}
+	
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
@@ -119,9 +127,7 @@ public class Player extends Actor{
 		setVisible(true);
 		updateState(activeEntities);
 		move();
-		//updateAttackStatus();
-		//updateState(activeEntities);
-		//revealNearby(activeEntities);
+		updatePowerup();
 		setLookDir(null);
 	}
 
