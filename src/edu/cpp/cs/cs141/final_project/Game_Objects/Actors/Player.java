@@ -109,13 +109,18 @@ public class Player extends Actor{
 	}
 	
 	public void reset() {
-		this.row = startingRow;
-		this.col = startingCol;
-		this.remainingLives-=1;
-		this.hasDiedRecently = true;
+		if (!isInvincible){
+			this.row = startingRow;
+			this.col = startingCol;
+			this.remainingLives-=1;
+			this.hasDiedRecently = true;
+		}
 	}
 	
 	public void updatePowerup() {
+		
+		if (remainingTurnsInvincible == 0) isInvincible = false;
+		
 		if (this.currentPowerup == null) return;
 		
 		currentPowerup.consume(this);
@@ -129,6 +134,7 @@ public class Player extends Actor{
 		canLook = true;
 		hasDiedRecently = false;
 		hasRadar = false;
+		if(isInvincible) remainingTurnsInvincible-=1;
 		setVisible(true);
 		updateState(activeEntities);
 		move();
@@ -150,8 +156,8 @@ public class Player extends Actor{
 	}
 
 	public void setInvincibilityTurns(int invincibilityTurns) {
-		this.remainingTurnsInvincible += invincibilityTurns;
-		
+		remainingTurnsInvincible += invincibilityTurns;
+		isInvincible = true;
 	}
 
 	public void setHasRadar(boolean b) {
