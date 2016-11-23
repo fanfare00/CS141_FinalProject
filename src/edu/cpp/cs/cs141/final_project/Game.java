@@ -45,7 +45,7 @@ public class Game {
 		spawnPlayer();
 		spawnRooms();
 		spawnPowerups();
-		//spawnEnemies();
+		spawnEnemies();
 		spawnBriefcase();
 		
 		initializeEntities();
