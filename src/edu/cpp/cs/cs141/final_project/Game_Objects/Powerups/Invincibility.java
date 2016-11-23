@@ -9,9 +9,12 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
  * The invincibility powerup. This makes the consumer invincible for 5 turns.
  */
 public class Invincibility extends GameObject implements Powerup{
+	
+	private static final char INVINCIBILITY_SYMBOL = 'i';
 
 	public Invincibility(int row, int col) {
 		super(row, col);
+		this.symbol = INVINCIBILITY_SYMBOL;
 		// TODO Auto-generated constructor stub
 	}
 

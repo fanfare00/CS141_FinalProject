@@ -44,8 +44,10 @@ public class Game {
 		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES, MAX_PLAYER_AMMO);
 		activeEntities.add(player);
 		
-		spawnEnemiesRandomly();
+		
 		spawnRooms();
+		spawnEnemies();
+		spawnPowerups();
 		spawnBriefcase();
 		
 		for (GameObject obj : activeEntities) {
@@ -102,7 +104,7 @@ public class Game {
 		else spawnRandomly(obj);
 	}
 	
-	private void spawnPowerupsRandomly() {
+	private void spawnPowerups() {
 		spawnRandomly(new Radar(0,0));
 		spawnRandomly(new ExtraBullet(0,0));
 		spawnRandomly(new Invincibility(0,0));
@@ -111,9 +113,8 @@ public class Game {
 	/**
 	 * Randomly spawns enemies around the map.
 	 */
-	private void spawnEnemiesRandomly() {	
+	private void spawnEnemies() {	
 		for (int i = 0; i < MAX_ENEMY_COUNT; i++) {
-			
 			spawnRandomly(new Enemy(0,0));
 		}
 	}

@@ -7,8 +7,11 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 
 public class Radar extends GameObject implements Powerup{
 
+	private static final char RADAR_SYMBOL = 'r';
+	
 	public Radar(int row, int col) {
 		super(row, col);
+		this.symbol = RADAR_SYMBOL;
 		// TODO Auto-generated constructor stub
 	}
 

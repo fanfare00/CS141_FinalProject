@@ -7,7 +7,7 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 
 public class ExtraBullet extends GameObject implements Powerup {
 	
-	private static final char EXTRA_BULLET_SYMBOL = 'b';
+	private static final char EXTRA_BULLET_SYMBOL = 'a';
 
 	public ExtraBullet(int xPos, int yPos) {
 		super(xPos, yPos);
