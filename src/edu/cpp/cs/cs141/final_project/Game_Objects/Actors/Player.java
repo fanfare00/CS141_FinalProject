@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
+import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.Room;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
@@ -25,8 +26,11 @@ public class Player extends Actor{
 	
 	private int remainingLives;
 	private int remainingAmmo;
+	private int remainingTurnsInvincible = 0;
 	
 	private boolean isAlive;
+
+	private boolean hasRadar;
 	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
@@ -80,7 +84,7 @@ public class Player extends Actor{
 	public void revealNearby(List<GameObject> activeEntities) {
 		for (GameObject obj : activeEntities) {
 			if(obj.equals(this)) continue;
-
+			if(hasRadar && obj instanceof Room && ((Room) obj).hasIntel()) obj.setVisible(true);
 			//obj.setVisible(false);
 			
 			for (Direction dir : Direction.values()){
@@ -124,6 +128,7 @@ public class Player extends Actor{
 	public void update(List<GameObject> activeEntities) {
 		canLook = true;
 		hasDiedRecently = false;
+		hasRadar = false;
 		setVisible(true);
 		updateState(activeEntities);
 		move();
@@ -137,6 +142,20 @@ public class Player extends Actor{
 	
 	public int getRemainingAmmo() {
 		return remainingAmmo;
+	}
+
+	public void setRemainingAmmo(int extraAmmoAmount) {
+		remainingAmmo += extraAmmoAmount;
+		
+	}
+
+	public void setInvincibilityTurns(int invincibilityTurns) {
+		this.remainingTurnsInvincible += invincibilityTurns;
+		
+	}
+
+	public void setHasRadar(boolean b) {
+		this.hasRadar = true;
 	}
 
 }

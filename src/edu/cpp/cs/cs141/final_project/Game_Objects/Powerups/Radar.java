@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
+import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Player;
 
 public class Radar extends GameObject implements Powerup{
 
@@ -18,7 +19,7 @@ public class Radar extends GameObject implements Powerup{
 	@Override
 	public void consume(Actor consumer) {
 		// TODO Auto-generated method stub
-		System.out.println("TEST RADAR CONSUME");
+		((Player) consumer).setHasRadar(true);
 	}
 
 	@Override
