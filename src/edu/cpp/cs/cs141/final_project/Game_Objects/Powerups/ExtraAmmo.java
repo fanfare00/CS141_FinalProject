@@ -10,6 +10,7 @@ public class ExtraAmmo extends GameObject implements Powerup {
 	
 	private static final char EXTRA_AMMO_SYMBOL = 'a';
 	private static final char EXTRA_AMMO_AMMOUNT = 1;
+	private static final String EXTRA_AMMO_DESCRIPTION = "A cache of ammo yeilds you 1 extra rounds.";
 
 	public ExtraAmmo(int xPos, int yPos) {
 		super(xPos, yPos);
@@ -25,8 +26,15 @@ public class ExtraAmmo extends GameObject implements Powerup {
 
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		// TODO Auto-generated method stub
+		for (GameObject obj : activeEntities) {
+			if ((obj instanceof Player) && (checkCollision (obj))) ((Player)obj).setCurrentPowerup(this);
+		}	
 		
+	}
+
+	@Override
+	public String getDescription() {
+		return EXTRA_AMMO_DESCRIPTION;
 	}
 
 }

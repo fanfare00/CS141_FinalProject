@@ -41,10 +41,11 @@ public class Game {
 	
 	public Game() {
 
+		
+		spawnPlayer();
 		spawnRooms();
 		spawnPowerups();
-		spawnPlayer();
-		spawnEnemies();
+		//spawnEnemies();
 		spawnBriefcase();
 		
 		initializeEntities();
@@ -238,6 +239,8 @@ public class Game {
 			
 			if(debugMode) obj.setVisible(true);
 		}
+		
+		player.updatePowerup();
 	}
 	
 	private void updateEnemyStates() {
@@ -268,8 +271,9 @@ public class Game {
 	}
 	
 	public void update() {
-		
+			
 		updateEntities();
+		
 		
 		updateEnemyStates();
 		
@@ -283,6 +287,7 @@ public class Game {
 	}
 
 	private void revealEntitiesNearPlayer() {
+		//toggleEntityVisibility(false);
 		player.revealNearby(activeEntities);
 		
 	}

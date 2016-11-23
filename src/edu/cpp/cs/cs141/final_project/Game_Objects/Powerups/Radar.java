@@ -9,11 +9,11 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Player;
 public class Radar extends GameObject implements Powerup{
 
 	private static final char RADAR_SYMBOL = 'r';
+	private static final String RADAR_DESCRIPTION = "Radar has revealed the loctation of the intelligence.";
 	
 	public Radar(int row, int col) {
 		super(row, col);
 		this.symbol = RADAR_SYMBOL;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -24,8 +24,17 @@ public class Radar extends GameObject implements Powerup{
 
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		// TODO Auto-generated method stub
-		
+		for (GameObject obj : activeEntities) {
+			if ((obj instanceof Player) && (checkCollision (obj))) { 
+				((Player)obj).setCurrentPowerup(this);
+				((Player)obj).setHasRadar(true);
+			}
+		}	
+	}
+
+	@Override
+	public String getDescription() {
+		return RADAR_DESCRIPTION;
 	}
 	
 }

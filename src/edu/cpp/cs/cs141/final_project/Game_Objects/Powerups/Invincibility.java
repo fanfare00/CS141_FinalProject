@@ -14,21 +14,36 @@ public class Invincibility extends GameObject implements Powerup{
 	private static final char INVINCIBILITY_SYMBOL = 'i';
 	private static final int INVINCIBILITY_TURNS = 5;
 
+	
+	Actor consumer;
+
 	public Invincibility(int row, int col) {
 		super(row, col);
 		this.symbol = INVINCIBILITY_SYMBOL;
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
 	public void consume(Actor consumer) {
 		((Player) consumer).setInvincibilityTurns(INVINCIBILITY_TURNS);
+		this.consumer = consumer;
 	}
 
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		// TODO Auto-generated method stub
+		for (GameObject obj : activeEntities) {
+			if ((obj instanceof Player) && (checkCollision (obj))) ((Player)obj).setCurrentPowerup(this);
+		}	
+	}
+
+	@Override
+	public String getDescription() {
+		String description = "You have gained invincibility for " + INVINCIBILITY_TURNS + " turns.";
 		
+		//if (((Player) consumer).getInvincibilityTurns() == INVINCIBILITY_TURNS) description = "You have gained invincibility for " + INVINCIBILITY_TURNS + " turns.";
+		//else description = "You are invincible for " + ((Player) consumer).getInvincibilityTurns() + " more turns.";
+		
+		return description;
 	}
 
 }

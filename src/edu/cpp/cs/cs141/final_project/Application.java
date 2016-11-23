@@ -115,6 +115,8 @@ public class Application {
 	    for (GameObject o : game.getActiveEntities()) {
 	    	if (o.isVisible()) UI.addToGrid(o.getRow(), o.getCol(), o.getSymbol());
 	    }
+	    
+	    UI.addToGrid(game.getActiveEntities().get(0).getRow(), game.getActiveEntities().get(0).getCol(), game.getActiveEntities().get(0).getSymbol());
 	}
 	
 	public void getNewCommand() {
@@ -175,11 +177,13 @@ public class Application {
 	}
 	
 	public void updateUIAlertText() {
-		String alertText = null;
+		String alertText = "";
 		
 		if (getShootStatus()) alertText = "You've spotted an enemy ninja!";
 		if (getDeathStatus()) alertText = "An enemy ninja killed you!";
 		if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
+		if (game.getPlayer().getCurrentPowerup() != null) alertText = game.getPlayer().getCurrentPowerup().getDescription();
+		if (game.getPlayer().getIsInvincible()) alertText += "\nYou are invincible, " + game.getPlayer().getInvincibilityTurns() + " turns remaining.";
 		UI.setAlertText(alertText);
 	}
 

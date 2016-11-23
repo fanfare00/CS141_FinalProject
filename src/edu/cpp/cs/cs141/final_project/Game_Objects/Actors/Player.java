@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.Room;
+import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.Powerup;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 /**
@@ -85,6 +86,7 @@ public class Player extends Actor{
 		for (GameObject obj : activeEntities) {
 			if(obj.equals(this)) continue;
 			if(hasRadar && obj instanceof Room && ((Room) obj).hasIntel()) obj.setVisible(true);
+
 			//obj.setVisible(false);
 			
 			for (Direction dir : Direction.values()){
@@ -94,6 +96,7 @@ public class Player extends Actor{
 				
 			}
 		}
+		//hasRadar = false;
 	}
 	
 	public void setRemainingLives(int remainingLives){
@@ -118,14 +121,13 @@ public class Player extends Actor{
 	}
 	
 	public void updatePowerup() {
-		
 		if (remainingTurnsInvincible == 0) isInvincible = false;
 		
 		if (this.currentPowerup == null) return;
 		
 		currentPowerup.consume(this);
 		((GameObject) currentPowerup).setActive(false);
-		currentPowerup = null;
+		
 	}
 	
 	
@@ -134,11 +136,14 @@ public class Player extends Actor{
 		canLook = true;
 		hasDiedRecently = false;
 		hasRadar = false;
+		currentPowerup = null;
+		
+		
 		if(isInvincible) remainingTurnsInvincible-=1;
 		setVisible(true);
 		updateState(activeEntities);
 		move();
-		updatePowerup();
+		
 		setLookDir(null);
 	}
 
@@ -159,9 +164,27 @@ public class Player extends Actor{
 		remainingTurnsInvincible += invincibilityTurns;
 		isInvincible = true;
 	}
+	
+	public int getInvincibilityTurns() {
+		return remainingTurnsInvincible;
+	}
 
 	public void setHasRadar(boolean b) {
 		this.hasRadar = true;
+	}
+	
+	public Powerup getCurrentPowerup() {
+		return this.currentPowerup;
+	}
+
+	public void setCurrentPowerup(Powerup obj) {
+		this.currentPowerup = obj;
+		
+	}
+	
+	public boolean getIsInvincible() {
+		// TODO Auto-generated method stub
+		return isInvincible;
 	}
 
 }

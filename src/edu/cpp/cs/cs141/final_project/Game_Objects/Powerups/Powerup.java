@@ -12,4 +12,6 @@ public interface Powerup {
      * @param consumer
      */
 	public void consume(Actor consumer);
+	
+	public String getDescription();
 }

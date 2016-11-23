@@ -46,6 +46,7 @@ public abstract class Actor extends GameObject{
 		for (GameObject obj : activeEntities) {
 			if (obj.equals(this)) continue;
 			
+			
 			for(Direction dir : Direction.values()) {
 				if (checkCollision( obj, dir) && obj instanceof Actor) { 
 					_moveConditions[dir.ordinal()] = false;
@@ -53,7 +54,7 @@ public abstract class Actor extends GameObject{
 					this.updateAttackStatus();
 				}
 				else if (checkCollision( obj, dir) && !(obj instanceof Powerup)) _moveConditions[dir.ordinal()] = false;
-				else if (checkCollision( obj, dir) && (obj instanceof Powerup)) currentPowerup = (Powerup) obj;
+				
 			}
 		}
 		
@@ -113,6 +114,7 @@ public abstract class Actor extends GameObject{
 		//updateState(activeEntities);
 		//updateShootStatus();
 	}
+
 
 
 }

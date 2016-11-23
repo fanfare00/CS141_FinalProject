@@ -74,6 +74,10 @@ public abstract class GameObject implements Serializable{
 	
 	public abstract void update(List<GameObject> activeEntities);
 	
+	public boolean checkCollision(GameObject obj){
+		return (this.row == obj.getRow()) &&
+			   (this.col == obj.getCol());
+	}
 	
 	public boolean checkCollision(GameObject obj, Direction dir){
 		return (this.row+dir.row() == obj.getRow()) &&

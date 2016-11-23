@@ -74,7 +74,7 @@ public class TextUserInterface implements IUserInterface
     
     private void drawAlertText() {
     	
-    	if (alertText != null) System.out.println(alertText);
+    	if (alertText != "") System.out.println(alertText);
     	alertText = null;
     }
     
