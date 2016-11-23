@@ -128,11 +128,7 @@ public class Application {
 	}
 	
 	public boolean[] getDirectionalConditions() {
-		return game.getPlayer().getState().getMoveConditions();
-	}
-	
-	public boolean[] getProximityConditions() {
-		return game.getPlayer().getState().getProximityConditions();
+		return game.getPlayer().getMoveConditions();
 	}
 
 	public void toggleMenuMode() {

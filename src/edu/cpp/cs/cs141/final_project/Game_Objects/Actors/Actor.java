@@ -20,7 +20,9 @@ public abstract class Actor extends GameObject{
 	boolean canAttack = false;
 	int ammo;
 	
-	protected ActorState state;
+	boolean[] moveConditions;
+	
+	//protected ActorState state;
 	
 	private Direction moveDir;
 	
@@ -31,13 +33,11 @@ public abstract class Actor extends GameObject{
 	public void updateState(List<GameObject> activeEntities) {
 
 		canAttack = false;
-		
-		boolean[] proximityConditions = new boolean[MAX_DIRECTIONS];
-		boolean[] moveConditions = new boolean[MAX_DIRECTIONS];
+		boolean[] _moveConditions = new boolean[MAX_DIRECTIONS];
 		
 		
 		for(Direction dir : Direction.values()) {
-			moveConditions[dir.ordinal()] = !checkOutOfBounds(MAX_ROW, MAX_COL, dir);
+			_moveConditions[dir.ordinal()] = !checkOutOfBounds(MAX_ROW, MAX_COL, dir);
 		}
 		
 		for (GameObject obj : activeEntities) {
@@ -45,16 +45,15 @@ public abstract class Actor extends GameObject{
 			
 			for(Direction dir : Direction.values()) {
 				if (checkCollision( obj, dir) && obj instanceof Actor) { 
-					proximityConditions[dir.ordinal()] = true;
-					moveConditions[dir.ordinal()] = false;
+					_moveConditions[dir.ordinal()] = false;
 					nearbyActors.add((Actor) obj);
 					this.updateAttackStatus();
 				}
-				else if (checkCollision( obj, dir)) moveConditions[dir.ordinal()] = false;
+				else if (checkCollision( obj, dir)) _moveConditions[dir.ordinal()] = false;
 			}
 		}
 		
-		state = new ActorState(moveConditions, proximityConditions);
+		this.moveConditions = _moveConditions;
 	}
 	
 	/**
@@ -100,8 +99,8 @@ public abstract class Actor extends GameObject{
 		return canAttack;
 	}
 	
-	public ActorState getState() {
-		return state;
+	public boolean[] getMoveConditions() {
+		return moveConditions;
 	}
 
 	@Override

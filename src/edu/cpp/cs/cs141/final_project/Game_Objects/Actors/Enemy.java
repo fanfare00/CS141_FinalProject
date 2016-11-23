@@ -26,7 +26,7 @@ public class Enemy extends Actor {
 
 	public void getRandomMovement() {
 		List<Direction> availableDirs = new ArrayList<Direction>();
-		boolean[] moveConditions = this.getState().getMoveConditions();
+		boolean[] moveConditions = this.getMoveConditions();
 		
 		for (Direction dir : Direction.values()) {
 			if (moveConditions[dir.ordinal()]) availableDirs.add(dir);

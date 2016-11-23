@@ -129,7 +129,6 @@ public class TextUserInterface implements IUserInterface
     
     private boolean[] getGridConditions() {
     	
-    	if(state.equals(shooting)) return app.getProximityConditions();
     	return app.getDirectionalConditions();
     }
     
