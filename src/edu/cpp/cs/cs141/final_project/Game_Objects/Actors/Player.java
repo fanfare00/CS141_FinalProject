@@ -39,6 +39,8 @@ public class Player extends Actor{
 	
 	private boolean killedEnemy;
 	
+	private boolean missedEnemy;
+	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
 		this.startingRow = row;
@@ -172,6 +174,7 @@ public class Player extends Actor{
 			}
 		}
 
+		if (targetedEnemy == null) missedEnemy = true;
 		
 	    if ((remainingAmmo > 0) && (targetedEnemy != null)) {
 	    	targetedEnemy.setActive(false);
@@ -240,7 +243,7 @@ public class Player extends Actor{
 		currentPowerup = null;
 		killedEnemy = false;
 		revealedEnemy = false;
-		
+		missedEnemy = false;
 		
 		if(isInvincible) remainingTurnsInvincible-=1;
 		setVisible(true);
@@ -313,6 +316,14 @@ public class Player extends Actor{
 
 	public void setKilledEnemy(boolean killedEnemy) {
 		this.killedEnemy = killedEnemy;
+	}
+
+	public boolean hasMissedEnemy() {
+		return missedEnemy;
+	}
+
+	public void setMissedEnemy(boolean missedEnemy) {
+		this.missedEnemy = missedEnemy;
 	}
 
 }

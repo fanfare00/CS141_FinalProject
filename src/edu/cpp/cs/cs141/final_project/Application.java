@@ -190,6 +190,7 @@ public class Application {
 		
 		if (game.getPlayer().hasRevealedEnemy()) alertText = "You've spotted an enemy ninja!";
 		if (game.getPlayer().hasKilledEnemy()) alertText = "Your gun killed an enemy ninja!";
+		if (game.getPlayer().hasMissedEnemy()) alertText = "You shot your gun, but did not hit an enemy ninja.";
 		if (getDeathStatus()) alertText = "An enemy ninja killed you!";
 		if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
 		if (game.getGameWon()) alertText = "Congratulations! You've found the intel and won the game!";
