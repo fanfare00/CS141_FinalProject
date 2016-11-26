@@ -57,8 +57,13 @@ public class Application {
 	
 	public void playerLook(Direction dir) {
 		game.playerLook(dir);
+		game.checkGameOver();
+		
 		redrawUI();
-		UI.toggleMoveState();
+		
+		if (getGameOverStatus()) UI.toggleMenuState();
+		else UI.toggleMoveState();
+		
 		UI.update();
 		
 	}
@@ -173,7 +178,7 @@ public class Application {
 	}
 	
 	public boolean getGameOverStatus() {
-		return game.getGameOver();
+		return (game.getGameOver() | game.getGameWon());
 	}
 	
 	public void updateUIAlertText() {
@@ -182,6 +187,7 @@ public class Application {
 		if (getShootStatus()) alertText = "You've spotted an enemy ninja!";
 		if (getDeathStatus()) alertText = "An enemy ninja killed you!";
 		if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
+		if (game.getGameWon()) alertText = "Congratulations! You've found the intel and won the game!";
 		if (game.getPlayer().getCurrentPowerup() != null) alertText = game.getPlayer().getCurrentPowerup().getDescription();
 		if (game.getPlayer().getIsInvincible()) alertText += "\nYou are invincible, " + game.getPlayer().getInvincibilityTurns() + " turns remaining.";
 		UI.setAlertText(alertText);
@@ -194,5 +200,9 @@ public class Application {
 		statusText += "Your gun has " + game.getPlayer().getRemainingAmmo() + " shots left.";
 		
 		UI.setStatusText(statusText);
+	}
+
+	public boolean getRoomCheckCondition() {
+		return game.getPlayer().getAboveRoom();
 	}
 }

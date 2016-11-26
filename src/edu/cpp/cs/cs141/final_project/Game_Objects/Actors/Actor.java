@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
+import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.Room;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.Powerup;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
@@ -22,6 +23,8 @@ public abstract class Actor extends GameObject{
 	int ammo;
 	
 	boolean[] moveConditions;
+	
+	private boolean aboveRoom;
 	
 	//protected ActorState state;
 	
@@ -46,6 +49,7 @@ public abstract class Actor extends GameObject{
 		for (GameObject obj : activeEntities) {
 			if (obj.equals(this)) continue;
 			
+			if ((obj instanceof Room) && (checkCollision(obj, Direction.DOWN))) this.aboveRoom = true;
 			
 			for(Direction dir : Direction.values()) {
 				if (checkCollision( obj, dir) && obj instanceof Actor) { 
@@ -106,6 +110,13 @@ public abstract class Actor extends GameObject{
 	
 	public boolean[] getMoveConditions() {
 		return moveConditions;
+	}
+	
+	public boolean getAboveRoom() {
+		boolean _aboveRoom = aboveRoom;
+		aboveRoom = false;
+		
+		return _aboveRoom;
 	}
 
 	@Override

@@ -64,7 +64,7 @@ public class TextUserInterface implements IUserInterface
     }
     
     private void drawStatusText() {
-    	System.out.println(statusText);
+    	if (state != inMenus) System.out.println(statusText);
     }
     
     public void getAndHandleInput(){

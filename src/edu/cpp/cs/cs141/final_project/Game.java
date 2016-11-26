@@ -36,6 +36,8 @@ public class Game {
 	
 	private boolean gameOver = false;
 	
+	private boolean gameWon = false;
+	
 	private boolean debugMode = false;
 	
 	
@@ -262,8 +264,13 @@ public class Game {
 		}
 	}
 	
-	private void checkGameOver() {
+	public void checkGameOver() {
 		if (player.getRemainingLives() == 0) gameOver = true;
+		if (player.foundIntel()) gameWon = true;
+	}
+	
+	public boolean getGameWon() {
+		return gameWon;
 	}
 	
 	public boolean getGameOver() {

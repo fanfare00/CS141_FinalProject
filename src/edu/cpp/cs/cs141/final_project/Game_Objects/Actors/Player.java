@@ -33,6 +33,8 @@ public class Player extends Actor{
 
 	private boolean hasRadar;
 	
+	private boolean foundIntel;
+	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
 		this.startingRow = row;
@@ -64,8 +66,12 @@ public class Player extends Actor{
 					this.nearbyActors.add((Enemy)obj);
 					this.canAttack = true;
 				}
-				
 			}
+			
+			if ((obj instanceof Room) && (((Room)obj).hasIntel())) {
+				if (checkCollision(obj, lookDir.row(), lookDir.col())) foundIntel = true;
+			}
+
 		}
 		
 		canLook = false;
@@ -180,6 +186,10 @@ public class Player extends Actor{
 	public void setCurrentPowerup(Powerup obj) {
 		this.currentPowerup = obj;
 		
+	}
+	
+	public boolean foundIntel() {
+		return foundIntel;
 	}
 	
 	public boolean getIsInvincible() {

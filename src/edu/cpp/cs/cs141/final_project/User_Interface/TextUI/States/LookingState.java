@@ -25,13 +25,22 @@ public class LookingState extends TextUIState {
 		key_C.setText("Move");
 		key_C.setCommand(new ToggleMoveCommand());
 		
+	}
+	@Override
+	public void update(boolean[] activeDirections) {	
+		key_1.setActive(false);
+		key_2.setActive(false);
+		key_3.setActive(false);
+		key_4.setActive(false);
 		
-//		keys.add(new Key('W', "W - Move UP", new LookCommand(app, 1, 0)));
-//		keys.add(new Key('A', "A - Move LEFT", new LookCommand(app, 0, -1)));
-//		keys.add(new Key('S', "S - Move DOWN", new LookCommand(app, -1, 0)));
-//		keys.add(new Key('D', "D - Move RIGHT", new LookCommand(app, 0, 1)));
-//		//activeKeys.add(new Key('C', "C - Look", new MoveCommand(app, 1, 0)));;
-//		//activeKeys.add(new Key('M', "M - Menu", new MoveCommand(app, 1, 0)));
+		keys.get(keys.indexOf(key_W)).setActive(activeDirections[Direction.UP.ordinal()]);
+		keys.get(keys.indexOf(key_A)).setActive(activeDirections[Direction.LEFT.ordinal()]);
+		keys.get(keys.indexOf(key_S)).setActive(activeDirections[Direction.DOWN.ordinal()] | app.getRoomCheckCondition());
+		keys.get(keys.indexOf(key_D)).setActive(activeDirections[Direction.RIGHT.ordinal()]);
+			
+		keys.get(keys.indexOf(key_C)).setActive(app.getLookStatus());
+		keys.get(keys.indexOf(key_Z)).setActive(app.getShootStatus());
+		
 	}
 
 }
