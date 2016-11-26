@@ -35,6 +35,10 @@ public class Player extends Actor{
 	
 	private boolean foundIntel;
 	
+	private boolean revealedEnemy;
+	
+	private boolean killedEnemy;
+	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
 		this.startingRow = row;
@@ -53,6 +57,43 @@ public class Player extends Actor{
 		this.lookDir = dir;
 	}
 	
+	
+	@Override
+	public void updateState(List<GameObject> activeEntities) {
+
+		canAttack = false;
+		boolean[] _moveConditions = new boolean[MAX_DIRECTIONS];
+		
+		for(Direction dir : Direction.values()) {
+			_moveConditions[dir.ordinal()] = !checkOutOfBounds(MAX_ROW, MAX_COL, dir);
+		}
+		
+		for (GameObject obj : activeEntities) {
+			if (obj.equals(this)) continue;
+			
+			if ((obj instanceof Room) && (checkCollision(obj, Direction.DOWN))) this.aboveRoom = true;
+			if ((obj instanceof Enemy) && (obj.getRow() == this.row)) nearbyActors.add((Actor)obj);
+			if ((obj instanceof Enemy) && (obj.getCol() == this.col)) nearbyActors.add((Actor)obj);
+			
+			for(Direction dir : Direction.values()) {
+				if (checkCollision( obj, dir) && obj instanceof Actor) { 
+					_moveConditions[dir.ordinal()] = false;
+					//nearbyActors.add((Actor) obj);
+					this.updateAttackStatus();
+				}
+				else if (checkCollision( obj, dir) && !(obj instanceof Powerup)) _moveConditions[dir.ordinal()] = false;
+			}
+
+		}
+		
+		this.moveConditions = _moveConditions;
+	}
+	
+	protected void updateAttackStatus(Enemy obj) {
+		
+
+	}
+	
 	public void look(List<GameObject> activeEntities) {
 		revealNearby(activeEntities);
 		
@@ -63,8 +104,7 @@ public class Player extends Actor{
 				obj.setVisible(true);
 				
 				if (obj instanceof Enemy) {
-					this.nearbyActors.add((Enemy)obj);
-					this.canAttack = true;
+					revealedEnemy = true;
 				}
 			}
 			
@@ -80,16 +120,68 @@ public class Player extends Actor{
 		canLook = false;
 	}
 	
-	public void attack() {
+	public void attack(Direction dir) {
 		this.canAttack = false;
+		Actor targetedEnemy = null;
 		
-	    if(remainingAmmo > 0) {
-			nearbyActors.get(0).setActive(false);
-			nearbyActors.clear();
+		if (dir == Direction.UP) {
+			for (Actor actor : nearbyActors) {
+				if ((actor.getRow() < this.row) && (actor.getCol() == this.col)){
+					if (targetedEnemy != null) {
+						if (actor.getRow() > targetedEnemy.getRow()) targetedEnemy = actor;
+					} else {
+						targetedEnemy = actor;
+					}
+				}
+			}
+		}
+		
+		if (dir == Direction.DOWN) {	
+			for (Actor actor : nearbyActors) {
+				if ((actor.getRow() > this.row)  && (actor.getCol() == this.col)){
+					if (targetedEnemy != null) {
+						if (actor.getRow() < targetedEnemy.getRow()) targetedEnemy = actor;
+					} else {
+						targetedEnemy = actor;
+					}
+				}
+			}
+		}
 			
-			this.remainingAmmo -= 1;
+		if (dir == Direction.LEFT) {	
+			for (Actor actor : nearbyActors) {
+				if ((actor.getCol() < this.col)  && (actor.getRow() == this.row)){
+					if (targetedEnemy != null) {
+						if (actor.getCol() > targetedEnemy.getCol()) targetedEnemy = actor;
+					} else {
+						targetedEnemy = actor;
+					}
+				}
+			}
+		}
+		
+		if (dir == Direction.RIGHT) {	
+			for (Actor actor : nearbyActors) {
+				if ((actor.getCol() > this.col) && (actor.getRow() == this.row)){
+					if (targetedEnemy != null) {
+						if (actor.getCol() < targetedEnemy.getCol()) targetedEnemy = actor;
+					} else {
+						targetedEnemy = actor;
+					}
+				}
+			}
+		}
+
+		
+	    if ((remainingAmmo > 0) && (targetedEnemy != null)) {
+	    	targetedEnemy.setActive(false);
+	    	killedEnemy = true;
+			nearbyActors.clear();
 	    }
+	    
+	    this.remainingAmmo -= 1;
 	}
+	
 	
 	public void revealNearby(List<GameObject> activeEntities) {
 		for (GameObject obj : activeEntities) {
@@ -146,6 +238,8 @@ public class Player extends Actor{
 		hasDiedRecently = false;
 		hasRadar = false;
 		currentPowerup = null;
+		killedEnemy = false;
+		revealedEnemy = false;
 		
 		
 		if(isInvincible) remainingTurnsInvincible-=1;
@@ -191,6 +285,11 @@ public class Player extends Actor{
 		
 	}
 	
+	@Override
+	public boolean getCanAttack() {	
+		return remainingAmmo > 0 ;
+	}
+	
 	public boolean foundIntel() {
 		return foundIntel;
 	}
@@ -198,6 +297,22 @@ public class Player extends Actor{
 	public boolean getIsInvincible() {
 		// TODO Auto-generated method stub
 		return isInvincible;
+	}
+
+	public boolean hasRevealedEnemy() {
+		return revealedEnemy;
+	}
+
+	public void setRevealedEnemy(boolean revealedEnemy) {
+		this.revealedEnemy = revealedEnemy;
+	}
+
+	public boolean hasKilledEnemy() {
+		return killedEnemy;
+	}
+
+	public void setKilledEnemy(boolean killedEnemy) {
+		this.killedEnemy = killedEnemy;
 	}
 
 }

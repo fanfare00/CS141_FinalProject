@@ -191,8 +191,8 @@ public class Game {
 		player.look(activeEntities);
 	}
 	
-	public void playerAttack() {
-		player.attack();
+	public void playerAttack(Direction dir) {
+		player.attack(dir);
 		removeInactiveObjects();
 	}
 	

@@ -24,7 +24,7 @@ public abstract class Actor extends GameObject{
 	
 	boolean[] moveConditions;
 	
-	private boolean aboveRoom;
+	protected boolean aboveRoom;
 	
 	//protected ActorState state;
 	

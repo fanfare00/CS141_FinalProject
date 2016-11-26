@@ -68,10 +68,14 @@ public class Application {
 		
 	}
 	
-	public void playerAttack() {
+	public void playerAttack(Direction dir) {
 		game.getPlayer().setMoveDirection(null);
-		game.playerAttack();
+		game.playerAttack(dir);
 		redrawUI();
+		
+		UI.toggleMoveState();
+		
+		UI.update();
 	}
 	
 	/**
@@ -154,7 +158,7 @@ public class Application {
 	}
 
 	public void toggleShootMode() {
-		//UI.toggleShootState();
+		UI.toggleShootState();
 		UI.update();
 		
 	}
@@ -170,7 +174,7 @@ public class Application {
 	}
 
 	public boolean getShootStatus() {
-		return (game.getPlayer().getRemainingAmmo() > 0 ) && (game.getPlayer().getCanAttack());
+		return (game.getPlayer().getCanAttack());
 	}
 	
 	public boolean getDeathStatus() {
@@ -184,7 +188,8 @@ public class Application {
 	public void updateUIAlertText() {
 		String alertText = "";
 		
-		if (getShootStatus()) alertText = "You've spotted an enemy ninja!";
+		if (game.getPlayer().hasRevealedEnemy()) alertText = "You've spotted an enemy ninja!";
+		if (game.getPlayer().hasKilledEnemy()) alertText = "Your gun killed an enemy ninja!";
 		if (getDeathStatus()) alertText = "An enemy ninja killed you!";
 		if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
 		if (game.getGameWon()) alertText = "Congratulations! You've found the intel and won the game!";

@@ -141,24 +141,25 @@ public class TextUserInterface implements IUserInterface
 
 	@Override
 	public void toggleMenuState() {
-		instructionText = "Choose a menu option from the command list below";
+		instructionText = "Choose a menu option from the command list below.";
 		state = inMenus;
 	}
 
 	@Override
 	public void toggleMoveState() {
-		instructionText = "Choose a direction to move from the command list below";
+		instructionText = "Choose a direction to move from the command list below.";
 		state = moving;
 	}
 
 	@Override
 	public void toggleLookState() {
-		instructionText = "Choose a direction to look from the command list below";
+		instructionText = "Choose a direction to look from the command list below.";
 		state = looking;
 	}
 
 	@Override
 	public void toggleShootState() {
+		instructionText = "Choose a direction to shoot from the command list below.";
 		state = shooting;
 	}
 
