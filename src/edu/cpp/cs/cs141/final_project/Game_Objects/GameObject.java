@@ -72,6 +72,10 @@ public abstract class GameObject implements Serializable{
 		return isActive;
 	}
 	
+	public void setSymbol(char symbol){
+		this.symbol = symbol;
+	}
+	
 	public abstract void update(List<GameObject> activeEntities);
 	
 	public boolean checkCollision(GameObject obj){

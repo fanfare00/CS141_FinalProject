@@ -23,7 +23,7 @@ public class Room extends GameObject {
 	 */
 	public void placeIntel() {
 		hasIntel = true;
-		this.symbol = 'I';
+		//this.symbol = 'I';
 	}
 	
 	/**
@@ -34,6 +34,8 @@ public class Room extends GameObject {
 	{
 	    return hasIntel;
 	}
+	
+
 
 	@Override
 	public void update(List<GameObject> activeEntities) {

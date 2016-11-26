@@ -209,6 +209,13 @@ public class Game {
 	private void toggleEntityVisibility(boolean flag) {
 		for (GameObject obj : activeEntities){
 			if(obj instanceof Player) continue;
+			
+			if ((flag) && (obj instanceof Room)) {
+				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
+			} else if (obj instanceof Room){
+				 obj.setSymbol('R');
+			}
+			
 			obj.setVisible(flag);
 		}
 	}
@@ -235,9 +242,17 @@ public class Game {
 	private void updateEntities() {
 		toggleEntityVisibility(false);
 		
+		
+		
 		for (GameObject obj : activeEntities){
 			
 			obj.update(activeEntities);
+			
+			if ((debugMode) && (obj instanceof Room)) {
+				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
+			} else if (obj instanceof Room){
+				 obj.setSymbol('R');
+			}
 			
 			if(debugMode) obj.setVisible(true);
 		}

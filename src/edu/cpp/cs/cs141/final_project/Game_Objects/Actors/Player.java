@@ -69,7 +69,10 @@ public class Player extends Actor{
 			}
 			
 			if ((obj instanceof Room) && (((Room)obj).hasIntel())) {
-				if (checkCollision(obj, lookDir.row(), lookDir.col())) foundIntel = true;
+				if (checkCollision(obj, lookDir.row(), lookDir.col())) { 
+					obj.setSymbol('I');
+					foundIntel = true;
+				}
 			}
 
 		}
