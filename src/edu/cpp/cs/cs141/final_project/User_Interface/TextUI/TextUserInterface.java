@@ -116,8 +116,8 @@ public class TextUserInterface implements IUserInterface
     	grid = new char[rows][cols];
     }
     
-    public void addToGrid(int xIndex, int yIndex, char symbol) {
-    	grid[xIndex][yIndex] = symbol;
+    public void addToGrid(int row, int col, char symbol) {
+    	grid[row][col] = symbol;
     }
     
     /**

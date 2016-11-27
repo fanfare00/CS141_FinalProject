@@ -245,6 +245,7 @@ public class Game {
 		for (GameObject obj : activeEntities){
 			if (obj instanceof Player)continue;
 			
+			if (obj instanceof Actor) ((Actor)obj).updateState(activeEntities);
 			obj.update(activeEntities);
 			
 			if ((debugMode) && (obj instanceof Room)) {

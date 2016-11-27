@@ -6,7 +6,7 @@ public class SelectGUICommand implements Command{
 
 	@Override
 	public void execute(Application app) {
-		System.out.println("hey2");
+		app.toggleUIType();
 		
 	}
 

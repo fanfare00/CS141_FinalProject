@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
+import edu.cpp.cs.cs141.final_project.User_Interface.GUI.GraphicalUserInterface;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.TextUserInterface;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 import edu.cpp.cs.cs141.final_project.Utilities.SaveFileManager;
@@ -12,6 +13,8 @@ import edu.cpp.cs.cs141.final_project.Utilities.SaveFileManager;
  * The {@link Application} class receives commands from the UI and controls the game.
  */
 public class Application {
+	
+	private int FPS = 30; 
 	
 	private IUserInterface UI;
 	private Game game;
@@ -27,11 +30,27 @@ public class Application {
 	public void run() {
 		if (getGameOverStatus()) UI.toggleMenuState();
 		
-		UI.update();
-		game.update();
-		redrawUI();
+		while(!close){ 
+			long time = System.currentTimeMillis(); 
+			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
+			 
+			UI.update();
+			game.update();
+			redrawUI();
+			
+			if (time > 0) { 
+				try { 
+					Thread.sleep(time); 
+                } 
+                	catch(Exception e){} 
+             } 
+        }
 		
-		if (!close) run();
+//		UI.update();
+//		game.update();
+//		redrawUI();
+		
+		//if (!close) run();
 	}
 	
 	/**
@@ -215,5 +234,14 @@ public class Application {
 
 	public boolean getRoomCheckCondition() {
 		return game.getPlayer().getAboveRoom();
+	}
+
+	public void toggleUIType() {
+		game.setDebugMode(true);
+		FPS = 2;
+		
+		UI = new GraphicalUserInterface();
+		UI.init(this);
+		redrawUI();
 	}
 }
