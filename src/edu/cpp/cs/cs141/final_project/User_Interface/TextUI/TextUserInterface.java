@@ -22,6 +22,7 @@ public class TextUserInterface implements IUserInterface
     private static LookingState looking;
     private static MenuState inMenus;
     private static ShootingState shooting;
+    private static UISelectionState UISelect;
     
     private String instructionText;
     private String statusText;
@@ -34,16 +35,23 @@ public class TextUserInterface implements IUserInterface
     public void init(Application app) {
     	this.app = app;
     	
+    	UISelect = new UISelectionState(app);
     	moving = new MovingState(app);
     	shooting = new ShootingState(app);
     	inMenus = new MenuState(app);
     	looking = new LookingState(app);
     	
-    	toggleMoveState();
+    	
+    	toggleUICommand();
+    	state.update(null);
+    	drawInstructions();
+    	drawCommandList();
+    	state.handleInput(getUserInput());
     }
     
     public void update() {
     	state.update(getGridConditions());
+    	
     	
     	drawGrid();
     	drawAlertText();
@@ -161,6 +169,11 @@ public class TextUserInterface implements IUserInterface
 	public void toggleShootState() {
 		instructionText = "Choose a direction to shoot from the command list below.";
 		state = shooting;
+	}
+	
+	public void toggleUICommand() {
+		instructionText = "Choose a menu option from the command list below.";
+		state = UISelect;
 	}
 
     

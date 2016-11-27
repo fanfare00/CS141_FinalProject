@@ -6,7 +6,7 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Player;
 
-public class Radar extends GameObject implements Powerup{
+public class Radar extends Powerup{
 
 	private static final char RADAR_SYMBOL = 'r';
 	private static final String RADAR_DESCRIPTION = "Radar has revealed the loctation of the intelligence.";

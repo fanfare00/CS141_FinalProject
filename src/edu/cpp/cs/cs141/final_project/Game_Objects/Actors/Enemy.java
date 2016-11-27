@@ -42,22 +42,13 @@ public class Enemy extends Actor {
 			if ((actor instanceof Player) && !((Player)actor).getHasDiedRecently()) canAttack = true;
 		}
 		
-//		for (int i = 0; i < nearbyActors.size(); i++) {
-//			if (nearbyActors.get(i) instanceof Player) { 
-//				canAttack = true;
-//			}
-//		}
-		
 		nearbyActors.clear();
 	}
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		updateState(activeEntities);
 		getRandomMovement();
 		move();
-		//updateAttackStatus();
-		//updateState(activeEntities);
 	}
 
 }

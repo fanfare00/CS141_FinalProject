@@ -51,7 +51,6 @@ public class Application {
 	}
 	
 	public void playerMove(Direction dir) {
-		
 		game.getPlayer().setMoveDirection(dir);
 	}
 	
@@ -141,6 +140,11 @@ public class Application {
 	public boolean[] getDirectionalConditions() {
 		return game.getPlayer().getMoveConditions();
 	}
+	
+	public void stayInTextUI() {
+		redrawUI();
+		UI.toggleMoveState();
+	}
 
 	public void toggleMenuMode() {
 		UI.toggleMenuState();
@@ -148,6 +152,7 @@ public class Application {
 	}
 
 	public void toggleMoveMode() {
+		
 		UI.toggleMoveState();
 		UI.update();
 	}

@@ -6,7 +6,7 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Player;
 
-public class ExtraAmmo extends GameObject implements Powerup {
+public class ExtraAmmo extends Powerup {
 	
 	private static final char EXTRA_AMMO_SYMBOL = 'a';
 	private static final char EXTRA_AMMO_AMMOUNT = 1;

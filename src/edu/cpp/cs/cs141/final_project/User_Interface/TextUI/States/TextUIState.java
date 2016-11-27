@@ -91,7 +91,5 @@ public class TextUIState implements UIState {
 		keys.get(keys.indexOf(key_C)).setActive(app.getLookStatus());
 		keys.get(keys.indexOf(key_Z)).setActive(app.getShootStatus());
 		
-		
-		
 	}
 }

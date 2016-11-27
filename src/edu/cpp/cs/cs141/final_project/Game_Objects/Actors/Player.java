@@ -244,10 +244,10 @@ public class Player extends Actor{
 		killedEnemy = false;
 		revealedEnemy = false;
 		missedEnemy = false;
-		
 		if(isInvincible) remainingTurnsInvincible-=1;
 		setVisible(true);
-		updateState(activeEntities);
+		
+		//updateState(activeEntities);
 		move();
 		
 		setLookDir(null);

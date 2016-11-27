@@ -242,9 +242,8 @@ public class Game {
 	private void updateEntities() {
 		toggleEntityVisibility(false);
 		
-		
-		
 		for (GameObject obj : activeEntities){
+			if (obj instanceof Player)continue;
 			
 			obj.update(activeEntities);
 			
@@ -293,11 +292,19 @@ public class Game {
 	}
 	
 	public void update() {
-			
-		updateEntities();
+		//move player
+		//update everything elses state
+		//move everything else
+		//update everything elses state
+		//update player state
 		
-		
+		player.update(activeEntities);
 		updateEnemyStates();
+		
+		updateEntities();
+		updateEnemyStates();
+		
+		player.updateState(activeEntities);
 		
 		revealEntitiesNearPlayer();
 		
