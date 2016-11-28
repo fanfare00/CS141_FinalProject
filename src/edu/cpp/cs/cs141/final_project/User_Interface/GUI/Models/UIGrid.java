@@ -20,6 +20,8 @@ public class UIGrid {
 	
 	private Application app;
 	
+	public boolean hasUpdated;
+	
 	//private UIGridSpace componentGrid[][];
 	
 	public List<UIGridSpace> spaces = new ArrayList<UIGridSpace>();
@@ -33,9 +35,11 @@ public class UIGrid {
 		
 		this.app = app;
 		
+		
 	}
 
 	public void create(char[][] grid) {
+		hasUpdated = true;
 		
 		if (spaces.size() == 0) {
 			
@@ -48,12 +52,12 @@ public class UIGrid {
 		} else {
 			for (int m = 0; m < grid[0].length; m++) {
 				for (int n = 0; n < grid.length; n++) {
-					spaces.set((m*grid.length) + n, new UIGridSpace(m, n, new EmptyModel(), this, app));
+					//spaces.set((m*grid.length) + n, new UIGridSpace(m, n, new EmptyModel(), this, app));
+					spaces.get((m*grid.length) + n).model = new EmptyModel();
+					spaces.get((m*grid.length) + n).backModel = new EmptyModel();
 				}
 			}
 		}
-		
-		
 		
 		this.grid = grid;
 	}
@@ -66,17 +70,20 @@ public class UIGrid {
 	public void add(int row, int col, char symbol) {
 		
 		switch (symbol) {
-			case 'R': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RoomModel(), this, app));
+			case 'R': spaces.get((row*grid.length) + col).model = new RoomModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RoomModel(), this, app));
 				break;
-			case 'r': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RadarModel(), this, app));
+			case 'r': spaces.get((row*grid.length) + col).backModel = new RadarModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RadarModel(), this, app));
 				break;	
-			case 'a': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new AmmoModel(), this, app));
+			case 'a': spaces.get((row*grid.length) + col).backModel = new AmmoModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new AmmoModel(), this, app));
 				break;
-			case 'i': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new InvincibilityModel(), this, app));
+			case 'i': spaces.get((row*grid.length) + col).backModel = new InvincibilityModel();// spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new InvincibilityModel(), this, app));
 				break;
-			case 'P': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new PlayerModel(), this, app));
+			case 'P': spaces.get((row*grid.length) + col).model = new PlayerModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new PlayerModel(), this, app));
 				break;
-			case 'N': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new EnemyModel(), this, app));
+			case 'N': spaces.get((row*grid.length) + col).model = new EnemyModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new EnemyModel(), this, app));
+				break;
+			case 'I': spaces.get((row*grid.length) + col).model = new RoomModel();
+				spaces.get((row*grid.length) + col).backModel = new IntelModel();
 				break;
 			default: //spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new EmptyModel(), this, app));
 		}

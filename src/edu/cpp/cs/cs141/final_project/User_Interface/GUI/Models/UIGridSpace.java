@@ -26,9 +26,11 @@ public class UIGridSpace extends JComponent{
 	
 	private static final Color COLOR = Color.GRAY;
 	public Model model;
+	public Model backModel;
 	
 	private Rectangle rect;
 	
+	public boolean isHighlighted;
 	
 	public UIGridSpace(int row, int col, Model model, UIGrid grid, Application app) {
 		this.row = row;
@@ -38,29 +40,32 @@ public class UIGridSpace extends JComponent{
 		this.xLoc = (col * HEIGHT) + grid.xLoc;
 		
 		this.model = model;
+		this.backModel = new EmptyModel();
 		
 		rect = new Rectangle(xLoc, yLoc, WIDTH, HEIGHT);
 		
 		this.setLocation(xLoc, yLoc);
 		this.setSize(WIDTH, HEIGHT);
+		
+		
 		this.addMouseListener(new MouseHandler(grid, this, app));
 	}
 	
-	public boolean isMouseInside(JFrame frame){
-		boolean isMouseInside = false;
-		
-		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
-		
-		SwingUtilities.convertPointFromScreen(mousePoint, frame);
-		
-		mousePoint.x = (int) (mousePoint.getX() - 10);
-		mousePoint.y = (int) (mousePoint.getY() - 30);
-		
-		Rectangle rect = new Rectangle(xLoc, yLoc, WIDTH, HEIGHT);
-		if (rect.contains(mousePoint)) isMouseInside = true;
-		
-		return isMouseInside;
-	}
+//	public boolean isMouseInside(JFrame frame){
+//		boolean isMouseInside = false;
+//		
+//		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+//		
+//		SwingUtilities.convertPointFromScreen(mousePoint, frame);
+//		
+//		mousePoint.x = (int) (mousePoint.getX() - 10);
+//		mousePoint.y = (int) (mousePoint.getY() - 30);
+//		
+//		Rectangle rect = new Rectangle(xLoc, yLoc, WIDTH, HEIGHT);
+//		if (rect.contains(mousePoint)) isMouseInside = true;
+//		
+//		return isMouseInside;
+//	}
 	
 	public void draw(Graphics2D g, JFrame frame) {
 		
@@ -68,12 +73,16 @@ public class UIGridSpace extends JComponent{
 		g.setColor(Color.GRAY);
 		g.draw(rect);
 		
-		if (isMouseInside(frame)) {
+		//if (isMouseInside(frame)) {
+		if (isHighlighted) {
+		
 			g.setColor(Color.GREEN);
 			g.drawRect(xLoc+1, yLoc+1, WIDTH-2, HEIGHT-2);
 			g.drawRect(xLoc+2, yLoc+2, WIDTH-4, HEIGHT-4);
+		//}
 		}
 		
+		backModel.draw(xLoc, yLoc, WIDTH, HEIGHT, g);
 		model.draw(xLoc, yLoc, WIDTH, HEIGHT, g);
 		
 	}

@@ -25,7 +25,7 @@ public class MouseHandler extends InputHandler implements MouseListener {
 	}
 	
 	private Direction getMoveDirection(UIGridSpace oldSpace) {
-		Direction dir = Direction.UP;
+		Direction dir = null;
 		
 		if ((oldSpace.row == space.row) && (oldSpace.col == (space.col + 1))) dir = Direction.LEFT;
 		if ((oldSpace.row == space.row) && (oldSpace.col == (space.col - 1))) dir = Direction.RIGHT;
@@ -39,31 +39,42 @@ public class MouseHandler extends InputHandler implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		UIGridSpace oldSpace = null;
 		
-		for (int i = 0; i < grid.spaces.size(); i++) {
-			if (grid.spaces.get(i).model instanceof PlayerModel) { 
-				oldSpace = grid.spaces.get(i);
-				grid.spaces.get(i).model = new EmptyModel();
+		if (grid.hasUpdated) {	
+			for (int i = 0; i < grid.spaces.size(); i++) {
+				if (grid.spaces.get(i).model instanceof PlayerModel) { 
+					oldSpace = grid.spaces.get(i);
+					grid.spaces.get(i).model = new EmptyModel();
+				}
 			}
-		}
-		//grid.spaces.get(grid.spaces.indexOf(space)).model = new PlayerModel();
-		for (int i = 0; i < grid.spaces.size(); i++) {
-			if ((grid.spaces.get(i).row == space.row) && (grid.spaces.get(i).col == space.col)) {
-				grid.spaces.get(i).model = new PlayerModel();
-			}
-		}
 		
-		app.playerMove(getMoveDirection(oldSpace));
-
+			if ((getMoveDirection(oldSpace) != null) && (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) {
+				space.model = new PlayerModel();
+				app.playerMove(getMoveDirection(oldSpace));
+				grid.hasUpdated = false;
+			} else {
+				oldSpace.model = new PlayerModel();
+			}
+		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-
+		UIGridSpace oldSpace = null;
+		
+		for (int i = 0; i < grid.spaces.size(); i++) {
+			if (grid.spaces.get(i).model instanceof PlayerModel) { 
+				oldSpace = grid.spaces.get(i);	
+			}
+		}
+		
+		if ((getMoveDirection(oldSpace) != null) && (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) {
+			space.isHighlighted = true;
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		space.isHighlighted = false;
 
 	}
 
