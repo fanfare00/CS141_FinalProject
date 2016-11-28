@@ -238,7 +238,7 @@ public class Application {
 
 	public void toggleUIType() {
 		game.setDebugMode(true);
-		FPS = 1;
+		FPS = 30;
 		
 		UI = new GraphicalUserInterface();
 		UI.init(this);

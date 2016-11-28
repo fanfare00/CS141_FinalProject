@@ -3,6 +3,10 @@ package edu.cpp.cs.cs141.final_project;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.SwingUtilities;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.*;
@@ -32,6 +36,7 @@ public class Game {
 	
 	List<GameObject> activeEntities = new ArrayList<GameObject>();
 	
+	
 	private Player player;
 	
 	private boolean gameOver = false;
@@ -51,6 +56,29 @@ public class Game {
 		spawnBriefcase();
 		
 		initializeEntities();
+		
+		Timer timer = new Timer(true);
+		
+		TimerTask task = new TimerTask() {
+			@Override
+            public void run() {
+				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						for (GameObject obj : activeEntities){
+							if (obj instanceof Enemy) {
+								((Actor)obj).updateState(activeEntities);
+								obj.update(activeEntities);
+							}
+						}
+					}
+					
+				});
+			}
+		};
+		
+        timer.schedule(task, 0, 900);
 	}
 	
 	/**
@@ -244,9 +272,9 @@ public class Game {
 		
 		for (GameObject obj : activeEntities){
 			if (obj instanceof Player)continue;
+			//if (obj instanceof Actor) ((Actor)obj).updateState(activeEntities);
 			
-			if (obj instanceof Actor) ((Actor)obj).updateState(activeEntities);
-			obj.update(activeEntities);
+			if (!(obj instanceof Enemy)) obj.update(activeEntities);
 			
 			if ((debugMode) && (obj instanceof Room)) {
 				if ((((Room)obj).hasIntel())) obj.setSymbol('I');

@@ -3,6 +3,10 @@ package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.SwingUtilities;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
@@ -47,8 +51,10 @@ public class Enemy extends Actor {
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
+
 		getRandomMovement();
 		move();
+
 	}
 
 }
