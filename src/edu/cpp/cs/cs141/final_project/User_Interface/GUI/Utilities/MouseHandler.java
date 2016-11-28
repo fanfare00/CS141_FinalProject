@@ -67,7 +67,7 @@ public class MouseHandler extends InputHandler implements MouseListener {
 			}
 		}
 		
-		if ((getMoveDirection(oldSpace) != null) && (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) {
+		if ((getMoveDirection(oldSpace) != null) && ( (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()]) | space.isMouseInside(space))) {
 			space.isHighlighted = true;
 		}
 	}

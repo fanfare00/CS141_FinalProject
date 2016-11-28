@@ -51,21 +51,21 @@ public class UIGridSpace extends JComponent{
 		this.addMouseListener(new MouseHandler(grid, this, app));
 	}
 	
-//	public boolean isMouseInside(JFrame frame){
-//		boolean isMouseInside = false;
-//		
-//		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
-//		
-//		SwingUtilities.convertPointFromScreen(mousePoint, frame);
-//		
-//		mousePoint.x = (int) (mousePoint.getX() - 10);
-//		mousePoint.y = (int) (mousePoint.getY() - 30);
-//		
-//		Rectangle rect = new Rectangle(xLoc, yLoc, WIDTH, HEIGHT);
-//		if (rect.contains(mousePoint)) isMouseInside = true;
-//		
-//		return isMouseInside;
-//	}
+	public boolean isMouseInside(JComponent comp){
+		boolean isMouseInside = false;
+		
+		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+		
+		SwingUtilities.convertPointFromScreen(mousePoint, this);
+		
+		//mousePoint.x = (int) (mousePoint.getX() - 10);
+		//mousePoint.y = (int) (mousePoint.getY() - 30);
+		
+		Rectangle rect = new Rectangle(0, 0, WIDTH, HEIGHT);
+		if (rect.contains(mousePoint)) isMouseInside = true;
+		
+		return isMouseInside;
+	}
 	
 	public void draw(Graphics2D g, JFrame frame) {
 		
