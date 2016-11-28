@@ -7,8 +7,8 @@ public class EmptyModel implements Model{
 
 	@Override
 	public void draw(int x, int y, int width, int height, Graphics2D g) {
-		g.setColor(Color.GRAY);
-		g.drawRect(x, y, width, height);
+//		g.setColor(Color.GRAY);
+//		g.drawRect(x, y, width, height);
 		
 	}
 

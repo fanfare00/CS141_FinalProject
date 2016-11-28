@@ -4,68 +4,81 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+import edu.cpp.cs.cs141.final_project.Application;
+
 public class UIGrid {
 
-	private int xLoc;
-	private int yLoc;
-	private int width;
-	private int height;
+	public int xLoc;
+	public int yLoc;
+	public int width;
+	public int height;
 	
 	private char grid[][];
 	
-	private List<UIGridSpace> spaces = new ArrayList<UIGridSpace>();
+	private Application app;
 	
-	public UIGrid(int xLoc, int yLoc, int width, int height, char[][] grid) {
+	//private UIGridSpace componentGrid[][];
+	
+	public List<UIGridSpace> spaces = new ArrayList<UIGridSpace>();
+	
+	public UIGrid(int xLoc, int yLoc, int width, int height, char[][] grid, Application app) {
 		this.grid = grid;
 		this.width = width;
 		this.height = height;
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
+		
+		this.app = app;
+		
 	}
 
 	public void create(char[][] grid) {
+		
+		if (spaces.size() == 0) {
+			
+			for (int m = 0; m < grid[0].length; m++) {
+				for (int n = 0; n < grid.length; n++) {
+	
+					spaces.add(new UIGridSpace(m, n, new EmptyModel(), this, app));
+				}
+			}
+		} else {
+			for (int m = 0; m < grid[0].length; m++) {
+				for (int n = 0; n < grid.length; n++) {
+					spaces.set((m*grid.length) + n, new UIGridSpace(m, n, new EmptyModel(), this, app));
+				}
+			}
+		}
+		
+		
+		
 		this.grid = grid;
-
-		for (int m = 0; m < grid[0].length; m++) {
-			for (int n = 0; n < grid.length; n++) {
-
-				spaces.add(new UIGridSpace(n*50 + xLoc, m*50 + yLoc, 50, 50, new EmptyModel()));
-			}
-		}
 	}
 	
-	public void clearGrid() {
-		spaces.clear();
-	}
-	
-	private void parseSpace() {
-		for (int m = 0; m < grid[0].length; m++) {
-			for (int n = 0; n < grid.length; n++) {
-				if(grid[n][m] == 'R') spaces.set(n*m, (new UIGridSpace(n*50 + xLoc, m*50 + yLoc, 50, 50, new RoomModel())));
-			}
-		}
-		//if (symbol == 'R') spaces.add(new UIGridSpace(x, y, 50, 50, new RoomModel()));
-		//else spaces.add(new UIGridSpace(x, y, 50, 50, new EmptyModel()));
-		// spaces.add(new UIGridSpace(x, y, 50, 50, new EmptyModel()));
-	}
+//	public void clearGrid() {
+//		spaces.clear();
+//	}
+
 
 	public void add(int row, int col, char symbol) {
-		grid[row][col] = symbol;
 		
 		switch (symbol) {
-			case 'R': spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new RoomModel()));
+			case 'R': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RoomModel(), this, app));
 				break;
-			case 'r': spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new RadarModel()));
+			case 'r': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RadarModel(), this, app));
 				break;	
-			case 'a': spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new AmmoModel()));
+			case 'a': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new AmmoModel(), this, app));
 				break;
-			case 'i': spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new InvincibilityModel()));
+			case 'i': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new InvincibilityModel(), this, app));
 				break;
-			case 'P': spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new PlayerModel()));
+			case 'P': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new PlayerModel(), this, app));
 				break;
-			case 'N': spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new EnemyModel()));
+			case 'N': spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new EnemyModel(), this, app));
 				break;
-			default: //spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new EmptyModel()));
+			default: //spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new EmptyModel(), this, app));
 		}
 		
 //		if(symbol == 'R') spaces.add(new UIGridSpace(col*50 + xLoc, row*50 + yLoc, 50, 50, new RoomModel()));
@@ -75,9 +88,18 @@ public class UIGrid {
 		//parseSpace();
 	}
 	
-	public void draw(Graphics2D g) {
-		for (UIGridSpace space : spaces) {
-			space.draw(g);
+	public List<UIGridSpace> getSpaces() {
+		return spaces;
+	}
+	
+	public void draw(Graphics2D g, JFrame frame) {
+//		for (UIGridSpace space : spaces) {
+//			space.draw(g);
+//		}
+		
+		for (int i = 0; i < spaces.size(); i++) {
+			spaces.get(i).draw(g, frame);
+			frame.add(spaces.get(i));
 		}
 		
 //		for (UIGridSpace space : spaces) {

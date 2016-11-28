@@ -46,9 +46,12 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
     Command command;
     
     private boolean isRunning;
+    
+    Application app;
 
 	@Override
-	public void init(Application application) {
+	public void init(Application app) {
+		this.app = app;
 		
 		pack();
 		setResizable(false);
@@ -61,7 +64,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		g = (Graphics2D) getGraphics();
 		bbg  = (Graphics2D) backBuffer.getGraphics();  
 		
-		grid = new UIGrid(GRID_X, GRID_Y, GRID_WIDTH, GRID_HEIGHT, null);
+		grid = new UIGrid(GRID_X, GRID_Y, GRID_WIDTH, GRID_HEIGHT, null, app);
 				
 		setLocationRelativeTo(null);
 		
@@ -120,7 +123,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	@Override
 	public void createGrid(int rows, int cols) {
 		//grid = new char[rows][cols];
-		grid.clearGrid();
+	
 		grid.create(new char[rows][cols]);
 	}
 
@@ -143,7 +146,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		//bbg.setColor(Color.RED); 
 		//bbg.drawRect(GRID_X, GRID_Y, GRID_WIDTH, GRID_HEIGHT);
 		
-		grid.draw(bbg);
+		grid.draw(bbg, this);
 		
 		
 //		for (int m = 0; m < grid[0].length; m++) {

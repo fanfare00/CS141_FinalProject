@@ -91,6 +91,8 @@ public abstract class Actor extends GameObject{
 		
 		row += moveDir.row();
 		col += moveDir.col();
+		
+		moveDir = null;
 	}
 	
 	protected void updateAttackStatus() {

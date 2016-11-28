@@ -238,10 +238,11 @@ public class Application {
 
 	public void toggleUIType() {
 		game.setDebugMode(true);
-		FPS = 2;
+		FPS = 1;
 		
 		UI = new GraphicalUserInterface();
 		UI.init(this);
 		redrawUI();
 	}
+
 }
