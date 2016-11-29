@@ -24,7 +24,7 @@ public class Application {
 		this.UI = UI;
 		this.game = game;
 		
-		start();
+		//start();
 	}
 
 	public void run() {
@@ -54,7 +54,7 @@ public class Application {
 	}
 	
 	/**
-	 * Initializes a new game.
+	 * Initializes the game.
 	 */
 	public void start() {	
 		UI.init(this);
@@ -62,6 +62,9 @@ public class Application {
 		run();
 	}
 	
+	/**
+	 * Prepares a new game.
+	 */
 	public void startNewGame() {
 		UI = new TextUserInterface();
 		game = new Game();
