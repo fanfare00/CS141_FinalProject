@@ -306,24 +306,24 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 	
-	public void run() {
-		
-		while(true){ 
+	public void run() {	
+		while(!app.getPaused()){ 
 			long time = System.currentTimeMillis(); 
 			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
 			
-//			if (!app.getPause()) {
-				draw();
-				updateCounters();
+			
+			draw();
+			updateCounters();
+
 				
-				if (time > 0) { 
-					try { 
-						Thread.sleep(time); 
-	                } 
-	                	catch(Exception e){} 
-	             } 
-//			}
-        }		
+			if (time > 0) { 
+				try { 
+					Thread.sleep(time); 
+	               } 
+	                catch(Exception e){} 
+	        } 
+        }	
+		isRunning = false;
 	}
 
 	@Override
@@ -373,47 +373,19 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 
 	@Override
 	public void drawGrid() {
-
-		//bbg.setColor(Color.RED); 
-		//bbg.drawRect(GRID_X, GRID_Y, GRID_WIDTH, GRID_HEIGHT);
-		
 		grid.draw(bbg, this);
-		
-		
-//		for (int m = 0; m < grid[0].length; m++) {
-//		    for (int n = 0; n < grid.length; n++) {
-//		    	
-//		    	if (grid[m][n] == 'R') {
-//		    		bbg.setColor(Color.RED); 
-//		    		bbg.drawRect(n*50 + innerX, m*50 + innerY, 50, 50);
-//		    	}
-//		    	
-//		    	if (grid[m][n] == 'P') {
-//		    		bbg.setColor(Color.GREEN); 
-//		    		bbg.drawRect(n*50 + innerX +12, m*50 + innerY+12, 25, 25);
-//		    	}
-//		    	
-//		    	if (grid[m][n] == 'N') {
-//		    		bbg.setColor(Color.BLUE); 
-//		    		bbg.drawRect(n*50 + innerX + 12, m*50 + innerY + 12, 25, 25);
-//		    	}
-//		    	
-////		    	if (grid[m][n] == 'N') {
-////		    		Rectangle2D rectangle = new Rectangle2D.Double(n*50 + innerX + 12.5, m*50 + innerY + 12.5, 25, 25);
-////		    		AffineTransform transform = new AffineTransform();
-////		    		transform.rotate(Math.PI/4, rectangle.getX() + rectangle.getWidth()/2,    rectangle.getY() + rectangle.getHeight()/2);
-////		    		
-////		    		bbg.setColor(Color.BLUE); 
-////		    		bbg.draw((Shape)transform);
-////		    	}
-//		    }
-//		    	
-//		}
 	}
 
 	@Override
 	public void toggleMenuState() {
-		// TODO Auto-generated method stub
+		JPanel menu = new JPanel();
+		
+		menu.setSize(350, 500);
+		menu.setLocation(300, 100);
+		menu.setOpaque(true);
+		menu.setBackground(Color.RED);
+		menu.setVisible(true);
+		this.add(menu);
 		
 	}
 
@@ -450,9 +422,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	@Override
 	public void setAlertText(String string) {
 	
-		if (string != "") {
+//		if (string != "") {
 			alertLabel.setText(string);
-		}
+//		}
 		
 		
 		

@@ -20,6 +20,8 @@ public class Application {
 	private Game game;
 	private boolean close;
 	
+	private boolean paused;
+	
 	
 	public Application(IUserInterface UI, Game game) {
 		this.UI = UI;
@@ -29,33 +31,16 @@ public class Application {
 	}
 
 	public void run() {
-//		while(true){ 
-//			long time = System.currentTimeMillis(); 
-//			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
-			 
-//			if (!pause) {
-				if (getGameOverStatus()) { 
-					UI.toggleMenuState();
-				
-				}
-				
-				UI.update();
-				game.update();
-				redrawUI();
-				
-//				if (time > 0) { 
-//					try { 
-//						Thread.sleep(time); 
-//	                } 
-//	                	catch(Exception e){} 
-//	             } 
-//			} else {
-//				UI.update();
-//				redrawUI();
-	//		}
-						
-  //      }
-		
+		if (getGameOverStatus()) { 
+			UI.toggleMenuState();
+			paused = true;
+		}
+			
+		if (!paused) {
+			UI.update();
+			game.update();
+			redrawUI();	
+		}
 	}
 	
 	/**
@@ -228,14 +213,17 @@ public class Application {
 	public void updateUIAlertText() {
 		String alertText = "";
 		
+		//if (paused) alertText = "PAUSED";
 		if (game.getPlayer().hasRevealedEnemy()) alertText = "You've spotted an enemy ninja!";
-		if (game.getPlayer().hasKilledEnemy()) alertText = "Your gun killed an enemy ninja!";
-		if (game.getPlayer().hasMissedEnemy()) alertText = "You shot your gun, but did not hit an enemy ninja.";
-		if (getDeathStatus()) alertText = "An enemy ninja killed you!";
-		if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
-		if (game.getGameWon()) alertText = "Congrats! You've found the intel and won the game!";
-		if (game.getPlayer().getCurrentPowerup() != null) alertText = game.getPlayer().getCurrentPowerup().getDescription();
+		else if (game.getPlayer().hasKilledEnemy()) alertText = "Your gun killed an enemy ninja!";
+		else if (game.getPlayer().hasMissedEnemy()) alertText = "You shot your gun, but did not hit an enemy ninja.";
+		else if (getDeathStatus()) alertText = "An enemy ninja killed you!";
+		else if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
+		else if (game.getGameWon()) alertText = "Congrats! You've found the intel and won the game!";
+		else if (game.getPlayer().getCurrentPowerup() != null) alertText = game.getPlayer().getCurrentPowerup().getDescription();
+		
 		if (game.getPlayer().getIsInvincible()) alertText += "\nYou are invincible, " + game.getPlayer().getInvincibilityTurns() + " turns remaining.";
+		
 		UI.setAlertText(alertText);
 	}
 
@@ -271,6 +259,20 @@ public class Application {
 
 	public void setClose(boolean flag) {
 		close = flag;
+	}
+	
+	public boolean getPaused() {
+		return paused;
+	}
+
+	public void setPaused(boolean flag) {
+		
+		if (flag) UI.setAlertText("PAUSED");
+		else UI.setAlertText(" ");
+		
+		game.togglePause(flag);
+		
+		paused = flag;
 		
 	}
 

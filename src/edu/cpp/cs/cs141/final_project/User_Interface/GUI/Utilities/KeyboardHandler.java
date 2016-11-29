@@ -29,7 +29,9 @@ public class KeyboardHandler implements KeyListener{
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_9) app.toggleDebugMode();
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) app.setClose(true);
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			app.setPaused(!app.getPaused());
+		}
 		
 	}
 

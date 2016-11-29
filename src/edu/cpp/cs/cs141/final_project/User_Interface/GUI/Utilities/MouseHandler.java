@@ -55,7 +55,7 @@ public class MouseHandler implements MouseListener {
 				oldSpace.model = new PlayerModel();
 			}
 			
-			if ((SwingUtilities.isRightMouseButton(e)) && app.getRoomCheckCondition()) {
+			if ((SwingUtilities.isRightMouseButton(e)) && ((app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) | (app.getRoomCheckCondition())) {
 				space.isOpen = true;
 				app.playerLook(getMoveDirection(oldSpace));
 				grid.hasUpdated = false;
