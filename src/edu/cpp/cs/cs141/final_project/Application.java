@@ -106,12 +106,9 @@ public class Application {
 	 * @param activeEntities The list of entities to add to the game.
 	 */
 	public void loadGame(List<GameObject> activeEntities) {
-		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
-		redrawUI();
-		
 		game.setActiveEntities(activeEntities);
-		
-		//UI.update();
+		//UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
+		//redrawUI();
 	}
 	
 	/**

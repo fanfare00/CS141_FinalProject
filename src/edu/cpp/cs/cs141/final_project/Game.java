@@ -55,7 +55,7 @@ public class Game {
 		spawnPlayer();
 		spawnRooms();
 		spawnPowerups();
-		//spawnEnemies();
+		spawnEnemies();
 		spawnBriefcase();
 		
 		initializeEntities();
@@ -241,6 +241,7 @@ public class Game {
 		List<GameObject> entities = new ArrayList<GameObject>();
 		entities.addAll(activeEntities);
 		this.activeEntities = entities;
+		this.player = (Player) activeEntities.get(0);
 	}
 	
 	public void playerLook(Direction dir) {
