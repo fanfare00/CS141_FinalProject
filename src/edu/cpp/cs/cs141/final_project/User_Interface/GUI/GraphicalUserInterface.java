@@ -112,6 +112,10 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 	
+	private void setupMenu() {
+		
+	}
+	
 	private void setupAndDisplayLabels() {
 		alertLabel = new JLabel(" ");
 		alertLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -308,17 +312,18 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			long time = System.currentTimeMillis(); 
 			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
 			
-			draw();
-			updateCounters();
-			
-			if (time > 0) { 
-				try { 
-					Thread.sleep(time); 
-                } 
-                	catch(Exception e){} 
-             } 
-        }
-		
+//			if (!app.getPause()) {
+				draw();
+				updateCounters();
+				
+				if (time > 0) { 
+					try { 
+						Thread.sleep(time); 
+	                } 
+	                	catch(Exception e){} 
+	             } 
+//			}
+        }		
 	}
 
 	@Override

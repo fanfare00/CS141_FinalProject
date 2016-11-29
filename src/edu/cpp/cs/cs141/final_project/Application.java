@@ -20,6 +20,7 @@ public class Application {
 	private Game game;
 	private boolean close;
 	
+	
 	public Application(IUserInterface UI, Game game) {
 		this.UI = UI;
 		this.game = game;
@@ -28,40 +29,44 @@ public class Application {
 	}
 
 	public void run() {
-		
-		
-		while(!close){ 
-			long time = System.currentTimeMillis(); 
-			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
+//		while(true){ 
+//			long time = System.currentTimeMillis(); 
+//			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
 			 
-			if (getGameOverStatus()) UI.toggleMenuState();
-			
-			UI.update();
-			game.update();
-			redrawUI();
-			
-			if (time > 0) { 
-				try { 
-					Thread.sleep(time); 
-                } 
-                	catch(Exception e){} 
-             } 
-        }
+//			if (!pause) {
+				if (getGameOverStatus()) { 
+					UI.toggleMenuState();
+				
+				}
+				
+				UI.update();
+				game.update();
+				redrawUI();
+				
+//				if (time > 0) { 
+//					try { 
+//						Thread.sleep(time); 
+//	                } 
+//	                	catch(Exception e){} 
+//	             } 
+//			} else {
+//				UI.update();
+//				redrawUI();
+	//		}
+						
+  //      }
 		
-//		UI.update();
-//		game.update();
-//		redrawUI();
-		
-		//if (!close) run();
 	}
 	
 	/**
 	 * Initializes the game.
 	 */
-	public void start() {	
+	public void start() {
+		close = false;
+		
 		UI.init(this);
 		loadGame(game.getActiveEntities());
-		run();
+		//run();
 	}
 	
 	/**
@@ -71,7 +76,9 @@ public class Application {
 		UI = new TextUserInterface();
 		game = new Game();
 		
-		start();
+		close = true;
+		
+		//start();
 	}
 	
 	public void playerMove(Direction dir) {
@@ -256,6 +263,15 @@ public class Application {
 
 	public int getPlayerAmmo() {
 		return game.getPlayer().getRemainingAmmo();
+	}
+	
+	public boolean getClose() {
+		return close;
+	}
+
+	public void setClose(boolean flag) {
+		close = flag;
+		
 	}
 
 }
