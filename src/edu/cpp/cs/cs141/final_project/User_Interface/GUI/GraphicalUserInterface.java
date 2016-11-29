@@ -67,9 +67,14 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
     JLabel alertLabel;
     JLabel instructionLabel;
     
+    JLabel ammoLabel;
+    JLabel livesLabel;
+    
     JPanel rightPanel;
     JPanel topPanel;
     JPanel botPanel;
+    
+    private int lifeCounter = 3;
 
 	@Override
 	public void init(Application app) {
@@ -110,8 +115,10 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	private void setupAndDisplayLabels() {
 		alertLabel = new JLabel(" ");
 		alertLabel.setHorizontalAlignment(JLabel.CENTER);
-		alertLabel.setSize(topPanel.getWidth(), topPanel.getHeight());
+		alertLabel.setLocation(200, 0);
+		alertLabel.setSize(topPanel.getWidth()-400, topPanel.getHeight());
 		alertLabel.setFont(new Font("Arial", Font.BOLD, 17));
+
 		alertLabel.setForeground(Color.RED);
 		alertLabel.setVisible(true);
 		topPanel.add(alertLabel);
@@ -212,6 +219,26 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			rightPanel.repaint();
 
 		
+		ammoLabel = new JLabel();
+		ammoLabel = new JLabel();
+		ammoLabel.setIcon(new ImageIcon("res/full_ammo.png"));
+		ammoLabel.setSize(70, 25);
+		ammoLabel.setLocation(120, 25);
+		ammoLabel.setVisible(true);
+		topPanel.add(ammoLabel);
+		
+		livesLabel = new JLabel();
+		livesLabel.setIcon(new ImageIcon("res/3lives.png"));
+		livesLabel.setSize(70, 25);
+		livesLabel.setLocation(45, 25);
+		livesLabel.setVisible(true);
+		topPanel.add(livesLabel);
+		
+		topPanel.repaint();
+		
+		
+			
+		
 	}
 	
 	private void setupAndDisplayPanels() {
@@ -222,6 +249,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		topPanel.setBackground(Color.BLACK);
 		topPanel.setSize(FRAME_WIDTH, 50);
 		topPanel.setPreferredSize(new Dimension(FRAME_WIDTH, 50));
+		topPanel.setLayout(null);
 		topPanel.setVisible(true);
 		this.add(topPanel);
 		
@@ -258,6 +286,19 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 	
+	private void updateCounters() {
+		
+		if (app.getPlayerLives() == 2) livesLabel.setIcon(new ImageIcon("res/2lives.png"));
+	
+		if (app.getPlayerLives() == 1) livesLabel.setIcon(new ImageIcon("res/1lives.png"));
+	
+		if (app.getPlayerLives() == 0) livesLabel.setIcon(new ImageIcon("res/nolives.png"));
+		
+		if (app.getPlayerAmmo() == 1) ammoLabel.setIcon(new ImageIcon("res/full_ammo.png"));
+		
+		if (app.getPlayerAmmo() == 0)ammoLabel.setIcon(new ImageIcon("res/no_ammo.png"));
+		
+	}
 	
 	public void run() {
 		
@@ -266,6 +307,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
 			
 			draw();
+			updateCounters();
 			
 			if (time > 0) { 
 				try { 

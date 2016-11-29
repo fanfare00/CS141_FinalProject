@@ -214,6 +214,10 @@ public class Application {
 		return (game.getGameOver() | game.getGameWon());
 	}
 	
+	public int getPlayerLives() {
+		return game.getPlayer().getRemainingLives();
+	}
+	
 	public void updateUIAlertText() {
 		String alertText = "";
 		
@@ -248,6 +252,10 @@ public class Application {
 		UI = new GraphicalUserInterface();
 		UI.init(this);
 		redrawUI();
+	}
+
+	public int getPlayerAmmo() {
+		return game.getPlayer().getRemainingAmmo();
 	}
 
 }
