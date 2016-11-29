@@ -105,7 +105,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	}
 	
 	private void setupAndDisplayLabels() {
-		alertLabel = new JLabel();
+		alertLabel = new JLabel(" ");
 		alertLabel.setHorizontalAlignment(JLabel.CENTER);
 		alertLabel.setSize(topPanel.getWidth(), topPanel.getHeight());
 		alertLabel.setFont(new Font("Arial", Font.BOLD, 17));
@@ -162,27 +162,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			rightClickDescLabel.setHorizontalAlignment(JLabel.CENTER);
 			rightClickDescLabel.setVisible(true);
 			rightPanel.add(rightClickDescLabel);
-		
-		JLabel spaceKeyLabel = new JLabel();
-		spaceKeyLabel.setSize(210, 65);
-		spaceKeyLabel.setLocation(5, 390);
-		spaceKeyLabel.setOpaque(true);
-		spaceKeyLabel.setBackground(Color.BLACK);
-		spaceKeyLabel.setHorizontalAlignment(JLabel.CENTER);
-		spaceKeyLabel.setIcon(new ImageIcon("res/space_key.png"));
-		spaceKeyLabel.setVisible(true);
-		rightPanel.add(spaceKeyLabel);
 			
-			JLabel spaceKeyDescLabel = new JLabel("SHOOT");
-			spaceKeyDescLabel.setFont(new Font("Arial", Font.BOLD, 18));
-			spaceKeyDescLabel.setForeground(Color.YELLOW);
-			spaceKeyDescLabel.setSize(210, 35);
-			spaceKeyDescLabel.setLocation(5, 365);
-			spaceKeyDescLabel.setOpaque(true);
-			spaceKeyDescLabel.setBackground(Color.BLACK);
-			spaceKeyDescLabel.setHorizontalAlignment(JLabel.CENTER);
-			spaceKeyDescLabel.setVisible(true);
-			rightPanel.add(spaceKeyDescLabel);
 			
 		JLabel escKeyLabel = new JLabel();
 		escKeyLabel.setSize(110, 100);
@@ -204,6 +184,30 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			escKeyDescLabel.setHorizontalAlignment(JLabel.CENTER);
 			escKeyDescLabel.setVisible(true);
 			rightPanel.add(escKeyDescLabel);
+		
+		JLabel spaceKeyLabel = new JLabel();
+		spaceKeyLabel.setSize(210, 65);
+		spaceKeyLabel.setLocation(5, 390);
+		spaceKeyLabel.setOpaque(true);
+		spaceKeyLabel.setBackground(Color.BLACK);
+		spaceKeyLabel.setHorizontalAlignment(JLabel.CENTER);
+		spaceKeyLabel.setIcon(new ImageIcon("res/space_key.png"));
+		spaceKeyLabel.setVisible(true);
+		rightPanel.add(spaceKeyLabel);
+			
+			JLabel spaceKeyDescLabel = new JLabel("SHOOT");
+			spaceKeyDescLabel.setFont(new Font("Arial", Font.BOLD, 18));
+			spaceKeyDescLabel.setForeground(Color.YELLOW);
+			spaceKeyDescLabel.setSize(200, 35);
+			spaceKeyDescLabel.setLocation(10, 360);
+			spaceKeyDescLabel.setOpaque(true);
+			spaceKeyDescLabel.setBackground(Color.BLACK);
+			spaceKeyDescLabel.setHorizontalAlignment(JLabel.CENTER);
+			spaceKeyDescLabel.setVisible(true);
+			rightPanel.add(spaceKeyDescLabel);
+			
+			rightPanel.repaint();
+
 		
 	}
 	
@@ -229,7 +233,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 				BorderFactory.createEtchedBorder(
 						EtchedBorder.RAISED, Color.GRAY, Color.DARK_GRAY), "Controls",TitledBorder.CENTER, TitledBorder.TOP));
 		((javax.swing.border.TitledBorder)rightPanel.getBorder()).setTitleColor(Color.WHITE);
-		
+		rightPanel.setLayout(null);
 		rightPanel.setVisible(true);
 		this.add(rightPanel);
 		
