@@ -108,16 +108,16 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		setupAndDisplayPanels();
 		setupAndDisplayLabels();
 		
-		this.addKeyListener(new KeyboardHandler(grid));
+		this.addKeyListener(new KeyboardHandler(grid, app));
 		
 	}
 	
 	private void setupAndDisplayLabels() {
 		alertLabel = new JLabel(" ");
 		alertLabel.setHorizontalAlignment(JLabel.CENTER);
-		alertLabel.setLocation(200, 0);
+		alertLabel.setLocation(200, 14);
 		alertLabel.setSize(topPanel.getWidth()-400, topPanel.getHeight());
-		alertLabel.setFont(new Font("Arial", Font.BOLD, 17));
+		alertLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
 		alertLabel.setForeground(Color.RED);
 		alertLabel.setVisible(true);
@@ -297,6 +297,8 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		if (app.getPlayerAmmo() == 1) ammoLabel.setIcon(new ImageIcon("res/full_ammo.png"));
 		
 		if (app.getPlayerAmmo() == 0)ammoLabel.setIcon(new ImageIcon("res/no_ammo.png"));
+		
+		//if (app.getLookStatus()) 
 		
 	}
 	

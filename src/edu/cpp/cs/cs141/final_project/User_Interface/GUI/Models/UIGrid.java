@@ -71,19 +71,30 @@ public class UIGrid {
 	public void add(int row, int col, char symbol) {
 		
 		switch (symbol) {
-			case 'R': spaces.get((row*grid.length) + col).model = new RoomModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RoomModel(), this, app));
+			case 'R': 
+				if (spaces.get((row*grid.length) + col).isOpen) {
+					spaces.get((row*grid.length) + col).model = new OpenRoomModel();
+				} else {
+					spaces.get((row*grid.length) + col).model = new RoomModel();
+				}
+			
 				break;
-			case 'r': spaces.get((row*grid.length) + col).backModel = new RadarModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new RadarModel(), this, app));
+			case 'r': spaces.get((row*grid.length) + col).backModel = new RadarModel();
 				break;	
-			case 'a': spaces.get((row*grid.length) + col).backModel = new AmmoModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new AmmoModel(), this, app));
+			case 'a': spaces.get((row*grid.length) + col).backModel = new AmmoModel();
 				break;
-			case 'i': spaces.get((row*grid.length) + col).backModel = new InvincibilityModel();// spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new InvincibilityModel(), this, app));
+			case 'i': spaces.get((row*grid.length) + col).backModel = new InvincibilityModel();
 				break;
-			case 'P': spaces.get((row*grid.length) + col).model = new PlayerModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new PlayerModel(), this, app));
+			case 'P': spaces.get((row*grid.length) + col).model = new PlayerModel();
 				break;
-			case 'N': spaces.get((row*grid.length) + col).model = new EnemyModel();//spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new EnemyModel(), this, app));
+			case 'N': spaces.get((row*grid.length) + col).model = new EnemyModel();
 				break;
-			case 'I': spaces.get((row*grid.length) + col).model = new RoomModel();
+			case 'I':
+				if (spaces.get((row*grid.length) + col).isOpen) {
+					spaces.get((row*grid.length) + col).model = new OpenRoomModel();
+				} else {
+					spaces.get((row*grid.length) + col).model = new RoomModel();
+				}
 				spaces.get((row*grid.length) + col).backModel = new IntelModel();
 				break;
 			default: //spaces.set((row*grid.length) + col, new UIGridSpace(row, col, new EmptyModel(), this, app));

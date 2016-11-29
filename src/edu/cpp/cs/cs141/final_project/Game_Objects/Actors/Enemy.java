@@ -43,7 +43,10 @@ public class Enemy extends Actor {
 		if (nearbyActors.isEmpty()) return;
 		
 		for (Actor actor : nearbyActors){
-			if ((actor instanceof Player) && !((Player)actor).getHasDiedRecently()) canAttack = true;
+			if ((actor instanceof Player) && !((Player)actor).getHasDiedRecently()) {
+				canAttack = true;
+				isLookedAt = true;
+			}
 		}
 		
 		nearbyActors.clear();

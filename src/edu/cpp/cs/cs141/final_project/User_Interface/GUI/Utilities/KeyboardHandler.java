@@ -17,8 +17,9 @@ public class KeyboardHandler implements KeyListener{
 		this.space = space;
 		this.app = app;
 	}
-	public KeyboardHandler(UIGrid grid) {
+	public KeyboardHandler(UIGrid grid, Application app) {
 		this.grid = grid;
+		this.app = app;
 	}
 
 	@Override
@@ -26,6 +27,8 @@ public class KeyboardHandler implements KeyListener{
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			
 		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_9) app.toggleDebugMode();
 		
 	}
 

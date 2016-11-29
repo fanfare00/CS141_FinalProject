@@ -28,7 +28,7 @@ public abstract class Actor extends GameObject{
 	
 	//protected ActorState state;
 	
-	private Direction moveDir;
+	protected Direction moveDir;
 	
 	protected Powerup currentPowerup = null;
 	

@@ -20,11 +20,21 @@ public abstract class GameObject implements Serializable{
 	protected boolean isActive;
 	protected boolean isVisible;
 	
+	protected boolean isLookedAt;
+	
 	public GameObject(int row, int col) {
 		this.row = row;
 		this.col = col;
 		this.isActive = true;
 		this.isVisible = false;
+	}
+	
+	public boolean isLookedAt() {
+		return isLookedAt;
+	}
+	
+	public void setIsLookedAt(boolean isLookedAt) {
+		this.isLookedAt = isLookedAt;
 	}
 	
 	/**

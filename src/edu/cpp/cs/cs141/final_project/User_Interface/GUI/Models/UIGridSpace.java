@@ -33,6 +33,8 @@ public class UIGridSpace extends JComponent{
 	
 	public boolean isHighlighted;
 	
+	public boolean isOpen;
+	
 	public UIGridSpace(int row, int col, Model model, UIGrid grid, Application app) {
 		this.row = row;
 		this.col = col;
@@ -79,20 +81,22 @@ public class UIGridSpace extends JComponent{
 		g.setColor(Color.GRAY);
 		g.draw(rect);
 		
-		//if (isMouseInside(frame)) {
-		if (isHighlighted) {
-		
-			g.setColor(Color.GREEN);
-			g.drawRect(xLoc+1, yLoc+1, WIDTH-2, HEIGHT-2);
-			g.drawRect(xLoc+2, yLoc+2, WIDTH-4, HEIGHT-4);
-		//}
-		}
+
+
 		
 		g.setColor(Color.BLACK);
 		if (model instanceof RoomModel) g.fill(rect);
 		
 		backModel.draw(xLoc, yLoc, WIDTH, HEIGHT, g);
 		model.draw(xLoc, yLoc, WIDTH, HEIGHT, g);
+		
+		if (isHighlighted) {
+			
+			g.setColor(Color.GREEN);
+			g.drawRect(xLoc+1, yLoc+1, WIDTH-2, HEIGHT-2);
+			g.drawRect(xLoc+2, yLoc+2, WIDTH-4, HEIGHT-4);
+
+		}
 		
 	}
 	

@@ -99,27 +99,29 @@ public class Player extends Actor{
 	public void look(List<GameObject> activeEntities) {
 		revealNearby(activeEntities);
 		
-		for (GameObject obj : activeEntities) {
-			if(obj.equals(this)) continue;
-			
-			if (checkCollision(obj, lookDir.row()*2, lookDir.col()*2)) { 
-				obj.setVisible(true);
+		if (canLook) {
+			for (GameObject obj : activeEntities) {
+				if(obj.equals(this)) continue;
 				
-				if (obj instanceof Enemy) {
-					revealedEnemy = true;
+				if (checkCollision(obj, lookDir.row()*2, lookDir.col()*2)) { 
+					obj.setIsLookedAt(true);
+					
+					if (obj instanceof Enemy) {
+						revealedEnemy = true;
+					}
 				}
-			}
-			
-			if ((obj instanceof Room) && (((Room)obj).hasIntel())) {
-				if (checkCollision(obj, lookDir.row(), lookDir.col())) { 
-					obj.setSymbol('I');
-					foundIntel = true;
+				
+				if ((obj instanceof Room) && (((Room)obj).hasIntel())) {
+					if (checkCollision(obj, lookDir.row(), lookDir.col())) { 
+						obj.setSymbol('I');
+						foundIntel = true;
+					}
 				}
+	
 			}
-
+			canLook = false;
 		}
 		
-		canLook = false;
 	}
 	
 	public void attack(Direction dir) {
@@ -237,13 +239,17 @@ public class Player extends Actor{
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
-		canLook = true;
-		hasDiedRecently = false;
-		hasRadar = false;
-		currentPowerup = null;
-		killedEnemy = false;
-		revealedEnemy = false;
-		missedEnemy = false;
+		
+		if (moveDir != null) {
+			canLook = true;
+			hasDiedRecently = false;
+			hasRadar = false;
+			currentPowerup = null;
+			killedEnemy = false;
+			revealedEnemy = false;
+			missedEnemy = false;
+
+		
 		if(isInvincible) remainingTurnsInvincible-=1;
 		setVisible(true);
 		
@@ -251,6 +257,12 @@ public class Player extends Actor{
 		move();
 		
 		setLookDir(null);
+
+		for (GameObject obj : activeEntities) {
+			obj.setIsLookedAt(false);
+		}
+		
+		}
 	}
 
 	public int getRemainingLives() {

@@ -238,6 +238,8 @@ public class Game {
 		for (GameObject obj : activeEntities){
 			if(obj instanceof Player) continue;
 			
+			
+			
 			if ((flag) && (obj instanceof Room)) {
 				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
 			} else if (obj instanceof Room){
@@ -245,6 +247,7 @@ public class Game {
 			}
 			
 			obj.setVisible(flag);
+			if(obj.isLookedAt()) obj.setVisible(true);
 		}
 	}
 	

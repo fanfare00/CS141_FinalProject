@@ -5,8 +5,11 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.EmptyModel;
+import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.OpenRoomModel;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.PlayerModel;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGridSpace;
@@ -40,21 +43,22 @@ public class MouseHandler implements MouseListener {
 		UIGridSpace oldSpace = null;
 		
 		if (grid.hasUpdated) {	
-//			for (int i = 0; i < grid.spaces.size(); i++) {
-//				if (grid.spaces.get(i).model instanceof PlayerModel) { 
-//					oldSpace = grid.spaces.get(i);
-//					grid.spaces.get(i).model = new EmptyModel();
-//				}
-//			}
-			
 			oldSpace = grid.getPlayerSpace();
 		
 			if ((getMoveDirection(oldSpace) != null) && (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) {
-				space.model = new PlayerModel();
-				app.playerMove(getMoveDirection(oldSpace));
-				grid.hasUpdated = false;
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					space.model = new PlayerModel();
+					app.playerMove(getMoveDirection(oldSpace));
+					grid.hasUpdated = false;
+				}	
 			} else {
 				oldSpace.model = new PlayerModel();
+			}
+			
+			if ((SwingUtilities.isRightMouseButton(e)) && app.getRoomCheckCondition()) {
+				space.isOpen = true;
+				app.playerLook(getMoveDirection(oldSpace));
+				grid.hasUpdated = false;
 			}
 		}
 	}
@@ -63,6 +67,7 @@ public class MouseHandler implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		UIGridSpace oldSpace = null;
 		
+		if (app.getRoomCheckCondition()) space.isHighlighted = true;
 		
 		for (int i = 0; i < grid.spaces.size(); i++) {
 			if (grid.spaces.get(i).model instanceof PlayerModel) { 
