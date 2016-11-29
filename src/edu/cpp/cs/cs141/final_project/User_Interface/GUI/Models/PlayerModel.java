@@ -2,6 +2,7 @@ package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 
 public class PlayerModel implements Model {
 
@@ -12,14 +13,16 @@ public class PlayerModel implements Model {
 		
 
 		
-		int innerWidth = width/2;
-		int innerHeight = height/2;
+		int innerWidth = width - 15;
+		int innerHeight = height - 15;
 		
-		int innerX = x + (innerWidth/2);
-		int innerY = y + (innerHeight/2);
+		int innerX = x + (innerWidth/3)-3;
+		int innerY = y + (innerHeight/3)-3;
 
-		g.setColor(Color.GREEN);
-		g.drawOval(innerX, innerY, innerWidth, innerHeight);
+		//g.setColor(Color.GREEN);
+		//g.drawOval(innerX, innerY, innerWidth, innerHeight);
+		
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("res/spy.png"), innerX, innerY, innerWidth, innerHeight, null);
 	}
 
 }

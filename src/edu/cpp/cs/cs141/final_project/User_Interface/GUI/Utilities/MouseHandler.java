@@ -40,12 +40,14 @@ public class MouseHandler implements MouseListener {
 		UIGridSpace oldSpace = null;
 		
 		if (grid.hasUpdated) {	
-			for (int i = 0; i < grid.spaces.size(); i++) {
-				if (grid.spaces.get(i).model instanceof PlayerModel) { 
-					oldSpace = grid.spaces.get(i);
-					grid.spaces.get(i).model = new EmptyModel();
-				}
-			}
+//			for (int i = 0; i < grid.spaces.size(); i++) {
+//				if (grid.spaces.get(i).model instanceof PlayerModel) { 
+//					oldSpace = grid.spaces.get(i);
+//					grid.spaces.get(i).model = new EmptyModel();
+//				}
+//			}
+			
+			oldSpace = grid.getPlayerSpace();
 		
 			if ((getMoveDirection(oldSpace) != null) && (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) {
 				space.model = new PlayerModel();

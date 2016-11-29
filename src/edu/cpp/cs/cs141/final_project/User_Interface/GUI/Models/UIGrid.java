@@ -122,6 +122,7 @@ public class UIGrid {
 		for (int i = 0; i < spaces.size(); i++) {
 			if (spaces.get(i).model instanceof PlayerModel) return spaces.get(i);
 		} 
-		return null;
+		
+		return spaces.get(0);
 	}
 }
