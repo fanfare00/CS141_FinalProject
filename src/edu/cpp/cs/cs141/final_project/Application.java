@@ -238,9 +238,6 @@ public class Application {
 	}
 
 	public void toggleUIType() {
-		//game.setDebugMode(true);
-		FPS = 30;
-		
 		UI = new GraphicalUserInterface();
 		UI.init(this);
 		redrawUI();
@@ -270,6 +267,11 @@ public class Application {
 		game.togglePause(flag);
 		
 		paused = flag;
+		
+	}
+
+	public void pauseEnemies(boolean p) {
+		game.togglePause(p);
 		
 	}
 

@@ -114,7 +114,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		setupAndDisplayLabels();
 		setupMenuButtons();
 		
-		this.addKeyListener(new KeyboardHandler(grid, app));
+		this.addKeyListener(new KeyboardHandler(grid, app, this));
 		
 	}
 	

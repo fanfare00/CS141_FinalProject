@@ -24,7 +24,7 @@ public class ButtonHandler implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		app.setPaused(false);
-		frame.addKeyListener(new KeyboardHandler(grid, app));
+		//frame.addKeyListener(new KeyboardHandler(grid, app));
 		
 	}
 
