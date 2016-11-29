@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -16,6 +18,7 @@ import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,6 +30,7 @@ import javax.swing.border.TitledBorder;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
+import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.ButtonHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.KeyboardHandler;
 import edu.cpp.cs.cs141.final_project.Commands.Command;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
@@ -73,6 +77,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
     JPanel rightPanel;
     JPanel topPanel;
     JPanel botPanel;
+    JPanel menuPanel;
     
     private int lifeCounter = 3;
 
@@ -107,13 +112,56 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		this.setLayout(null);
 		setupAndDisplayPanels();
 		setupAndDisplayLabels();
+		setupMenuButtons();
 		
 		this.addKeyListener(new KeyboardHandler(grid, app));
 		
 	}
 	
-	private void setupMenu() {
+	public void startyNew() {
+		app.startNewGame();
+	}
+	
+	private void setupMenuButtons() {
+		JButton newGameButton = new JButton("New Game");
+		newGameButton.setSize(160, 35);
+		newGameButton.setLocation(20, 25);
+		newGameButton.setVisible(true);
 		
+		//newGameButton.addActionListener(new ButtonHandler(grid, this, app));
+		
+		menuPanel.add(newGameButton);
+		
+		JButton loadGameButton = new JButton("loadGame");
+		loadGameButton.setSize(160, 35);
+		loadGameButton.setLocation(20, 75);
+		loadGameButton.setVisible(true);
+		menuPanel.add(loadGameButton);
+		
+		JButton saveGameButton = new JButton("Save Game");
+		saveGameButton.setSize(160, 35);
+		saveGameButton.setLocation(20, 125);
+		saveGameButton.setVisible(true);
+		menuPanel.add(saveGameButton);
+		
+		JButton quitGameButton = new JButton("Quit Game");
+		quitGameButton.setSize(160, 35);
+		quitGameButton.setLocation(20, 250);
+		quitGameButton.setVisible(true);
+		menuPanel.add(quitGameButton);
+		
+//		JButton backButton = new JButton("Back");
+//		backButton.setSize(160, 35);
+//		backButton.setLocation(20, 250);
+//		backButton.setVisible(true);
+//		
+//		backButton.addActionListener(new ActionListener() {
+//	         public void actionPerformed(ActionEvent e) {
+//	        	 app.setPaused(!app.getPaused());
+//	          }          
+//	       });
+		
+//		menuPanel.add(backButton);
 	}
 	
 	private void setupAndDisplayLabels() {
@@ -280,6 +328,24 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		botPanel.setPreferredSize(new Dimension(FRAME_WIDTH, 50));
 		botPanel.setVisible(true);
 		this.add(botPanel);
+		
+		menuPanel = new JPanel();
+		
+		menuPanel.setLocation(180, 150);
+		menuPanel.setSize(200, 300);
+		//menuPanel.setPreferredSize(new Dimension(350, 500));
+		menuPanel.setOpaque(true);
+		
+		menuPanel.setBackground(Color.DARK_GRAY);
+		
+		menuPanel.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(
+						EtchedBorder.RAISED, Color.GRAY, Color.DARK_GRAY), "MENU",TitledBorder.CENTER, TitledBorder.TOP));
+		((javax.swing.border.TitledBorder)menuPanel.getBorder()).setTitleColor(Color.WHITE);
+		
+		menuPanel.setLayout(null);
+		menuPanel.setVisible(false);
+		this.add(menuPanel);
 	}
 	
 	public void draw() {
@@ -323,12 +389,16 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	                catch(Exception e){} 
 	        } 
         }	
+		toggleMenuState();
 		isRunning = false;
+		
 	}
 
 	@Override
 	public void update() {
 		if (!isRunning) { 
+			menuPanel.setVisible(false);
+			
 			isRunning = true;
 			 (new Thread(this)).start();
 		}
@@ -378,15 +448,8 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 
 	@Override
 	public void toggleMenuState() {
-		JPanel menu = new JPanel();
-		
-		menu.setSize(350, 500);
-		menu.setLocation(300, 100);
-		menu.setOpaque(true);
-		menu.setBackground(Color.RED);
-		menu.setVisible(true);
-		this.add(menu);
-		
+		//menuPanel.setVisible(!menuPanel.isVisible());
+		menuPanel.setVisible(true);
 	}
 
 	@Override
