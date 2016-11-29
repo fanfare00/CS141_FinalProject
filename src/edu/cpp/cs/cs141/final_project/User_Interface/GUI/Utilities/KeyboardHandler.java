@@ -17,10 +17,15 @@ public class KeyboardHandler implements KeyListener{
 		this.space = space;
 		this.app = app;
 	}
+	public KeyboardHandler(UIGrid grid) {
+		this.grid = grid;
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//if (space.isHighlighted) && (e.g)
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			
+		}
 		
 	}
 

@@ -50,7 +50,11 @@ public class UIGridSpace extends JComponent{
 		
 		
 		this.addMouseListener(new MouseHandler(grid, this, app));
-		this.addKeyListener(new KeyboardHandler(grid, this, app));
+		
+		if (model instanceof RoomModel) {
+			this.setOpaque(true);
+			this.setBackground(Color.BLACK);
+		}
 	}
 	
 //	public boolean isMouseInside(JComponent comp){
@@ -83,6 +87,9 @@ public class UIGridSpace extends JComponent{
 			g.drawRect(xLoc+2, yLoc+2, WIDTH-4, HEIGHT-4);
 		//}
 		}
+		
+		g.setColor(Color.BLACK);
+		if (model instanceof RoomModel) g.fill(rect);
 		
 		backModel.draw(xLoc, yLoc, WIDTH, HEIGHT, g);
 		model.draw(xLoc, yLoc, WIDTH, HEIGHT, g);

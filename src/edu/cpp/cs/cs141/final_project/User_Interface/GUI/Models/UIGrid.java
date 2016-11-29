@@ -1,5 +1,6 @@
 package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,11 +108,20 @@ public class UIGrid {
 		for (int i = 0; i < spaces.size(); i++) {
 			spaces.get(i).draw(g, frame);
 			frame.add(spaces.get(i));
+			
+			
 		}
 		
 //		for (UIGridSpace space : spaces) {
 //			if (space.model instanceof RoomModel) space.draw(g);
 //		}
 //		
+	}
+	
+	public UIGridSpace getPlayerSpace() {
+		for (int i = 0; i < spaces.size(); i++) {
+			if (spaces.get(i).model instanceof PlayerModel) return spaces.get(i);
+		} 
+		return null;
 	}
 }

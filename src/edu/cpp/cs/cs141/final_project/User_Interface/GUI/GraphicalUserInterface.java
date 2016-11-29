@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
+import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.KeyboardHandler;
 import edu.cpp.cs.cs141.final_project.Commands.Command;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
@@ -102,6 +103,8 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		setupAndDisplayPanels();
 		setupAndDisplayLabels();
 		
+		this.addKeyListener(new KeyboardHandler(grid));
+		
 	}
 	
 	private void setupAndDisplayLabels() {
@@ -166,7 +169,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			
 		JLabel escKeyLabel = new JLabel();
 		escKeyLabel.setSize(110, 100);
-		escKeyLabel.setLocation(8, 255);
+		escKeyLabel.setLocation(8, 245);
 		escKeyLabel.setOpaque(true);
 		escKeyLabel.setBackground(Color.BLACK);
 		escKeyLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -178,7 +181,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			escKeyDescLabel.setFont(new Font("Arial", Font.BOLD, 18));
 			escKeyDescLabel.setForeground(Color.YELLOW);
 			escKeyDescLabel.setSize(105, 100);
-			escKeyDescLabel.setLocation(110, 255);
+			escKeyDescLabel.setLocation(110, 245);
 			escKeyDescLabel.setOpaque(true);
 			escKeyDescLabel.setBackground(Color.BLACK);
 			escKeyDescLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -299,12 +302,24 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
         bbg.setColor(Color.BLACK); 
         bbg.fillRect(5, 25, FRAME_WIDTH, FRAME_HEIGHT); 
         
-        g.setColor(Color.BLACK);
+        bbg.setColor(Color.BLACK);
         g.fillRect(FRAME_WIDTH-27, 101, 35, FRAME_HEIGHT-135);
         
         g.fillRect(FRAME_WIDTH-247, 80, 255, 22);
         
         g.fillRect(FRAME_WIDTH-247, FRAME_HEIGHT-35, 255, 22);
+        
+        bbg.setColor(new Color(255, 255, 189));
+        bbg.fillOval(grid.getPlayerSpace().getX()-55, grid.getPlayerSpace().getY()-105, grid.getPlayerSpace().getWidth()*3, grid.getPlayerSpace().getHeight()*3);
+        
+        bbg.setColor(Color.BLACK);
+        bbg.fillRect(0, 0, 45, FRAME_HEIGHT);
+        
+        bbg.fillRect(496, 0, 55, FRAME_HEIGHT);
+        
+        bbg.fillRect(5, FRAME_HEIGHT-120, FRAME_WIDTH-300, 20);
+        bbg.fillRect(5, 0, FRAME_WIDTH-300, 30);
+        
 	}
 
 	@Override
