@@ -61,6 +61,7 @@ public class MouseHandler extends InputHandler implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		UIGridSpace oldSpace = null;
 		
+		
 		for (int i = 0; i < grid.spaces.size(); i++) {
 			if (grid.spaces.get(i).model instanceof PlayerModel) { 
 				oldSpace = grid.spaces.get(i);	

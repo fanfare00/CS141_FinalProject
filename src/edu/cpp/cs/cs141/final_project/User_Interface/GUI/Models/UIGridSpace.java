@@ -28,7 +28,7 @@ public class UIGridSpace extends JComponent{
 	public Model model;
 	public Model backModel;
 	
-	private Rectangle rect;
+	public Rectangle rect;
 	
 	public boolean isHighlighted;
 	
@@ -44,28 +44,28 @@ public class UIGridSpace extends JComponent{
 		
 		rect = new Rectangle(xLoc, yLoc, WIDTH, HEIGHT);
 		
-		this.setLocation(xLoc, yLoc);
+		this.setLocation(xLoc+5, yLoc+55);
 		this.setSize(WIDTH, HEIGHT);
 		
 		
 		this.addMouseListener(new MouseHandler(grid, this, app));
 	}
 	
-	public boolean isMouseInside(JComponent comp){
-		boolean isMouseInside = false;
-		
-		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
-		
-		SwingUtilities.convertPointFromScreen(mousePoint, this);
-		
-		//mousePoint.x = (int) (mousePoint.getX() - 10);
-		//mousePoint.y = (int) (mousePoint.getY() - 30);
-		
-		Rectangle rect = new Rectangle(0, 0, WIDTH, HEIGHT);
-		if (rect.contains(mousePoint)) isMouseInside = true;
-		
-		return isMouseInside;
-	}
+//	public boolean isMouseInside(JComponent comp){
+//		boolean isMouseInside = false;
+//		
+//		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+//		
+//		SwingUtilities.convertPointFromScreen(mousePoint, this);
+//		
+//		//mousePoint.x = (int) (mousePoint.getX() - 10);
+//		//mousePoint.y = (int) (mousePoint.getY() - 30);
+//		
+//		Rectangle rect = new Rectangle(0, 0, WIDTH, HEIGHT);
+//		if (rect.contains(mousePoint)) isMouseInside = true;
+//		
+//		return isMouseInside;
+//	}
 	
 	public void draw(Graphics2D g, JFrame frame) {
 		
