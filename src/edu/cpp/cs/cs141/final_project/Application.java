@@ -28,12 +28,14 @@ public class Application {
 	}
 
 	public void run() {
-		if (getGameOverStatus()) UI.toggleMenuState();
+		
 		
 		while(!close){ 
 			long time = System.currentTimeMillis(); 
 			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
 			 
+			if (getGameOverStatus()) UI.toggleMenuState();
+			
 			UI.update();
 			game.update();
 			redrawUI();

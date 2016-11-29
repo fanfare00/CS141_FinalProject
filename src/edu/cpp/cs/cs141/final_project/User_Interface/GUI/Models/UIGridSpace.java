@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import javax.swing.SwingUtilities;
 
 import edu.cpp.cs.cs141.final_project.Application;
+import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.KeyboardHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.MouseHandler;
 
 import javax.swing.JComponent;
@@ -49,6 +50,7 @@ public class UIGridSpace extends JComponent{
 		
 		
 		this.addMouseListener(new MouseHandler(grid, this, app));
+		this.addKeyListener(new KeyboardHandler(grid, this, app));
 	}
 	
 //	public boolean isMouseInside(JComponent comp){

@@ -12,7 +12,7 @@ import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGridSpace;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-public class MouseHandler extends InputHandler implements MouseListener {
+public class MouseHandler implements MouseListener {
 	
 	UIGrid grid;
 	UIGridSpace space;
