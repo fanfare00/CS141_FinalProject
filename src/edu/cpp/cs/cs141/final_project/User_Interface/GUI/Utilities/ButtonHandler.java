@@ -23,9 +23,21 @@ public class ButtonHandler implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		app.setPaused(false);
-		//frame.addKeyListener(new KeyboardHandler(grid, app));
+		String action = e.getActionCommand();
 		
+		if (action.equals("Quit Game")) {
+			frame.dispose();
+			app.close();
+		}
+		
+		if (action.equals("New Game")) {
+			frame.dispose();
+			app.startNewGame();
+		}
+		
+		if (action.equals("Load Game")) {
+			app.loadGameData();
+		}
 	}
 
 }

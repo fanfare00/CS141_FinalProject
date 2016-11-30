@@ -28,6 +28,8 @@ public class TextUserInterface implements IUserInterface
     private String statusText;
     private String alertText;
     
+    private boolean hasMadeUIChoice;
+    
     public TextUserInterface() {
 		scan = new Scanner(System.in);	
     }
@@ -41,12 +43,17 @@ public class TextUserInterface implements IUserInterface
     	inMenus = new MenuState(app);
     	looking = new LookingState(app);
     	
-    	
-    	toggleUICommand();
-    	state.update(null);
-    	drawInstructions();
-    	drawCommandList();
-    	state.handleInput(getUserInput());
+    	if (!app.hasMadeUIChoice()) {
+	    	toggleUICommand();
+	    	state.update(null);
+	    	drawInstructions();
+	    	drawCommandList();
+	    	state.handleInput(getUserInput());
+	    	hasMadeUIChoice = true;
+    	}
+    	else {
+    		toggleMoveState();
+    	}
     }
     
     public void update() {

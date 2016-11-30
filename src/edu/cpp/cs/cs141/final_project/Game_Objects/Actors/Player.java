@@ -116,15 +116,14 @@ public class Player extends Actor{
 				}
 				
 				if (obj instanceof Room) {
-					hasLookedRoom = true;
-					if (((Room)obj).hasIntel()) {
-						if (checkCollision(obj, lookDir.row(), lookDir.col())) { 
+					if (checkCollision(obj, lookDir.row(), lookDir.col())) { 
+						hasLookedRoom = true;
+						if (((Room)obj).hasIntel()) {
 							obj.setSymbol('I');
 							foundIntel = true;
 						}
 					}
 				}
-	
 			}
 			canLook = false;
 		}

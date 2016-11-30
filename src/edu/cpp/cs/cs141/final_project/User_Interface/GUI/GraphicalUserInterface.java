@@ -97,6 +97,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		bbg  = (Graphics2D) backBuffer.getGraphics();  
 		
 		grid = new UIGrid(GRID_X, GRID_Y, GRID_WIDTH, GRID_HEIGHT, null, app);
+		app.updateUIGrid();
 				
 		setLocationRelativeTo(null);
 		
@@ -128,26 +129,36 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		newGameButton.setLocation(20, 25);
 		newGameButton.setVisible(true);
 		
-		//newGameButton.addActionListener(new ButtonHandler(grid, this, app));
+		newGameButton.addActionListener(new ButtonHandler(grid, this, app));
+		newGameButton.setActionCommand(newGameButton.getText());
 		
 		menuPanel.add(newGameButton);
 		
-		JButton loadGameButton = new JButton("loadGame");
+		JButton loadGameButton = new JButton("Load Game");
 		loadGameButton.setSize(160, 35);
 		loadGameButton.setLocation(20, 75);
 		loadGameButton.setVisible(true);
+		loadGameButton.addActionListener(new ButtonHandler(grid, this, app));
+		loadGameButton.setActionCommand(loadGameButton.getText());
+		
 		menuPanel.add(loadGameButton);
 		
 		JButton saveGameButton = new JButton("Save Game");
 		saveGameButton.setSize(160, 35);
 		saveGameButton.setLocation(20, 125);
 		saveGameButton.setVisible(true);
+		saveGameButton.addActionListener(new ButtonHandler(grid, this, app));
+		saveGameButton.setActionCommand(saveGameButton.getText());
+		
 		menuPanel.add(saveGameButton);
 		
 		JButton quitGameButton = new JButton("Quit Game");
 		quitGameButton.setSize(160, 35);
 		quitGameButton.setLocation(20, 250);
 		quitGameButton.setVisible(true);
+		quitGameButton.addActionListener(new ButtonHandler(grid, this, app));
+		quitGameButton.setActionCommand(quitGameButton.getText());
+		
 		menuPanel.add(quitGameButton);
 		
 //		JButton backButton = new JButton("Back");
@@ -342,6 +353,8 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 						EtchedBorder.RAISED, Color.GRAY, Color.DARK_GRAY), "MENU",TitledBorder.CENTER, TitledBorder.TOP));
 		((javax.swing.border.TitledBorder)menuPanel.getBorder()).setTitleColor(Color.WHITE);
 		
+		menuPanel.addKeyListener(new KeyboardHandler(grid, app, this));
+		
 		menuPanel.setLayout(null);
 		menuPanel.setVisible(false);
 		this.add(menuPanel);
@@ -376,6 +389,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 			long time = System.currentTimeMillis(); 
 			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
 			
+			this.requestFocus();
 			
 			draw();
 			updateCounters();
@@ -449,6 +463,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	public void toggleMenuState() {
 		//menuPanel.setVisible(!menuPanel.isVisible());
 		menuPanel.setVisible(true);
+		menuPanel.requestFocus();
 	}
 
 	@Override

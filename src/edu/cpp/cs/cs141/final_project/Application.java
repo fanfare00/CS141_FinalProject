@@ -14,13 +14,12 @@ import edu.cpp.cs.cs141.final_project.Utilities.SaveFileManager;
  */
 public class Application {
 	
-	private int FPS = 30; 
-	
 	private IUserInterface UI;
 	private Game game;
 	private boolean close;
 	
 	private boolean paused;
+	private boolean hasMadeUIChoice;
 	
 	
 	public Application(IUserInterface UI, Game game) {
@@ -58,12 +57,15 @@ public class Application {
 	 * Prepares a new game.
 	 */
 	public void startNewGame() {
-		UI = new TextUserInterface();
+		hasMadeUIChoice = true;
+		
+		if (UI instanceof GraphicalUserInterface) UI = new GraphicalUserInterface();
+		else UI = new TextUserInterface();
+
 		game = new Game();
-		
-		close = true;
-		
-		//start();
+		loadGame(game.getActiveEntities());
+		UI.init(this);
+		paused = false;
 	}
 	
 	public void playerMove(Direction dir) {
@@ -107,6 +109,7 @@ public class Application {
 	 */
 	public void loadGame(List<GameObject> activeEntities) {
 		game.setActiveEntities(activeEntities);
+		paused = false;
 		//UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
 		//redrawUI();
 	}
@@ -146,8 +149,9 @@ public class Application {
 	}
 	
 	public void close() {
+		game.togglePause(true);
 		this.close = true;
-		System.exit(0);
+		//System.exit(0);
 	}
 	
 	public boolean[] getDirectionalConditions() {
@@ -274,6 +278,10 @@ public class Application {
 	public void pauseEnemies(boolean p) {
 		game.togglePause(p);
 		
+	}
+
+	public boolean hasMadeUIChoice() {
+		return hasMadeUIChoice;
 	}
 
 }
