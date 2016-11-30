@@ -28,8 +28,6 @@ public class Player extends Actor{
 	private int remainingLives;
 	private int remainingAmmo;
 	private int remainingTurnsInvincible = 0;
-	
-	private boolean isAlive;
 
 	private boolean hasRadar;
 	
@@ -42,6 +40,10 @@ public class Player extends Actor{
 	private boolean missedEnemy;
 	
 	public boolean hasMadeFirstMove;
+	public boolean hasLookedRoom;
+	public boolean hasUsedPowerup;
+	
+	public Powerup oldPowerup;
 	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
@@ -113,10 +115,13 @@ public class Player extends Actor{
 					}
 				}
 				
-				if ((obj instanceof Room) && (((Room)obj).hasIntel())) {
-					if (checkCollision(obj, lookDir.row(), lookDir.col())) { 
-						obj.setSymbol('I');
-						foundIntel = true;
+				if (obj instanceof Room) {
+					hasLookedRoom = true;
+					if (((Room)obj).hasIntel()) {
+						if (checkCollision(obj, lookDir.row(), lookDir.col())) { 
+							obj.setSymbol('I');
+							foundIntel = true;
+						}
 					}
 				}
 	
@@ -234,24 +239,27 @@ public class Player extends Actor{
 		if (this.currentPowerup == null) return;
 		
 		currentPowerup.consume(this);
+		oldPowerup = currentPowerup;
 		((GameObject) currentPowerup).setActive(false);
-		
+		hasUsedPowerup = true;
 	}
 	
 	
 	@Override
 	public void update(List<GameObject> activeEntities) {
+		currentPowerup = null;
 		
 		if (moveDir != null) {
 			canLook = true;
 			hasDiedRecently = false;
 			hasRadar = false;
-			currentPowerup = null;
+			
 			killedEnemy = false;
 			revealedEnemy = false;
 			missedEnemy = false;
 			hasMadeFirstMove = true;
-
+			hasLookedRoom = false;
+			hasUsedPowerup = false;
 		
 		if(isInvincible) remainingTurnsInvincible-=1;
 		setVisible(true);

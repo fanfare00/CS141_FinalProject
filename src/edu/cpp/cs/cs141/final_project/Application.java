@@ -212,12 +212,13 @@ public class Application {
 		String alertText = "";
 		
 		if (game.getPlayer().hasRevealedEnemy()) alertText = "You've spotted an enemy ninja!";
+		else if (game.getPlayer().hasLookedRoom) alertText = "The intel is not in this room.";
 		else if (game.getPlayer().hasKilledEnemy()) alertText = "Your gun killed an enemy ninja!";
 		else if (game.getPlayer().hasMissedEnemy()) alertText = "You shot your gun, but did not hit an enemy ninja.";
 		else if (getDeathStatus()) alertText = "An enemy ninja killed you!";
 		else if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
 		else if (game.getGameWon()) alertText = "Congrats! You've found the intel and won the game!";
-		else if (game.getPlayer().getCurrentPowerup() != null) alertText = game.getPlayer().getCurrentPowerup().getDescription();
+		else if (game.getPlayer().hasUsedPowerup) alertText = game.getPlayer().oldPowerup.getDescription();
 		
 		if (game.getPlayer().getIsInvincible()) alertText += "\nYou are invincible, " + game.getPlayer().getInvincibilityTurns() + " turns remaining.";
 		
