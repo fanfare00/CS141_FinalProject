@@ -20,7 +20,7 @@ public class Player extends Actor{
 	
 	private Direction lookDir;
 	private boolean canLook = true;
-	private boolean hasDiedRecently;
+	private boolean hasDiedRecently = true;
 	
 	private int startingRow;
 	private int startingCol;
@@ -40,6 +40,8 @@ public class Player extends Actor{
 	private boolean killedEnemy;
 	
 	private boolean missedEnemy;
+	
+	public boolean hasMadeFirstMove;
 	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
@@ -248,6 +250,7 @@ public class Player extends Actor{
 			killedEnemy = false;
 			revealedEnemy = false;
 			missedEnemy = false;
+			hasMadeFirstMove = true;
 
 		
 		if(isInvincible) remainingTurnsInvincible-=1;

@@ -6,6 +6,8 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.SwingUtilities;
 
 import edu.cpp.cs.cs141.final_project.Application;
@@ -29,11 +31,18 @@ public class UIGridSpace extends JComponent{
 	public Model model;
 	public Model backModel;
 	
+	UIGrid grid;
+	Application app;
+	
 	public Rectangle rect;
 	
 	public boolean isHighlighted;
 	
 	public boolean isOpen;
+	
+	public boolean isLookedAt;
+	
+	public boolean canShoot;
 	
 	public UIGridSpace(int row, int col, Model model, UIGrid grid, Application app) {
 		this.row = row;
@@ -45,6 +54,9 @@ public class UIGridSpace extends JComponent{
 		this.model = model;
 		this.backModel = new EmptyModel();
 		
+		this.grid = grid;
+		this.app = app;
+		
 		rect = new Rectangle(xLoc, yLoc, WIDTH, HEIGHT);
 		
 		this.setLocation(xLoc+5, yLoc+55);
@@ -53,39 +65,43 @@ public class UIGridSpace extends JComponent{
 		
 		this.addMouseListener(new MouseHandler(grid, this, app));
 		
+
+		
 		if (model instanceof RoomModel) {
 			this.setOpaque(true);
 			this.setBackground(Color.BLACK);
 		}
 	}
 	
-//	public boolean isMouseInside(JComponent comp){
-//		boolean isMouseInside = false;
-//		
-//		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
-//		
-//		SwingUtilities.convertPointFromScreen(mousePoint, this);
-//		
-//		//mousePoint.x = (int) (mousePoint.getX() - 10);
-//		//mousePoint.y = (int) (mousePoint.getY() - 30);
-//		
-//		Rectangle rect = new Rectangle(0, 0, WIDTH, HEIGHT);
-//		if (rect.contains(mousePoint)) isMouseInside = true;
-//		
-//		return isMouseInside;
-//	}
+	public boolean isMouseInside(JComponent comp){
+		boolean isMouseInside = false;
+		
+		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+		
+		SwingUtilities.convertPointFromScreen(mousePoint, this);
+		
+		//mousePoint.x = (int) (mousePoint.getX() - 10);
+		//mousePoint.y = (int) (mousePoint.getY() - 30);
+		
+		Rectangle rect = new Rectangle(0, 0, WIDTH, HEIGHT);
+		if (rect.contains(mousePoint)) isMouseInside = true;
+		
+		return isMouseInside;
+	}
 	
 	public void draw(Graphics2D g, JFrame frame) {
 		
-		//
 		g.setColor(Color.GRAY);
 		g.draw(rect);
 		
-
-
 		
 		g.setColor(Color.BLACK);
 		if (model instanceof RoomModel) g.fill(rect);
+		
+		if (isLookedAt) {
+			g.setColor(new Color(255, 255, 189));
+			g.fillOval(xLoc, yLoc, WIDTH, HEIGHT);
+		}
 		
 		backModel.draw(xLoc, yLoc, WIDTH, HEIGHT, g);
 		model.draw(xLoc, yLoc, WIDTH, HEIGHT, g);
@@ -96,6 +112,19 @@ public class UIGridSpace extends JComponent{
 			g.drawRect(xLoc+1, yLoc+1, WIDTH-2, HEIGHT-2);
 			g.drawRect(xLoc+2, yLoc+2, WIDTH-4, HEIGHT-4);
 
+		}
+		
+		if (isMouseInside(this) && canShoot) {
+			UIGridSpace oldSpace = null;
+			
+			for (int i = 0; i < grid.spaces.size(); i++) {
+				if (grid.spaces.get(i).model instanceof PlayerModel) { 
+					oldSpace = grid.spaces.get(i);	
+				}
+			}
+			
+			grid.setCanShoot(false);
+			app.playerAttack(grid.getMoveDirection(oldSpace, this));
 		}
 		
 	}

@@ -27,38 +27,34 @@ public class MouseHandler implements MouseListener {
 		this.app = app;
 	}
 	
-	private Direction getMoveDirection(UIGridSpace oldSpace) {
-		Direction dir = null;
-		
-		if ((oldSpace.row == space.row) && (oldSpace.col == (space.col + 1))) dir = Direction.LEFT;
-		if ((oldSpace.row == space.row) && (oldSpace.col == (space.col - 1))) dir = Direction.RIGHT;
-		if ((oldSpace.row == (space.row - 1)) && (oldSpace.col == (space.col))) dir = Direction.DOWN;
-		if ((oldSpace.row == (space.row + 1)) && (oldSpace.col == (space.col))) dir = Direction.UP;
-		
-		return dir;
-	}
+
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		UIGridSpace oldSpace = null;
+		grid.unlookAllSpaces();
 		
 		if (grid.hasUpdated) {	
 			oldSpace = grid.getPlayerSpace();
 		
-			if ((getMoveDirection(oldSpace) != null) && (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) {
+			if ((grid.getMoveDirection(oldSpace, space) != null) && (app.getDirectionalConditions()[grid.getMoveDirection(oldSpace, space).ordinal()])) {
 				if (SwingUtilities.isLeftMouseButton(e)) {
 					space.model = new PlayerModel();
-					app.playerMove(getMoveDirection(oldSpace));
+					app.playerMove(grid.getMoveDirection(oldSpace, space));
 					grid.hasUpdated = false;
+					
 				}	
 			} else {
 				oldSpace.model = new PlayerModel();
 			}
 			
-			if ((SwingUtilities.isRightMouseButton(e)) && ((app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()])) | (app.getRoomCheckCondition())) {
-				space.isOpen = true;
-				app.playerLook(getMoveDirection(oldSpace));
-				grid.hasUpdated = false;
+			if (app.getLookStatus()) {
+				if ((SwingUtilities.isRightMouseButton(e)) && ((app.getDirectionalConditions()[grid.getMoveDirection(oldSpace, space).ordinal()])) | (app.getRoomCheckCondition())) {
+					space.isOpen = true;
+					app.playerLook(grid.getMoveDirection(oldSpace, space));
+					grid.revealLookedSpace(space, grid.getMoveDirection(oldSpace, space));
+					grid.hasUpdated = false;
+				}
 			}
 		}
 	}
@@ -76,10 +72,14 @@ public class MouseHandler implements MouseListener {
 		}
 		
 		if (oldSpace != null) {
-			if ((getMoveDirection(oldSpace) != null) && ( (app.getDirectionalConditions()[getMoveDirection(oldSpace).ordinal()]))) {
+			if ((grid.getMoveDirection(oldSpace, space) != null) && ( (app.getDirectionalConditions()[grid.getMoveDirection(oldSpace, space).ordinal()]))) {
 					//| space.isMouseInside(space))) {
 				space.isHighlighted = true;
 			}
+		}
+		
+		if (space.canShoot) {
+
 		}
 	}
 

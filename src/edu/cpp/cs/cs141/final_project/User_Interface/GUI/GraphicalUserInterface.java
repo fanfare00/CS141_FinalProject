@@ -167,10 +167,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	private void setupAndDisplayLabels() {
 		alertLabel = new JLabel(" ");
 		alertLabel.setHorizontalAlignment(JLabel.CENTER);
-		alertLabel.setLocation(200, 14);
-		alertLabel.setSize(topPanel.getWidth()-400, topPanel.getHeight());
-		alertLabel.setFont(new Font("Arial", Font.BOLD, 15));
-
+		alertLabel.setLocation(170, 14);
+		alertLabel.setSize(topPanel.getWidth()-300, topPanel.getHeight());
+		alertLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		alertLabel.setForeground(Color.RED);
 		alertLabel.setVisible(true);
 		topPanel.add(alertLabel);

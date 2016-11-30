@@ -196,6 +196,7 @@ public class Application {
 	}
 	
 	public boolean getDeathStatus() {
+		if (!game.getPlayer().hasMadeFirstMove) return false;
 		return game.getPlayer().getHasDiedRecently();
 	}
 	
@@ -210,7 +211,6 @@ public class Application {
 	public void updateUIAlertText() {
 		String alertText = "";
 		
-		//if (paused) alertText = "PAUSED";
 		if (game.getPlayer().hasRevealedEnemy()) alertText = "You've spotted an enemy ninja!";
 		else if (game.getPlayer().hasKilledEnemy()) alertText = "Your gun killed an enemy ninja!";
 		else if (game.getPlayer().hasMissedEnemy()) alertText = "You shot your gun, but did not hit an enemy ninja.";

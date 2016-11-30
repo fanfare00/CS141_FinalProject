@@ -47,6 +47,8 @@ public class KeyboardHandler implements KeyListener{
 			app.toggleUIType();
 			frame.dispose();
 		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) grid.setCanShoot(true);
 	}
 
 	@Override

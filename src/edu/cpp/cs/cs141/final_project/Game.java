@@ -79,7 +79,7 @@ public class Game {
 			}
 		};
 		
-        timer.schedule(task, 0, 800);
+        timer.schedule(task, 0, 900);
         
 	}
 	

@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import edu.cpp.cs.cs141.final_project.Application;
+import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 public class UIGrid {
 
@@ -135,5 +136,41 @@ public class UIGrid {
 		} 
 		
 		return spaces.get(0);
+	}
+	
+	public void unlookAllSpaces() {
+		for (int i = 0; i < spaces.size(); i++) {
+			spaces.get(i).isLookedAt = false;
+		}
+	}
+
+	public void revealLookedSpace(UIGridSpace oldSpace, Direction dir) {
+		if (oldSpace.model instanceof OpenRoomModel) return;
+		
+		for (int i = 0; i < spaces.size(); i++) {	
+			if ((oldSpace.col + dir.col()) == spaces.get(i).col) {	
+				if ((oldSpace.row + dir.row()) == spaces.get(i).row) {
+						spaces.get(i).isLookedAt = true;
+				}
+			}
+						 
+		} 
+	}
+
+	public void setCanShoot(boolean flag) {
+		for (int i = 0; i < spaces.size(); i++) {
+			spaces.get(i).canShoot = flag;
+		}
+	}
+	
+	public Direction getMoveDirection(UIGridSpace oldSpace, UIGridSpace space) {
+		Direction dir = null;
+		
+		if ((oldSpace.row == space.row) && (oldSpace.col == (space.col + 1))) dir = Direction.LEFT;
+		if ((oldSpace.row == space.row) && (oldSpace.col == (space.col - 1))) dir = Direction.RIGHT;
+		if ((oldSpace.row == (space.row - 1)) && (oldSpace.col == (space.col))) dir = Direction.DOWN;
+		if ((oldSpace.row == (space.row + 1)) && (oldSpace.col == (space.col))) dir = Direction.UP;
+		
+		return dir;
 	}
 }
