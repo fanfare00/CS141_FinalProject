@@ -124,7 +124,7 @@ public class UIGridSpace extends JComponent{
 			}
 			
 			grid.setCanShoot(false);
-			app.playerAttack(grid.getMoveDirection(oldSpace, this));
+			if (isHighlighted) app.playerAttack(grid.getMoveDirection(oldSpace, this));
 		}
 		
 	}

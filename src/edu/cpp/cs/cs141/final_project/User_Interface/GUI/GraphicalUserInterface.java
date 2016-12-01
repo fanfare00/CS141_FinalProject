@@ -459,7 +459,6 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	@Override
 	public void toggleMenuState() {
 		if (isRunning) {
-			System.out.println("test");
 			draw();
 			menuPanel.setVisible(true);
 			menuPanel.requestFocus();
