@@ -36,7 +36,7 @@ public class KeyboardHandler implements KeyListener{
 		
 		if (e.getKeyCode() == KeyEvent.VK_9) app.toggleDebugMode();
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			app.setPaused(!app.getPaused());
+			if (!app.getGameOverStatus()) app.setPaused(!app.getPaused());
 		}
 		if (e.getKeyCode() == KeyEvent.VK_P) {
 			p = !p;

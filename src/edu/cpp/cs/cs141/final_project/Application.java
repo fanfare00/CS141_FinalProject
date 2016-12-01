@@ -31,8 +31,9 @@ public class Application {
 
 	public void run() {
 		if (getGameOverStatus()) { 
-			UI.toggleMenuState();
 			paused = true;
+			UI.toggleMenuState();
+			
 		}
 			
 		if (!paused) {
@@ -65,6 +66,7 @@ public class Application {
 		redrawUI();
 		paused = false;
 		
+		
 	}
 	
 	public void loadGameFromFile() {
@@ -74,6 +76,8 @@ public class Application {
 		loadGameData();
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
 		redrawUI();
+		
+		paused = false;
 	}
 	
 	public void playerMove(Direction dir) {
@@ -228,7 +232,8 @@ public class Application {
 		else if (game.getPlayer().hasKilledEnemy()) alertText = "Your gun killed an enemy ninja!";
 		else if (game.getPlayer().hasMissedEnemy()) alertText = "You shot your gun, but did not hit an enemy ninja.";
 		else if (getDeathStatus()) alertText = "An enemy ninja killed you!";
-		else if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
+		
+		if (game.getGameOver()) alertText = "You have no lives left. Game Over.";
 		else if (game.getGameWon()) alertText = "Congrats! You've found the intel and won the game!";
 		else if (game.getPlayer().hasUsedPowerup) alertText = game.getPlayer().oldPowerup.getDescription();
 		

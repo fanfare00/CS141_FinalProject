@@ -44,9 +44,10 @@ public class ButtonHandler implements ActionListener{
 		}
 		
 		if (action.equals("Toggle UI")) {
-			app.setPaused(false);
-			app.toggleUIType();
-			
+			if (!app.getGameOverStatus()) {
+				app.setPaused(false);
+				app.toggleUIType();
+			}
 		}
 	}
 

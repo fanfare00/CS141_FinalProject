@@ -27,8 +27,6 @@ public class MouseHandler implements MouseListener {
 		this.app = app;
 	}
 	
-
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		UIGridSpace oldSpace = null;
@@ -76,10 +74,6 @@ public class MouseHandler implements MouseListener {
 					//| space.isMouseInside(space))) {
 				space.isHighlighted = true;
 			}
-		}
-		
-		if (space.canShoot) {
-
 		}
 	}
 

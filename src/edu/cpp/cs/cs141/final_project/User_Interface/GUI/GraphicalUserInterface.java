@@ -66,6 +66,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
     
     private boolean isRunning;
     
+    
     Application app;
     
     JLabel alertLabel;
@@ -167,18 +168,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 		menuPanel.add(quitGameButton);
 		
-//		JButton backButton = new JButton("Back");
-//		backButton.setSize(160, 35);
-//		backButton.setLocation(20, 250);
-//		backButton.setVisible(true);
-//		
-//		backButton.addActionListener(new ActionListener() {
-//	         public void actionPerformed(ActionEvent e) {
-//	        	 app.setPaused(!app.getPaused());
-//	          }          
-//	       });
-		
-//		menuPanel.add(backButton);
+
 	}
 	
 	private void setupAndDisplayLabels() {
@@ -376,6 +366,8 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	
 	private void updateCounters() {
 		
+		if (app.getPlayerLives() == 3) livesLabel.setIcon(new ImageIcon("res/3lives.png"));
+		
 		if (app.getPlayerLives() == 2) livesLabel.setIcon(new ImageIcon("res/2lives.png"));
 	
 		if (app.getPlayerLives() == 1) livesLabel.setIcon(new ImageIcon("res/1lives.png"));
@@ -466,15 +458,18 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 
 	@Override
 	public void toggleMenuState() {
-		//menuPanel.setVisible(!menuPanel.isVisible());
-		menuPanel.setVisible(true);
-		menuPanel.requestFocus();
+		if (isRunning) {
+			System.out.println("test");
+			draw();
+			menuPanel.setVisible(true);
+			menuPanel.requestFocus();
+			menuPanel.repaint();
+		}
 	}
 
 	@Override
 	public void toggleMoveState() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
