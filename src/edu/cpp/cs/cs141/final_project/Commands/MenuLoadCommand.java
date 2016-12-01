@@ -6,7 +6,7 @@ public class MenuLoadCommand implements Command {
 
 	@Override
 	public void execute(Application app) {
-		app.loadGameData();
+		app.loadGameFromFile();
 	}
 
 }

@@ -121,6 +121,7 @@ public class Player extends Actor{
 						if (((Room)obj).hasIntel()) {
 							obj.setSymbol('I');
 							foundIntel = true;
+							hasLookedRoom = false;
 						}
 					}
 				}

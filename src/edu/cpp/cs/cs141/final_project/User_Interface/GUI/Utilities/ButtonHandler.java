@@ -36,7 +36,11 @@ public class ButtonHandler implements ActionListener{
 		}
 		
 		if (action.equals("Load Game")) {
-			app.loadGameData();
+			app.loadGameFromFile();
+		}
+		
+		if (action.equals("Save Game")) {
+			app.saveGameData();
 		}
 	}
 

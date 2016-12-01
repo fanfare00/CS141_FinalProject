@@ -7,7 +7,6 @@ public class MenuSaveCommand implements Command {
 	@Override
 	public void execute(Application app) {
 		app.saveGameData();
-		
 	}
 
 }

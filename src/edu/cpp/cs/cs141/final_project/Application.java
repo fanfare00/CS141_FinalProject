@@ -59,15 +59,19 @@ public class Application {
 	public void startNewGame() {
 		hasMadeUIChoice = true;
 		
-//		if (UI instanceof GraphicalUserInterface) { //UI = new GraphicalUserInterface();
-//			
-//		}
-//		else UI = new TextUserInterface();
-
 		game = new Game();
 		loadGame(game.getActiveEntities());
 		redrawUI();
 		paused = false;
+	}
+	
+	public void loadGameFromFile() {
+		hasMadeUIChoice = true;
+		
+		game = new Game();
+		loadGameData();
+		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
+		redrawUI();
 	}
 	
 	public void playerMove(Direction dir) {
@@ -121,7 +125,8 @@ public class Application {
 	 */
 	public void saveGameData() {
 		SaveFileManager.save(game.getActiveEntities());
-		UI.update();
+		UI.setAlertText("Game saved to file.");
+		//UI.update();
 	}
 	
 	/**
