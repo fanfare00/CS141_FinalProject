@@ -68,6 +68,7 @@ public class TextUserInterface implements IUserInterface
     	
     	state.handleInput(getUserInput());
     	
+    	
     }
     
     public void setStatusText(String statusText){
@@ -112,7 +113,8 @@ public class TextUserInterface implements IUserInterface
 	}
     
     public char getUserInput(){
-    	return Character.toUpperCase(scan.next().trim().charAt(0));
+    	char c =  Character.toUpperCase(scan.next().trim().charAt(0));
+    	return c;
     }
     
     public void changeState(UIState state) {

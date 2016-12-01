@@ -59,12 +59,14 @@ public class Application {
 	public void startNewGame() {
 		hasMadeUIChoice = true;
 		
-		if (UI instanceof GraphicalUserInterface) UI = new GraphicalUserInterface();
-		else UI = new TextUserInterface();
+//		if (UI instanceof GraphicalUserInterface) { //UI = new GraphicalUserInterface();
+//			
+//		}
+//		else UI = new TextUserInterface();
 
 		game = new Game();
 		loadGame(game.getActiveEntities());
-		UI.init(this);
+		redrawUI();
 		paused = false;
 	}
 	
@@ -131,7 +133,6 @@ public class Application {
 		updateUIAlertText();
 		updateUIStatusText();
 		updateUIGrid();
-
 	}
 	
 	public void updateUIGrid(){
@@ -276,8 +277,7 @@ public class Application {
 	}
 
 	public void pauseEnemies(boolean p) {
-		game.togglePause(p);
-		
+		game.togglePause(p);	
 	}
 
 	public boolean hasMadeUIChoice() {

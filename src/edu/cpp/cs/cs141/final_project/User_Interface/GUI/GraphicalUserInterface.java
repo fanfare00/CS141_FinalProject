@@ -117,10 +117,8 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 		this.addKeyListener(new KeyboardHandler(grid, app, this));
 		
-	}
-	
-	public void startyNew() {
-		app.startNewGame();
+		System.out.println("TEST");
+		
 	}
 	
 	private void setupMenuButtons() {
@@ -411,7 +409,6 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	public void update() {
 		if (!isRunning) { 
 			menuPanel.setVisible(false);
-			
 			isRunning = true;
 			 (new Thread(this)).start();
 		}

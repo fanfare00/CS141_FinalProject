@@ -31,7 +31,7 @@ public class ButtonHandler implements ActionListener{
 		}
 		
 		if (action.equals("New Game")) {
-			frame.dispose();
+			//frame.setVisible(false);
 			app.startNewGame();
 		}
 		

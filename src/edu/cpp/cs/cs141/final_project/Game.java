@@ -47,7 +47,8 @@ public class Game {
 	
 	Timer timer = new Timer(true);
 	
-
+	private boolean paused;
+	private boolean turnBased;
 	
 	public Game() {
 
@@ -67,10 +68,12 @@ public class Game {
 
 					@Override
 					public void run() {
-						for (GameObject obj : activeEntities){
-							if (obj instanceof Enemy) {
-								((Actor)obj).updateState(activeEntities);
-								obj.update(activeEntities);
+						if (!paused) {
+							for (GameObject obj : activeEntities){
+								if (obj instanceof Enemy) {
+									((Actor)obj).updateState(activeEntities);
+									obj.update(activeEntities);
+								}
 							}
 						}
 					}
@@ -84,30 +87,7 @@ public class Game {
 	}
 	
 	public void togglePause(boolean flag) {
-		TimerTask task = new TimerTask() {
-			@Override
-	        public void run() {
-				SwingUtilities.invokeLater(new Runnable() {
-
-					@Override
-					public void run() {
-						for (GameObject obj : activeEntities){
-							if (obj instanceof Enemy) {
-								((Actor)obj).updateState(activeEntities);
-								obj.update(activeEntities);
-							}
-						}
-					}
-					
-				});
-			}
-		};
-		
-		if (flag) timer.cancel();
-		else {
-			timer = new Timer();
-			timer.schedule(task, 0, 800);
-		}
+		paused = flag;
 	}
 	
 	/**
@@ -268,8 +248,6 @@ public class Game {
 		for (GameObject obj : activeEntities){
 			if(obj instanceof Player) continue;
 			
-			
-			
 			if ((flag) && (obj instanceof Room)) {
 				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
 			} else if (obj instanceof Room){
@@ -307,7 +285,7 @@ public class Game {
 			if (obj instanceof Player)continue;
 			//if (obj instanceof Actor) ((Actor)obj).updateState(activeEntities);
 			
-			if (!(obj instanceof Enemy)) obj.update(activeEntities);
+			if (!(obj instanceof Enemy) | (turnBased)) obj.update(activeEntities);
 			
 			if ((debugMode) && (obj instanceof Room)) {
 				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
@@ -381,5 +359,9 @@ public class Game {
 		//toggleEntityVisibility(false);
 		player.revealNearby(activeEntities);
 		
+	}
+	
+	public void setTurnBased(boolean flag) {
+		turnBased = flag;
 	}
 }
