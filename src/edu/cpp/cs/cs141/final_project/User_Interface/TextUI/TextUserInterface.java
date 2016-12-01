@@ -54,6 +54,7 @@ public class TextUserInterface implements IUserInterface
     	else {
     		toggleMoveState();
     	}
+    	
     }
     
     public void update() {

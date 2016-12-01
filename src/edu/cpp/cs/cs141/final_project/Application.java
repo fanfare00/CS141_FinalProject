@@ -288,5 +288,10 @@ public class Application {
 	public boolean hasMadeUIChoice() {
 		return hasMadeUIChoice;
 	}
+	
+	public void setGameType(boolean flag) {
+		game.setTurnBased(flag);
+		game.togglePause(flag);
+	}
 
 }
