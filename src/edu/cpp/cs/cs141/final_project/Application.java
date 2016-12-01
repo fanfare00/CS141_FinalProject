@@ -33,13 +33,14 @@ public class Application {
 		if (getGameOverStatus()) { 
 			paused = true;
 			UI.toggleMenuState();
-			
 		}
 			
 		if (!paused) {
 			UI.update();
 			game.update();
 			redrawUI();	
+		} else {
+		
 		}
 	}
 	
@@ -63,6 +64,7 @@ public class Application {
 		game = new Game();
 		loadGame(game.getActiveEntities());
 		UI.toggleMoveState();
+		UI.resetGrid();
 		redrawUI();
 		paused = false;
 		
@@ -177,7 +179,6 @@ public class Application {
 
 	public void toggleMenuMode() {
 		UI.toggleMenuState();
-		UI.update();
 	}
 
 	public void toggleMoveMode() {
@@ -298,7 +299,6 @@ public class Application {
 		game.togglePause(flag);
 		
 		paused = flag;
-		
 	}
 
 	public void pauseEnemies(boolean p) {

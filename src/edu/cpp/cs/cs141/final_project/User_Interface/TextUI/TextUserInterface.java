@@ -158,6 +158,7 @@ public class TextUserInterface implements IUserInterface
 	public void toggleMenuState() {
 		instructionText = "Choose a menu option from the command list below.";
 		state = inMenus;
+		update();
 	}
 
 	@Override
@@ -188,6 +189,12 @@ public class TextUserInterface implements IUserInterface
 		scan.nextLine();
 
 
+	}
+
+	@Override
+	public void resetGrid() {
+		// TODO Auto-generated method stub
+		
 	}
 
     

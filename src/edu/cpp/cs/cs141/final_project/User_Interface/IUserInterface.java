@@ -33,5 +33,7 @@ public interface IUserInterface {
 
 	void dispose();
 
+	void resetGrid();
+
 	
 }

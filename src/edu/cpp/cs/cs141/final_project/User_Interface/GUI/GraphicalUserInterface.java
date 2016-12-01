@@ -508,4 +508,10 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 
+	@Override
+	public void resetGrid() {
+		grid.resetGrid();
+		
+	}
+
 }

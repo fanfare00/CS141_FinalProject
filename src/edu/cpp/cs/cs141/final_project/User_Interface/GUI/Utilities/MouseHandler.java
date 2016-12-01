@@ -29,6 +29,8 @@ public class MouseHandler implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		System.out.println("click");
+		
 		UIGridSpace oldSpace = null;
 		grid.unlookAllSpaces();
 		

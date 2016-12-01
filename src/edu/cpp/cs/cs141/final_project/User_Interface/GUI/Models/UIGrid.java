@@ -64,10 +64,11 @@ public class UIGrid {
 		this.grid = grid;
 	}
 	
-//	public void clearGrid() {
-//		spaces.clear();
-//	}
-
+	public void resetGrid() {
+		for (int i = 0; i < spaces.size(); i++) {
+			spaces.get(i).isOpen = false;
+		}
+	}
 
 	public void add(int row, int col, char symbol) {
 		

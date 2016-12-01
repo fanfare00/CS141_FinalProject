@@ -183,7 +183,7 @@ public class Player extends Actor{
 			}
 		}
 
-		if (targetedEnemy == null) missedEnemy = true;
+		if (targetedEnemy == null && remainingAmmo > 0) missedEnemy = true;
 		
 	    if ((remainingAmmo > 0) && (targetedEnemy != null)) {
 	    	targetedEnemy.setActive(false);
