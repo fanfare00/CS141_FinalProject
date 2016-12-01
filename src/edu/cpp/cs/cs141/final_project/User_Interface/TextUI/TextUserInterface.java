@@ -31,6 +31,7 @@ public class TextUserInterface implements IUserInterface
     
     public void init(Application app) {
     	this.app = app;
+    	app.setTurnBased(true);
     	
     	scan = new Scanner(System.in);	
     	
@@ -51,6 +52,7 @@ public class TextUserInterface implements IUserInterface
     		toggleMoveState();
     	}
     	
+
     }
     
     public void update() {

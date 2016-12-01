@@ -80,9 +80,6 @@ public class UIGridSpace extends JComponent{
 		
 		SwingUtilities.convertPointFromScreen(mousePoint, this);
 		
-		//mousePoint.x = (int) (mousePoint.getX() - 10);
-		//mousePoint.y = (int) (mousePoint.getY() - 30);
-		
 		Rectangle rect = new Rectangle(0, 0, WIDTH, HEIGHT);
 		if (rect.contains(mousePoint)) isMouseInside = true;
 		

@@ -68,7 +68,7 @@ public class Game {
 
 					@Override
 					public void run() {
-						if (!paused) {
+						if (!paused && !turnBased) {
 							for (GameObject obj : activeEntities){
 								if (obj instanceof Enemy) {
 									((Actor)obj).updateState(activeEntities);
@@ -353,6 +353,7 @@ public class Game {
 		removeInactiveObjects();
 		
 		checkGameOver();
+		
 	}
 
 	private void revealEntitiesNearPlayer() {

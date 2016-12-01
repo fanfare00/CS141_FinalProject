@@ -43,6 +43,7 @@ public class MenuState extends TextUIState{
 		keys.get(keys.indexOf(key_Z)).setActive(false);
 		
 		keys.get(keys.indexOf(key_3)).setActive(!app.getGameOverStatus());
+		keys.get(keys.indexOf(key_5)).setActive(!app.getGameOverStatus());
 		keys.get(keys.indexOf(key_M)).setActive(!app.getGameOverStatus());
 	}
 }

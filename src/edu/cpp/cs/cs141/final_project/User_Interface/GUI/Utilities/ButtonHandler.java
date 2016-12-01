@@ -40,13 +40,19 @@ public class ButtonHandler implements ActionListener{
 		}
 		
 		if (action.equals("Save Game")) {
-			app.saveGameData();
+			if (!app.getGameOverStatus()) {
+				app.saveGameData();
+			} else {
+				app.setAlertText("Can't do that now.");
+			}
 		}
 		
 		if (action.equals("Toggle UI")) {
 			if (!app.getGameOverStatus()) {
 				app.setPaused(false);
 				app.toggleUIType();
+			} else {
+				app.setAlertText("Can't do that now.");
 			}
 		}
 	}

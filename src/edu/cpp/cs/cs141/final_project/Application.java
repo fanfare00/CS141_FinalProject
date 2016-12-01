@@ -241,6 +241,10 @@ public class Application {
 		
 		UI.setAlertText(alertText);
 	}
+	
+	public void setAlertText(String text) {
+		UI.setAlertText(text);
+	}
 
 	public void updateUIStatusText() {
 		String statusText = "";
@@ -267,7 +271,6 @@ public class Application {
 			UI = new TextUserInterface();
 			UI.init(this);
 			redrawUI();
-			//UI.update();
 		}
 	}
 
@@ -306,7 +309,8 @@ public class Application {
 		return hasMadeUIChoice;
 	}
 	
-	public void setGameType(boolean flag) {
+	public void setTurnBased(boolean flag) {
+
 		game.setTurnBased(flag);
 		game.togglePause(flag);
 	}

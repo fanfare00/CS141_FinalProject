@@ -85,7 +85,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 	@Override
 	public void init(Application app) {
 		this.app = app;
-		app.setGameType(false);
+		app.setTurnBased(false);
 		
 		pack();
 		setResizable(false);
@@ -118,6 +118,7 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		setupMenuButtons();
 		
 		this.addKeyListener(new KeyboardHandler(grid, app, this));
+
 		
 	}
 	
