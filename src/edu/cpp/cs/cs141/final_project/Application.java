@@ -46,7 +46,7 @@ public class Application {
 	 * Initializes the game.
 	 */
 	public void start() {
-		close = false;
+//		close = false;
 		
 		UI.init(this);
 		loadGame(game.getActiveEntities());
@@ -61,8 +61,10 @@ public class Application {
 		
 		game = new Game();
 		loadGame(game.getActiveEntities());
+		UI.toggleMoveState();
 		redrawUI();
 		paused = false;
+		
 	}
 	
 	public void loadGameFromFile() {
@@ -155,7 +157,7 @@ public class Application {
 	}
 	
 	public void close() {
-		game.togglePause(true);
+		game.dispose();
 		this.close = true;
 		//System.exit(0);
 	}
@@ -249,22 +251,26 @@ public class Application {
 	}
 
 	public void toggleUIType() {
-		UI = new GraphicalUserInterface();
-		UI.init(this);
-		redrawUI();
+		
+		if (UI instanceof TextUserInterface) {
+			UI = new GraphicalUserInterface();
+			UI.init(this);
+			//redrawUI();
+		}
+
 	}
 
 	public int getPlayerAmmo() {
 		return game.getPlayer().getRemainingAmmo();
 	}
 	
-	public boolean getClose() {
+	public boolean isRunning() {
 		return close;
 	}
 
-	public void setClose(boolean flag) {
-		close = flag;
-	}
+//	public void setClose(boolean flag) {
+//		close = flag;
+//	}
 	
 	public boolean getPaused() {
 		return paused;

@@ -22,6 +22,7 @@ public class TextUIState implements UIState {
 	protected Key key_2 = new Key('2');
 	protected Key key_3 = new Key('3');
 	protected Key key_4 = new Key('4');
+	protected Key key_5 = new Key('5');
 	protected Key key_9 = new Key('9');
 	
 	protected List<Key> keys = new ArrayList<Key>();
@@ -45,6 +46,7 @@ public class TextUIState implements UIState {
 		keys.add(key_2);
 		keys.add(key_3);
 		keys.add(key_4);
+		keys.add(key_5);
 		
 		key_Z.setText("Shoot");
 		key_Z.setCommand(new ToggleShootCommand());

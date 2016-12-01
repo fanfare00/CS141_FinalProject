@@ -13,16 +13,16 @@ public class Main {
     	Application app = new Application(new TextUserInterface(), new Game());
     	app.start();
     	
-		while(!app.getClose()){ 
+		while(!app.isRunning()){ 
 			long time = System.currentTimeMillis(); 
 			time = (1000 / FPS) - (System.currentTimeMillis()-time); 
 			
 			app.run();
 			
-			if (app.getClose()) {
-				app = new Application(new TextUserInterface(), new Game());
-				app.start();
-			}
+//			if (app.getClose()) {
+//				app = new Application(new TextUserInterface(), new Game());
+//				app.start();
+//			}
 			 
 			if (time > 0) { 
 				try { 

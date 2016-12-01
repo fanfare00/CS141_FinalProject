@@ -361,6 +361,10 @@ public class Game {
 		
 	}
 	
+	public void dispose(){
+		timer.cancel();
+	}
+	
 	public void setTurnBased(boolean flag) {
 		turnBased = flag;
 	}

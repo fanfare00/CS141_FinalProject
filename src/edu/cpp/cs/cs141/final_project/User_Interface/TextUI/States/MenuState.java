@@ -24,6 +24,10 @@ public class MenuState extends TextUIState{
 		key_4.setCommand(new MenuQuitCommand());
 		key_4.setActive(true);
 		
+		key_5.setText("Toggle UI");
+		key_5.setCommand(new ToggleUICommand());
+		key_5.setActive(true);
+		
 		key_M.setText("Back");
 		key_M.setCommand(new ToggleMoveCommand());
 	}
