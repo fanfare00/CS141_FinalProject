@@ -251,13 +251,19 @@ public class Application {
 	}
 
 	public void toggleUIType() {
+		hasMadeUIChoice = true;
 		
+		UI.dispose();
+	
 		if (UI instanceof TextUserInterface) {
 			UI = new GraphicalUserInterface();
 			UI.init(this);
-			//redrawUI();
+		} else {
+			UI = new TextUserInterface();
+			UI.init(this);
+			redrawUI();
+			//UI.update();
 		}
-
 	}
 
 	public int getPlayerAmmo() {

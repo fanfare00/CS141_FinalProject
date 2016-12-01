@@ -28,12 +28,11 @@ public class TextUserInterface implements IUserInterface
     private String statusText;
     private String alertText;
     
-    public TextUserInterface() {
-		scan = new Scanner(System.in);	
-    }
     
     public void init(Application app) {
     	this.app = app;
+    	
+    	scan = new Scanner(System.in);	
     	
     	UISelect = new UISelectionState(app);
     	moving = new MovingState(app);
@@ -111,8 +110,7 @@ public class TextUserInterface implements IUserInterface
 	}
     
     public char getUserInput(){
-    	char c =  Character.toUpperCase(scan.next().trim().charAt(0));
-    	return c;
+    	return Character.toUpperCase(scan.next().trim().charAt(0));
     }
     
     public void changeState(UIState state) {
@@ -181,6 +179,13 @@ public class TextUserInterface implements IUserInterface
 	public void toggleUICommand() {
 		instructionText = "Choose a menu option from the command list below.";
 		state = UISelect;
+	}
+
+	@Override
+	public void dispose() {
+		scan.nextLine();
+
+
 	}
 
     

@@ -149,6 +149,15 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 		menuPanel.add(saveGameButton);
 		
+		JButton toggleUIButton = new JButton("Toggle UI");
+		toggleUIButton.setSize(160, 35);
+		toggleUIButton.setLocation(20, 175);
+		toggleUIButton.setVisible(true);
+		toggleUIButton.addActionListener(new ButtonHandler(grid, this, app));
+		toggleUIButton.setActionCommand(toggleUIButton.getText());
+		
+		menuPanel.add(toggleUIButton);
+		
 		JButton quitGameButton = new JButton("Quit Game");
 		quitGameButton.setSize(160, 35);
 		quitGameButton.setLocation(20, 250);

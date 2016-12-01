@@ -31,5 +31,7 @@ public interface IUserInterface {
 
 	void setAlertText(String string);
 
+	void dispose();
+
 	
 }

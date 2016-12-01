@@ -42,6 +42,12 @@ public class ButtonHandler implements ActionListener{
 		if (action.equals("Save Game")) {
 			app.saveGameData();
 		}
+		
+		if (action.equals("Toggle UI")) {
+			app.setPaused(false);
+			app.toggleUIType();
+			
+		}
 	}
 
 }
