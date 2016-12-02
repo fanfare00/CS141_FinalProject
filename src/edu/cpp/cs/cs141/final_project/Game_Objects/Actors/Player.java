@@ -109,6 +109,7 @@ public class Player extends Actor{
 				
 				if (checkCollision(obj, lookDir.row()*2, lookDir.col()*2)) { 
 					obj.setIsLookedAt(true);
+					System.out.println("test");
 					
 					if (obj instanceof Enemy) {
 						revealedEnemy = true;
@@ -261,17 +262,17 @@ public class Player extends Actor{
 			hasLookedRoom = false;
 			hasUsedPowerup = false;
 		
-		if(isInvincible) remainingTurnsInvincible-=1;
-		setVisible(true);
+			if(isInvincible) remainingTurnsInvincible-=1;
+			setVisible(true);
 		
-		//updateState(activeEntities);
-		move();
+			//updateState(activeEntities);
+			move();
 		
-		setLookDir(null);
+			setLookDir(null);
 
-		for (GameObject obj : activeEntities) {
-			obj.setIsLookedAt(false);
-		}
+			for (GameObject obj : activeEntities) {
+				obj.setIsLookedAt(false);
+			}
 		
 		}
 	}

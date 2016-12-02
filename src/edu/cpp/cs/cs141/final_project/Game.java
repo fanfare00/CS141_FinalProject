@@ -56,7 +56,7 @@ public class Game {
 		spawnPlayer();
 		spawnRooms();
 		spawnPowerups();
-		spawnEnemies();
+		//spawnEnemies();
 		spawnBriefcase();
 		
 		initializeEntities();
@@ -227,6 +227,8 @@ public class Game {
 	public void playerLook(Direction dir) {
 		player.setLookDir(dir);
 		player.look(activeEntities);
+		toggleEntityVisibility(debugMode);
+		revealEntitiesNearPlayer();
 	}
 	
 	public void playerAttack(Direction dir) {
@@ -255,7 +257,10 @@ public class Game {
 			}
 			
 			obj.setVisible(flag);
-			if(obj.isLookedAt()) obj.setVisible(true);
+			if(obj.isLookedAt()) {
+				System.out.println("tes2t");
+				obj.setVisible(true);
+			}
 		}
 	}
 	
