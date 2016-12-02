@@ -92,62 +92,41 @@ public class Game {
 	private boolean turnBased;
 	
 	/**
-	 * Instantiates a new game.
+	 * Instantiates a new game. Spawns game objects and initalizes them.
 	 */
 	public Game() {
-
 		
 		spawnPlayer();
 		spawnRooms();
 		spawnPowerups();
 		spawnEnemies();
-//		Enemy enemy = new Enemy(7, 0);
-//		activeEntities.add(enemy);
-		spawnBriefcase();
-		
+		spawnIntel();
 		initializeEntities();
 		
-		TimerTask task = new TimerTask() {
-			@Override
-	        public void run() {
-				SwingUtilities.invokeLater(new Runnable() {
-
-					@Override
-					public void run() {
-						if (!paused && !turnBased) {
-							for (GameObject obj : activeEntities){
-								if (obj instanceof Enemy) {
-									((Actor)obj).updateState(activeEntities);
-									obj.update(activeEntities);
-								}
-							}
-						}
-					}
-					
-				});
-			}
-		};
+		scheduleEnemyMovements();
+	}
+	
+	/**
+	 * Updates the game. Primary function of this class being called in game loop.
+	 */
+	public void update() {
+		player.update(activeEntities);
 		
-        timer.schedule(task, 0, 900);
-        
-	}
-	
-	/**
-	 * Toggle pause.
-	 *
-	 * @param flag the flag
-	 */
-	public void togglePause(boolean flag) {
-		paused = flag;
-	}
-	
-	/**
-	 * Checks if the game is over.
-	 * @return True if the game is over, false if it is still going.
-	 */
-	public boolean isGameOver()
-	{
-	    return gameOver;
+		updateEnemyStates();
+		
+		updateEntities();
+		
+		updateEnemyStates();
+		
+		player.updateState(activeEntities);
+		
+		revealEntitiesNearPlayer();
+		
+		handleEnemyCombat();
+		
+		removeInactiveObjects();
+		
+		checkGameOver();
 	}
 	
 	/**
@@ -159,31 +138,6 @@ public class Game {
 	}
 	
 	/**
-	 * Initialize entities.
-	 */
-	private void initializeEntities() {
-		for (GameObject obj : activeEntities) {
-			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
-		}
-	}
-	
-	/**
-	 * Places the briefcase in a random room.
-	 */
-	private void spawnBriefcase() {
-		
-		List<Room> rooms = new ArrayList<Room>();
-
-		int randomRoomNumber = (int) (Math.random() * MAX_ROOM_COUNT);
-		
-		for (GameObject obj : activeEntities) {
-			if (obj instanceof Room) rooms.add((Room)obj);
-		}
-		 
-		rooms.get(randomRoomNumber).placeIntel();
-	}
-	
-	/**
 	 * Spawns the rooms. They will spawn in the same place each time.
 	 */
 	private void spawnRooms() {
@@ -192,55 +146,6 @@ public class Game {
 				activeEntities.add(new Room(i,j));
 			}
 		}
-	}
-	
-	/**
-	 * Spawn randomly.
-	 *
-	 * @param obj the obj
-	 */
-	private void spawnRandomly(GameObject obj) {
-		Random rand = new Random();
-		
-		int randomRow = rand.nextInt(GAME_ROWS);
-		int randomCol = rand.nextInt(GAME_COLS);
-		
-		obj.setRow(randomRow);
-		obj.setCol(randomCol);
-		
-		if(isValidSpawnLocation(randomRow, randomCol)) activeEntities.add(obj);
-		else spawnRandomly(obj);
-	}
-	
-	/**
-	 * Spawn powerups.
-	 */
-	private void spawnPowerups() {
-		spawnRandomly(new Radar(0,0));
-		spawnRandomly(new ExtraAmmo(0,0));
-		spawnRandomly(new Invincibility(0,0));
-	}
-
-	/**
-	 * Randomly spawns enemies around the map.
-	 */
-	private void spawnEnemies() {	
-		for (int i = 0; i < MAX_ENEMY_COUNT; i++) {
-			spawnRandomly(new Enemy(0,0));
-		}
-	}
-	
-	/**
-	 * Checks if the specified location is valid for spawning an enemy.
-	 * @param row The row of the target location.
-	 * @param col The column of the target location.
-	 * @return True if this location is valid, false if it is not.
-	 */
-	private boolean isValidSpawnLocation(int row, int col) {
-		if (isSpawnOccupied(row, col)) return false;
-		if (isSpawnTooClose(row, col)) return false;
-		
-		return true;
 	}
 	
 	/**
@@ -270,14 +175,197 @@ public class Game {
 		
 		return ((row > closeRow) && (col < closeCol));
 	}
-
+	
 	/**
-	 * Gets the list of currently active entities.
-	 *
-	 * @return the active entities
+	 * Checks if the specified location is valid for spawning an enemy.
+	 * @param row The row of the target location.
+	 * @param col The column of the target location.
+	 * @return True if this location is valid, false if it is not.
 	 */
-	public List<GameObject> getActiveEntities() {
-		return activeEntities;
+	private boolean isValidSpawnLocation(int row, int col) {
+		if (isSpawnOccupied(row, col)) return false;
+		if (isSpawnTooClose(row, col)) return false;
+		
+		return true;
+	}
+	
+	/**
+	 * Finds a random, valid row and col for game object to spawn in.
+	 *
+	 * @param obj the obj
+	 */
+	private void spawnRandomly(GameObject obj) {
+		Random rand = new Random();
+		
+		int randomRow = rand.nextInt(GAME_ROWS);
+		int randomCol = rand.nextInt(GAME_COLS);
+		
+		obj.setRow(randomRow);
+		obj.setCol(randomCol);
+		
+		if(isValidSpawnLocation(randomRow, randomCol)) activeEntities.add(obj);
+		else spawnRandomly(obj);
+	}
+	
+	/**
+	 * Spawn powerups.
+	 */
+	private void spawnPowerups() {
+		spawnRandomly(new Radar(0,0));
+		spawnRandomly(new ExtraAmmo(0,0));
+		spawnRandomly(new Invincibility(0,0));
+	}
+	
+	/**
+	 * Randomly spawns enemies around the map.
+	 */
+	private void spawnEnemies() {	
+		for (int i = 0; i < MAX_ENEMY_COUNT; i++) {
+			spawnRandomly(new Enemy(0,0));
+		}
+	}
+	
+	/**
+	 * Places the briefcase in a random room.
+	 */
+	private void spawnIntel() {
+		
+		List<Room> rooms = new ArrayList<Room>();
+
+		int randomRoomNumber = (int) (Math.random() * MAX_ROOM_COUNT);
+		
+		for (GameObject obj : activeEntities) {
+			if (obj instanceof Room) rooms.add((Room)obj);
+		}
+		 
+		rooms.get(randomRoomNumber).placeIntel();
+	}
+	
+	/**
+	 * Initializes entities.
+	 */
+	private void initializeEntities() {
+		for (GameObject obj : activeEntities) {
+			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
+		}
+	}
+	
+	/**
+	 * Schedule enemy movements. (Note this has to be scheduled no matter what,
+	 *  but cant be active when the game is not in GUI mode).
+	 */
+	private void scheduleEnemyMovements() {
+		TimerTask task = new TimerTask() {
+			@Override
+	        public void run() {
+				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						if (!paused && !turnBased) {
+							for (GameObject obj : activeEntities){
+								if (obj instanceof Enemy) {
+									((Actor)obj).updateState(activeEntities);
+									obj.update(activeEntities);
+								}
+							}
+						}
+					}
+				});
+			}
+		};
+        timer.schedule(task, 0, 900);
+	}
+	
+	/**
+	 * Update enemy states.
+	 */
+	private void updateEnemyStates() {
+		for (GameObject obj : activeEntities){
+			if (obj instanceof Actor) ((Actor) obj).updateState(activeEntities);
+		}
+	}
+	
+	/**
+	 * Update entities.
+	 */
+	private void updateEntities() {
+		toggleEntityVisibility(false);
+		
+		for (GameObject obj : activeEntities){
+			if (obj instanceof Player)continue;
+
+			if (!(obj instanceof Enemy) | (turnBased)) obj.update(activeEntities);
+			
+			if ((debugMode) && (obj instanceof Room)) {
+				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
+			} else if (obj instanceof Room){
+				 obj.setSymbol('R');
+			}
+			
+			if(debugMode) obj.setVisible(true);
+		}
+		
+		player.updatePowerup();
+	}
+	
+	/**
+	 * Reveal entities near player.
+	 */
+	private void revealEntitiesNearPlayer() {
+		player.revealNearby(activeEntities);
+	}
+	
+	/**
+	 * Toggle entity visibility.
+	 *
+	 * @param flag the flag
+	 */
+	private void toggleEntityVisibility(boolean flag) {
+		for (GameObject obj : activeEntities){
+			if(obj instanceof Player) continue;
+			
+			if ((flag) && (obj instanceof Room)) {
+				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
+			} else if (obj instanceof Room){
+				 obj.setSymbol('R');
+			}
+			
+			obj.setVisible(flag);
+			if(obj.isLookedAt())obj.setVisible(true);
+		}
+	}
+	
+	/**
+	 * Handle enemy combat, checks if enemy can attack and if so resets player.
+	 */
+	private void handleEnemyCombat() {
+		for (GameObject obj : activeEntities){
+			if (obj instanceof Enemy) {
+				if (( (Enemy) obj).getCanAttack()) resetPlayer();
+			}
+		}
+	}
+	
+	/**
+	 * Removes the inactive objects. Those that have died or been consumed.
+	 */
+	private void removeInactiveObjects() {
+		List<GameObject> inactiveEntities = new ArrayList<GameObject>();
+		
+		for (GameObject obj : activeEntities){
+			if (!obj.isActive()) inactiveEntities.add(obj);
+		}
+		
+		activeEntities.removeAll(inactiveEntities);
+	}
+	
+	/**
+	 * Check if game is over
+	 */
+	public void checkGameOver() {
+		if (player.getRemainingLives() == 0) gameOver = true;
+		if (player.foundIntel()) gameWon = true;
 	}
 
 	/**
@@ -290,6 +378,13 @@ public class Game {
 		this.activeEntities = entities;
 		this.player = (Player) activeEntities.get(0);
 	}
+	
+	/**
+	 * Gets the list of currently active entities.
+	 *
+	 * @return the active entities
+	 */
+	public List<GameObject> getActiveEntities() {return activeEntities;}
 	
 	/**
 	 * Player look.
@@ -327,93 +422,39 @@ public class Game {
 		player.setVisible(true);
 		player.revealNearby(activeEntities);
 	}
-	
-	/**
-	 * Toggle entity visibility.
-	 *
-	 * @param flag the flag
-	 */
-	private void toggleEntityVisibility(boolean flag) {
-		for (GameObject obj : activeEntities){
-			if(obj instanceof Player) continue;
-			
-			if ((flag) && (obj instanceof Room)) {
-				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
-			} else if (obj instanceof Room){
-				 obj.setSymbol('R');
-			}
-			
-			obj.setVisible(flag);
-			if(obj.isLookedAt()) {
-				obj.setVisible(true);
-			}
-		}
-	}
-	
 	/**
 	 * Gets the debug mode.
 	 *
 	 * @return the debug mode
 	 */
-	public boolean getDebugMode() {
-		return debugMode;
-	}
+	public boolean getDebugMode() {return debugMode;}
 
-	
 	/**
-	 * Removes the inactive objects.
+	 * Sets the turn based.
+	 *
+	 * @param flag the new turn based
 	 */
-	private void removeInactiveObjects() {
-		List<GameObject> inactiveEntities = new ArrayList<GameObject>();
-		
-		for (GameObject obj : activeEntities){
-			if (!obj.isActive()) inactiveEntities.add(obj);
-		}
-		
-		activeEntities.removeAll(inactiveEntities);
-	}
-	
+	public void setTurnBased(boolean flag) {turnBased = flag;}
+
 	/**
 	 * Gets the player.
 	 *
 	 * @return the player
 	 */
-	public Player getPlayer() {
-		return player;
-	}
+	public Player getPlayer() {return player;}
 	
 	/**
-	 * Update entities.
+	 * Toggle pause.
+	 *
+	 * @param flag the flag
 	 */
-	private void updateEntities() {
-		toggleEntityVisibility(false);
-		
-		for (GameObject obj : activeEntities){
-			if (obj instanceof Player)continue;
-			//if (obj instanceof Actor) ((Actor)obj).updateState(activeEntities);
-			
-			if (!(obj instanceof Enemy) | (turnBased)) obj.update(activeEntities);
-			
-			if ((debugMode) && (obj instanceof Room)) {
-				if ((((Room)obj).hasIntel())) obj.setSymbol('I');
-			} else if (obj instanceof Room){
-				 obj.setSymbol('R');
-			}
-			
-			if(debugMode) obj.setVisible(true);
-		}
-		
-		player.updatePowerup();
-	}
+	public void setPaused(boolean flag) {paused = flag;}
 	
 	/**
-	 * Update enemy states.
+	 * Checks if the game is over.
+	 * @return True if the game is over, false if it is still going.
 	 */
-	private void updateEnemyStates() {
-		for (GameObject obj : activeEntities){
-			if (obj instanceof Actor) ((Actor) obj).updateState(activeEntities);
-		}
-	}
+	public boolean isGameOver() {return gameOver;}
 	
 	/**
 	 * Reset player.
@@ -422,80 +463,20 @@ public class Game {
 		player.reset();
 		player.updateState(activeEntities);
 	}
-	
-	/**
-	 * Handle enemy combat.
-	 */
-	private void handleEnemyCombat() {
-		for (GameObject obj : activeEntities){
-			if (obj instanceof Enemy) {
-				if (( (Enemy) obj).getCanAttack()) resetPlayer();
-			}
-		}
-	}
-	
-	/**
-	 * Check game over.
-	 */
-	public void checkGameOver() {
-		if (player.getRemainingLives() == 0) gameOver = true;
-		if (player.foundIntel()) gameWon = true;
-	}
-	
+
 	/**
 	 * Gets the game won.
 	 *
 	 * @return the game won
 	 */
-	public boolean getGameWon() {
-		return gameWon;
-	}
+	public boolean getGameWon() {return gameWon;}
 	
 	/**
 	 * Gets the game over.
 	 *
 	 * @return the game over
 	 */
-	public boolean getGameOver() {
-		return gameOver;
-	}
-	
-	/**
-	 * Update.
-	 */
-	public void update() {
-		//move player
-		//update everything elses state
-		//move everything else
-		//update everything elses state
-		//update player state
-		
-		player.update(activeEntities);
-		updateEnemyStates();
-		
-		updateEntities();
-		updateEnemyStates();
-		
-		player.updateState(activeEntities);
-		
-		revealEntitiesNearPlayer();
-		
-		handleEnemyCombat();
-		
-		removeInactiveObjects();
-		
-		checkGameOver();
-		
-	}
-
-	/**
-	 * Reveal entities near player.
-	 */
-	private void revealEntitiesNearPlayer() {
-		//toggleEntityVisibility(false);
-		player.revealNearby(activeEntities);
-		
-	}
+	public boolean getGameOver() {return gameOver;}
 	
 	/**
 	 * Dispose.
@@ -504,12 +485,5 @@ public class Game {
 		timer.cancel();
 	}
 	
-	/**
-	 * Sets the turn based.
-	 *
-	 * @param flag the new turn based
-	 */
-	public void setTurnBased(boolean flag) {
-		turnBased = flag;
-	}
+
 }

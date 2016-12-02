@@ -94,8 +94,6 @@ public class TextUserInterface implements IUserInterface
     	else {
     		toggleMoveState();
     	}
-    	
-
     }
     
     /* (non-Javadoc)
@@ -300,8 +298,6 @@ public class TextUserInterface implements IUserInterface
 	@Override
 	public void dispose() {
 		scan.nextLine();
-
-
 	}
 
 	/* (non-Javadoc)

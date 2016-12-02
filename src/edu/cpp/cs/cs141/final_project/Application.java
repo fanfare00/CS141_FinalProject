@@ -31,22 +31,20 @@ import edu.cpp.cs.cs141.final_project.Utilities.SaveFileManager;
  */
 public class Application {
 	
-	/** The ui. */
+	/** The UI. */
 	private IUserInterface UI;
 	
 	/** The game. */
 	private Game game;
 	
-	/** The close. */
+	/** a loop flag for closing the game */
 	private boolean close;
 	
-	/** The paused. */
+	/** a loop flag for pausing the game. */
 	private boolean paused;
 	
 	/** The has made UI choice. */
 	private boolean hasMadeUIChoice;
-	
-	
 	
 	/**
 	 * Instantiates a new application.
@@ -57,12 +55,10 @@ public class Application {
 	public Application(IUserInterface UI, Game game) {
 		this.UI = UI;
 		this.game = game;
-		
-		//start();
 	}
 
 	/**
-	 * Run.
+	 * The main process of the entire program, being looped through over and over in main.
 	 */
 	public void run() {
 		if (getGameOverStatus()) { 
@@ -78,18 +74,15 @@ public class Application {
 	}
 	
 	/**
-	 * Initializes the game.
+	 * Initializes the UI and loads a fresh game.
 	 */
 	public void start() {
-//		close = false;
-		
 		UI.init(this);
 		loadGame(game.getActiveEntities());
-		//run();
 	}
 	
 	/**
-	 * Prepares a new game.
+	 * Prepares a new game and starts it.
 	 */
 	public void startNewGame() {
 		hasMadeUIChoice = true;
@@ -100,12 +93,10 @@ public class Application {
 		UI.resetGrid();
 		redrawUI();
 		paused = false;
-		
-		
 	}
 	
 	/**
-	 * Load game from file.
+	 * Load game from file and start.
 	 */
 	public void loadGameFromFile() {
 		hasMadeUIChoice = true;
@@ -120,18 +111,18 @@ public class Application {
 	}
 	
 	/**
-	 * Player move.
+	 * Resolves a player move, loop will continue from this point and game will update
 	 *
-	 * @param dir the dir
+	 * @param dir the direction
 	 */
 	public void playerMove(Direction dir) {
 		game.getPlayer().setMoveDirection(dir);
 	}
 	
 	/**
-	 * Player look.
+	 * Resolves a player look and updates UI
 	 *
-	 * @param dir the dir
+	 * @param dir the direction
 	 */
 	public void playerLook(Direction dir) {
 		game.playerLook(dir);
@@ -147,9 +138,9 @@ public class Application {
 	}
 	
 	/**
-	 * Player attack.
+	 * Resolves a player attack and updates UI
 	 *
-	 * @param dir the dir
+	 * @param dir the direction
 	 */
 	public void playerAttack(Direction dir) {
 		game.getPlayer().setMoveDirection(null);
@@ -176,8 +167,6 @@ public class Application {
 	public void loadGame(List<GameObject> activeEntities) {
 		game.setActiveEntities(activeEntities);
 		paused = false;
-		//UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
-		//redrawUI();
 	}
 	
 	/**
@@ -190,7 +179,7 @@ public class Application {
 	}
 	
 	/**
-	 * Updates the UI with the currently active entities.
+	 * Updates the UI with the whats currently happening in the game
 	 */
 	public void redrawUI()
 	{  
@@ -212,7 +201,7 @@ public class Application {
 	}
 	
 	/**
-	 * Gets the new command.
+	 * Returns a warning to the user if input is invalid and tries again.
 	 *
 	 * @return the new command
 	 */
@@ -240,7 +229,7 @@ public class Application {
 	}
 	
 	/**
-	 * Stay in text UI.
+	 * Stays in text UI if user neglects to chose GUI
 	 */
 	public void stayInTextUI() {
 		redrawUI();
@@ -248,14 +237,14 @@ public class Application {
 	}
 
 	/**
-	 * Toggle menu mode.
+	 * Toggle UI menu mode.
 	 */
 	public void toggleMenuMode() {
 		UI.toggleMenuState();
 	}
 
 	/**
-	 * Toggle move mode.
+	 * Toggle UI move mode.
 	 */
 	public void toggleMoveMode() {
 		
@@ -264,7 +253,7 @@ public class Application {
 	}
 
 	/**
-	 * Toggle look mode.
+	 * Toggle UI look mode.
 	 */
 	public void toggleLookMode() {
 		UI.toggleLookState();
@@ -272,7 +261,7 @@ public class Application {
 	}
 
 	/**
-	 * Toggle shoot mode.
+	 * Toggle UI shoot mode.
 	 */
 	public void toggleShootMode() {
 		UI.toggleShootState();
@@ -281,7 +270,7 @@ public class Application {
 	}
 	
 	/**
-	 * Toggle debug mode.
+	 * Toggle game/UI debug mode.
 	 */
 	public void toggleDebugMode() {
 		game.setDebugMode(!game.getDebugMode());
@@ -336,7 +325,7 @@ public class Application {
 	}
 	
 	/**
-	 * Update UI alert text.
+	 * Updates the UI alert text based on different conditions.
 	 */
 	public void updateUIAlertText() {
 		String alertText = "";
@@ -421,10 +410,6 @@ public class Application {
 	public boolean isRunning() {
 		return close;
 	}
-
-//	public void setClose(boolean flag) {
-//		close = flag;
-//	}
 	
 	/**
  * Gets the paused.
@@ -445,7 +430,7 @@ public boolean getPaused() {
 		if (flag) UI.setAlertText("PAUSED");
 		else UI.setAlertText(" ");
 		
-		game.togglePause(flag);
+		game.setPaused(flag);
 		
 		paused = flag;
 	}
@@ -456,11 +441,11 @@ public boolean getPaused() {
 	 * @param p the p
 	 */
 	public void pauseEnemies(boolean p) {
-		game.togglePause(p);	
+		game.setPaused(p);	
 	}
 
 	/**
-	 * Checks for made UI choice.
+	 * Checks if user has made an initial UI choice
 	 *
 	 * @return true, if successful
 	 */
@@ -469,18 +454,19 @@ public boolean getPaused() {
 	}
 	
 	/**
-	 * Sets the turn based.
+	 * Sets the game (enemies) to run as turn based or real time
 	 *
 	 * @param flag the new turn based
 	 */
 	public void setTurnBased(boolean flag) {
 
 		game.setTurnBased(flag);
-		game.togglePause(flag);
+		game.setPaused(flag);
 	}
 
 	/**
-	 * Gets the enemy direction.
+	 * Gets the enemy direction. A bandaid to solve the problem of not being able
+	 * to shoot while having spawn protection
 	 *
 	 * @return the enemy direction
 	 */
