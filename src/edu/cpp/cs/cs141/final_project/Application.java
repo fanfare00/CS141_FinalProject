@@ -39,8 +39,6 @@ public class Application {
 			UI.update();
 			game.update();
 			redrawUI();	
-		} else {
-		
 		}
 	}
 	
@@ -78,6 +76,7 @@ public class Application {
 		loadGameData();
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
 		redrawUI();
+		UI.update();
 		
 		paused = false;
 	}
@@ -134,7 +133,7 @@ public class Application {
 	public void saveGameData() {
 		SaveFileManager.save(game.getActiveEntities());
 		UI.setAlertText("Game saved to file.");
-		//UI.update();
+		UI.update();
 	}
 	
 	/**
