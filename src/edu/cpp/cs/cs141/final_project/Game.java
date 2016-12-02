@@ -36,59 +36,58 @@ import edu.cpp.cs.cs141.final_project.Utilities.Direction;
  */
 public class Game {
 
-	/** The Constant GAME_ROWS. */
+	/** The total number of rows */
 	public static final int GAME_ROWS = 9;
 	
-	/** The Constant GAME_COLS. */
+	/** The total number of cols */
 	public static final int GAME_COLS = 9;
 	
-	/** The Constant MAX_ENEMY_COUNT. */
+	/** The maximum enemy count. */
 	private static final int MAX_ENEMY_COUNT = 6;
 	
-	/** The Constant MAX_ROOM_COUNT. */
+	/** The maximum room count. */
 	private static final int MAX_ROOM_COUNT = 9;
 	
-	/** The Constant ROOM_SPACING. */
+	/** The spacing between rooms */
 	private static final int ROOM_SPACING = 3;
 	
-	/** The Constant ENEMY_SPAWN_DISTANCE. */
+	/** The spawn distance from player */
 	private static final int ENEMY_SPAWN_DISTANCE = 3;
 	
-	/** The Constant PLAYER_SPAWN_ROW. */
+	/** The row the player spawns in */
 	private static final int PLAYER_SPAWN_ROW = 8;
 	
-	/** The Constant PLAYER_SPAWN_COL. */
+	/** The col the player spawns in. */
 	private static final int PLAYER_SPAWN_COL = 0;
 	
-	/** The Constant MAX_LIVES. */
+	/** The maximum number of lives the player has. */
 	private static final int MAX_LIVES = 3;
 	
-	/** The Constant MAX_PLAYER_AMMO. */
+	/** The maximum amount of ammo the player starts with. */
 	private static final int MAX_PLAYER_AMMO = 1;
 	
 	/** The active entities. */
 	List<GameObject> activeEntities = new ArrayList<GameObject>();
 	
-	
 	/** The player. */
 	private Player player;
 	
-	/** The game over. */
+	/** Whether game is over or not */
 	private boolean gameOver = false;
 	
-	/** The game won. */
+	/** Whether game is won or not. */
 	private boolean gameWon = false;
 	
-	/** The debug mode. */
+	/** Whether game is in debug mode or not. */
 	private boolean debugMode = false;
 	
-	/** The timer. */
+	/** Timer for enemy movements (GUI ONLY) */
 	Timer timer = new Timer(true);
 	
-	/** The paused. */
+	/** Whether the game is paused or not. */
 	private boolean paused;
 	
-	/** The turn based. */
+	/** Whether the game is real time or not */
 	private boolean turnBased;
 	
 	/**
