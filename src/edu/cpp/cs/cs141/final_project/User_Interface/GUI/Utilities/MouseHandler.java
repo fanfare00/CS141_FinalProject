@@ -15,18 +15,37 @@ import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGridSpace;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MouseHandler.
+ */
 public class MouseHandler implements MouseListener {
 	
+	/** The grid. */
 	UIGrid grid;
+	
+	/** The space. */
 	UIGridSpace space;
+	
+	/** The app. */
 	Application app;
 
+	/**
+	 * Instantiates a new mouse handler.
+	 *
+	 * @param grid the grid
+	 * @param space the space
+	 * @param app the app
+	 */
 	public MouseHandler(UIGrid grid, UIGridSpace space, Application app) {
 		this.grid = grid;
 		this.space = space;
 		this.app = app;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		UIGridSpace oldSpace = null;
@@ -57,6 +76,9 @@ public class MouseHandler implements MouseListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		UIGridSpace oldSpace = null;
@@ -77,18 +99,27 @@ public class MouseHandler implements MouseListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		space.isHighlighted = false;
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub

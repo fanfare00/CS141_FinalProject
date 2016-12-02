@@ -5,8 +5,17 @@ import edu.cpp.cs.cs141.final_project.Commands.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MovingState.
+ */
 public class MovingState extends TextUIState {
 	
+	/**
+	 * Instantiates a new moving state.
+	 *
+	 * @param app the app
+	 */
 	public MovingState(Application app) {
 		super(app);
 		

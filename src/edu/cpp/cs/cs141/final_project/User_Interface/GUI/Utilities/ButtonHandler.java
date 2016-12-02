@@ -9,11 +9,28 @@ import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGridSpace;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ButtonHandler.
+ */
 public class ButtonHandler implements ActionListener{
+	
+	/** The app. */
 	Application app;
+	
+	/** The frame. */
 	JFrame frame;
+	
+	/** The grid. */
 	UIGrid grid;
 	
+	/**
+	 * Instantiates a new button handler.
+	 *
+	 * @param grid the grid
+	 * @param frame the frame
+	 * @param app the app
+	 */
 	public ButtonHandler(UIGrid grid, JFrame frame, Application app) {
 
 		this.app = app;
@@ -21,6 +38,9 @@ public class ButtonHandler implements ActionListener{
 		this.grid = grid;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();

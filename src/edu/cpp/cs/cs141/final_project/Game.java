@@ -14,42 +14,70 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
 /**
  * The game engine. It stores the game state and controls the mechanics of the game.
  */
 public class Game {
 
+	/** The Constant GAME_ROWS. */
 	public static final int GAME_ROWS = 9;
+	
+	/** The Constant GAME_COLS. */
 	public static final int GAME_COLS = 9;
 	
+	/** The Constant MAX_ENEMY_COUNT. */
 	private static final int MAX_ENEMY_COUNT = 6;
+	
+	/** The Constant MAX_ROOM_COUNT. */
 	private static final int MAX_ROOM_COUNT = 9;
 	
+	/** The Constant ROOM_SPACING. */
 	private static final int ROOM_SPACING = 3;
+	
+	/** The Constant ENEMY_SPAWN_DISTANCE. */
 	private static final int ENEMY_SPAWN_DISTANCE = 3;
 	
+	/** The Constant PLAYER_SPAWN_ROW. */
 	private static final int PLAYER_SPAWN_ROW = 8;
+	
+	/** The Constant PLAYER_SPAWN_COL. */
 	private static final int PLAYER_SPAWN_COL = 0;
 	
+	/** The Constant MAX_LIVES. */
 	private static final int MAX_LIVES = 3;
+	
+	/** The Constant MAX_PLAYER_AMMO. */
 	private static final int MAX_PLAYER_AMMO = 1;
 	
+	/** The active entities. */
 	List<GameObject> activeEntities = new ArrayList<GameObject>();
 	
 	
+	/** The player. */
 	private Player player;
 	
+	/** The game over. */
 	private boolean gameOver = false;
 	
+	/** The game won. */
 	private boolean gameWon = false;
 	
+	/** The debug mode. */
 	private boolean debugMode = false;
 	
+	/** The timer. */
 	Timer timer = new Timer(true);
 	
+	/** The paused. */
 	private boolean paused;
+	
+	/** The turn based. */
 	private boolean turnBased;
 	
+	/**
+	 * Instantiates a new game.
+	 */
 	public Game() {
 
 		
@@ -88,6 +116,11 @@ public class Game {
         
 	}
 	
+	/**
+	 * Toggle pause.
+	 *
+	 * @param flag the flag
+	 */
 	public void togglePause(boolean flag) {
 		paused = flag;
 	}
@@ -101,11 +134,17 @@ public class Game {
 	    return gameOver;
 	}
 	
+	/**
+	 * Spawn player.
+	 */
 	private void spawnPlayer() {
 		player = new Player(PLAYER_SPAWN_ROW, PLAYER_SPAWN_COL, MAX_LIVES, MAX_PLAYER_AMMO);
 		activeEntities.add(player);
 	}
 	
+	/**
+	 * Initialize entities.
+	 */
 	private void initializeEntities() {
 		for (GameObject obj : activeEntities) {
 			if (obj instanceof Actor) ((Actor) obj).init(activeEntities);
@@ -139,6 +178,11 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Spawn randomly.
+	 *
+	 * @param obj the obj
+	 */
 	private void spawnRandomly(GameObject obj) {
 		Random rand = new Random();
 		
@@ -152,6 +196,9 @@ public class Game {
 		else spawnRandomly(obj);
 	}
 	
+	/**
+	 * Spawn powerups.
+	 */
 	private void spawnPowerups() {
 		spawnRandomly(new Radar(0,0));
 		spawnRandomly(new ExtraAmmo(0,0));
@@ -210,6 +257,8 @@ public class Game {
 
 	/**
 	 * Gets the list of currently active entities.
+	 *
+	 * @return the active entities
 	 */
 	public List<GameObject> getActiveEntities() {
 		return activeEntities;
@@ -226,6 +275,11 @@ public class Game {
 		this.player = (Player) activeEntities.get(0);
 	}
 	
+	/**
+	 * Player look.
+	 *
+	 * @param dir the dir
+	 */
 	public void playerLook(Direction dir) {
 		player.setLookDir(dir);
 		player.look(activeEntities);
@@ -233,11 +287,21 @@ public class Game {
 		revealEntitiesNearPlayer();
 	}
 	
+	/**
+	 * Player attack.
+	 *
+	 * @param dir the dir
+	 */
 	public void playerAttack(Direction dir) {
 		player.attack(dir);
 		removeInactiveObjects();
 	}
 	
+	/**
+	 * Sets the debug mode.
+	 *
+	 * @param flag the new debug mode
+	 */
 	public void setDebugMode(boolean flag) {
 		this.debugMode = flag;
 		
@@ -248,6 +312,11 @@ public class Game {
 		player.revealNearby(activeEntities);
 	}
 	
+	/**
+	 * Toggle entity visibility.
+	 *
+	 * @param flag the flag
+	 */
 	private void toggleEntityVisibility(boolean flag) {
 		for (GameObject obj : activeEntities){
 			if(obj instanceof Player) continue;
@@ -265,11 +334,19 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Gets the debug mode.
+	 *
+	 * @return the debug mode
+	 */
 	public boolean getDebugMode() {
 		return debugMode;
 	}
 
 	
+	/**
+	 * Removes the inactive objects.
+	 */
 	private void removeInactiveObjects() {
 		List<GameObject> inactiveEntities = new ArrayList<GameObject>();
 		
@@ -280,10 +357,18 @@ public class Game {
 		activeEntities.removeAll(inactiveEntities);
 	}
 	
+	/**
+	 * Gets the player.
+	 *
+	 * @return the player
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 	
+	/**
+	 * Update entities.
+	 */
 	private void updateEntities() {
 		toggleEntityVisibility(false);
 		
@@ -305,17 +390,26 @@ public class Game {
 		player.updatePowerup();
 	}
 	
+	/**
+	 * Update enemy states.
+	 */
 	private void updateEnemyStates() {
 		for (GameObject obj : activeEntities){
 			if (obj instanceof Actor) ((Actor) obj).updateState(activeEntities);
 		}
 	}
 	
+	/**
+	 * Reset player.
+	 */
 	private void resetPlayer() {
 		player.reset();
 		player.updateState(activeEntities);
 	}
 	
+	/**
+	 * Handle enemy combat.
+	 */
 	private void handleEnemyCombat() {
 		for (GameObject obj : activeEntities){
 			if (obj instanceof Enemy) {
@@ -324,19 +418,35 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Check game over.
+	 */
 	public void checkGameOver() {
 		if (player.getRemainingLives() == 0) gameOver = true;
 		if (player.foundIntel()) gameWon = true;
 	}
 	
+	/**
+	 * Gets the game won.
+	 *
+	 * @return the game won
+	 */
 	public boolean getGameWon() {
 		return gameWon;
 	}
 	
+	/**
+	 * Gets the game over.
+	 *
+	 * @return the game over
+	 */
 	public boolean getGameOver() {
 		return gameOver;
 	}
 	
+	/**
+	 * Update.
+	 */
 	public void update() {
 		//move player
 		//update everything elses state
@@ -362,16 +472,27 @@ public class Game {
 		
 	}
 
+	/**
+	 * Reveal entities near player.
+	 */
 	private void revealEntitiesNearPlayer() {
 		//toggleEntityVisibility(false);
 		player.revealNearby(activeEntities);
 		
 	}
 	
+	/**
+	 * Dispose.
+	 */
 	public void dispose(){
 		timer.cancel();
 	}
 	
+	/**
+	 * Sets the turn based.
+	 *
+	 * @param flag the new turn based
+	 */
 	public void setTurnBased(boolean flag) {
 		turnBased = flag;
 	}

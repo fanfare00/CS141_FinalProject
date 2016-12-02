@@ -4,7 +4,17 @@ import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShootingState.
+ */
 public class ShootingState extends TextUIState {
+	
+	/**
+	 * Instantiates a new shooting state.
+	 *
+	 * @param app the app
+	 */
 	public ShootingState(Application app) {
 		super(app);
 
@@ -27,6 +37,9 @@ public class ShootingState extends TextUIState {
 		key_Z.setCommand(new ToggleMoveCommand());
 	}
 	
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States.TextUIState#update(boolean[])
+	 */
 	@Override
 	public void update(boolean[] activeDirections) {	
 		activeDirections[app.getEnemyDirection().ordinal()] = true;

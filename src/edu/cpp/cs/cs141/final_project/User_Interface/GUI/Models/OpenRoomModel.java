@@ -3,8 +3,15 @@ package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenRoomModel.
+ */
 public class OpenRoomModel implements Model {
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.Model#draw(int, int, int, int, java.awt.Graphics2D)
+	 */
 	@Override
 	public void draw(int x, int y, int width, int height, Graphics2D g) {
 		g.setColor(new Color(195, 195, 195));

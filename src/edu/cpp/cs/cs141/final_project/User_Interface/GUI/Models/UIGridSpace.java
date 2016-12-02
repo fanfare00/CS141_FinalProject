@@ -17,33 +17,69 @@ import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.MouseHandler;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UIGridSpace.
+ */
 public class UIGridSpace extends JComponent{
+	
+	/** The x loc. */
 	private int xLoc;
+	
+	/** The y loc. */
 	private int yLoc;
 	
+	/** The Constant WIDTH. */
 	private static final int WIDTH = 50;
+	
+	/** The Constant HEIGHT. */
 	private static final int HEIGHT = 50;
 	
+	/** The row. */
 	public int row;
+	
+	/** The col. */
 	public int col;
 	
+	/** The Constant COLOR. */
 	private static final Color COLOR = Color.GRAY;
+	
+	/** The model. */
 	public Model model;
+	
+	/** The back model. */
 	public Model backModel;
 	
+	/** The grid. */
 	UIGrid grid;
+	
+	/** The app. */
 	Application app;
 	
+	/** The rect. */
 	public Rectangle rect;
 	
+	/** The is highlighted. */
 	public boolean isHighlighted;
 	
+	/** The is open. */
 	public boolean isOpen;
 	
+	/** The is looked at. */
 	public boolean isLookedAt;
 	
+	/** The can shoot. */
 	public boolean canShoot;
 	
+	/**
+	 * Instantiates a new UI grid space.
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @param model the model
+	 * @param grid the grid
+	 * @param app the app
+	 */
 	public UIGridSpace(int row, int col, Model model, UIGrid grid, Application app) {
 		this.row = row;
 		this.col = col;
@@ -73,6 +109,12 @@ public class UIGridSpace extends JComponent{
 		}
 	}
 	
+	/**
+	 * Checks if is mouse inside.
+	 *
+	 * @param comp the comp
+	 * @return true, if is mouse inside
+	 */
 	public boolean isMouseInside(JComponent comp){
 		boolean isMouseInside = false;
 		
@@ -86,6 +128,12 @@ public class UIGridSpace extends JComponent{
 		return isMouseInside;
 	}
 	
+	/**
+	 * Draw.
+	 *
+	 * @param g the g
+	 * @param frame the frame
+	 */
 	public void draw(Graphics2D g, JFrame frame) {
 		
 		g.setColor(Color.GRAY);

@@ -5,8 +5,17 @@ import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LookingState.
+ */
 public class LookingState extends TextUIState {
 
+	/**
+	 * Instantiates a new looking state.
+	 *
+	 * @param app the app
+	 */
 	public LookingState(Application app) {
 		super(app);
 		
@@ -26,6 +35,10 @@ public class LookingState extends TextUIState {
 		key_C.setCommand(new ToggleMoveCommand());
 		
 	}
+	
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States.TextUIState#update(boolean[])
+	 */
 	@Override
 	public void update(boolean[] activeDirections) {	
 		key_1.setActive(false);

@@ -11,23 +11,48 @@ import javax.swing.JFrame;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UIGrid.
+ */
 public class UIGrid {
 
+	/** The x loc. */
 	public int xLoc;
+	
+	/** The y loc. */
 	public int yLoc;
+	
+	/** The width. */
 	public int width;
+	
+	/** The height. */
 	public int height;
 	
+	/** The grid. */
 	private char grid[][];
 	
+	/** The app. */
 	private Application app;
 	
+	/** The has updated. */
 	public boolean hasUpdated;
 	
 	//private UIGridSpace componentGrid[][];
 	
+	/** The spaces. */
 	public List<UIGridSpace> spaces = new ArrayList<UIGridSpace>();
 	
+	/**
+	 * Instantiates a new UI grid.
+	 *
+	 * @param xLoc the x loc
+	 * @param yLoc the y loc
+	 * @param width the width
+	 * @param height the height
+	 * @param grid the grid
+	 * @param app the app
+	 */
 	public UIGrid(int xLoc, int yLoc, int width, int height, char[][] grid, Application app) {
 		this.grid = grid;
 		this.width = width;
@@ -40,6 +65,11 @@ public class UIGrid {
 		
 	}
 
+	/**
+	 * Creates the.
+	 *
+	 * @param grid the grid
+	 */
 	public void create(char[][] grid) {
 		hasUpdated = true;
 		
@@ -64,12 +94,22 @@ public class UIGrid {
 		this.grid = grid;
 	}
 	
+	/**
+	 * Reset grid.
+	 */
 	public void resetGrid() {
 		for (int i = 0; i < spaces.size(); i++) {
 			spaces.get(i).isOpen = false;
 		}
 	}
 
+	/**
+	 * Adds the.
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @param symbol the symbol
+	 */
 	public void add(int row, int col, char symbol) {
 		
 		switch (symbol) {
@@ -109,10 +149,21 @@ public class UIGrid {
 		//parseSpace();
 	}
 	
+	/**
+	 * Gets the spaces.
+	 *
+	 * @return the spaces
+	 */
 	public List<UIGridSpace> getSpaces() {
 		return spaces;
 	}
 	
+	/**
+	 * Draw.
+	 *
+	 * @param g the g
+	 * @param frame the frame
+	 */
 	public void draw(Graphics2D g, JFrame frame) {
 //		for (UIGridSpace space : spaces) {
 //			space.draw(g);
@@ -131,6 +182,11 @@ public class UIGrid {
 //		
 	}
 	
+	/**
+	 * Gets the player space.
+	 *
+	 * @return the player space
+	 */
 	public UIGridSpace getPlayerSpace() {
 		for (int i = 0; i < spaces.size(); i++) {
 			if (spaces.get(i).model instanceof PlayerModel) return spaces.get(i);
@@ -139,12 +195,21 @@ public class UIGrid {
 		return spaces.get(0);
 	}
 	
+	/**
+	 * Unlook all spaces.
+	 */
 	public void unlookAllSpaces() {
 		for (int i = 0; i < spaces.size(); i++) {
 			spaces.get(i).isLookedAt = false;
 		}
 	}
 
+	/**
+	 * Reveal looked space.
+	 *
+	 * @param oldSpace the old space
+	 * @param dir the dir
+	 */
 	public void revealLookedSpace(UIGridSpace oldSpace, Direction dir) {
 		if (oldSpace.model instanceof OpenRoomModel) return;
 		
@@ -158,12 +223,24 @@ public class UIGrid {
 		} 
 	}
 
+	/**
+	 * Sets the can shoot.
+	 *
+	 * @param flag the new can shoot
+	 */
 	public void setCanShoot(boolean flag) {
 		for (int i = 0; i < spaces.size(); i++) {
 			spaces.get(i).canShoot = flag;
 		}
 	}
 	
+	/**
+	 * Gets the move direction.
+	 *
+	 * @param oldSpace the old space
+	 * @param space the space
+	 * @return the move direction
+	 */
 	public Direction getMoveDirection(UIGridSpace oldSpace, UIGridSpace space) {
 		Direction dir = null;
 		

@@ -8,34 +8,60 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.Room;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.Powerup;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
 /**
  * A {@link GameObject} that is capable of moving around.
  */
 public abstract class Actor extends GameObject{
 
+	/** The Constant MAX_DIRECTIONS. */
 	protected static final int MAX_DIRECTIONS = Direction.values().length;
 	
+	/** The nearby actors. */
 	protected List<Actor> nearbyActors = new ArrayList<Actor>();
 	
+	/** The is alive. */
 	boolean isAlive;
+	
+	/** The invincible. */
 	boolean invincible;
+	
+	/** The can attack. */
 	boolean canAttack = false;
+	
+	/** The ammo. */
 	int ammo;
 	
+	/** The move conditions. */
 	boolean[] moveConditions;
 	
+	/** The above room. */
 	protected boolean aboveRoom;
 	
 	//protected ActorState state;
 	
+	/** The move dir. */
 	protected Direction moveDir;
 	
+	/** The current powerup. */
 	protected Powerup currentPowerup = null;
 	
+	/**
+	 * Instantiates a new actor.
+	 *
+	 * @param row the row
+	 * @param col the col
+	 */
 	public Actor(int row, int col) {
 		super(row, col);
 		
 	}
+	
+	/**
+	 * Update state.
+	 *
+	 * @param activeEntities the active entities
+	 */
 	public void updateState(List<GameObject> activeEntities) {
 
 		canAttack = false;
@@ -74,18 +100,36 @@ public abstract class Actor extends GameObject{
 	    this.invincible = invincible;
 	}
 	
+	/**
+	 * Sets the move direction.
+	 *
+	 * @param dir the new move direction
+	 */
 	public void setMoveDirection(Direction dir){
 		this.moveDir = dir;
 	}
 	
+	/**
+	 * Attack.
+	 *
+	 * @param dir the dir
+	 */
 	public void attack(Direction dir){
 		
 	}
 	
+	/**
+	 * Inits the.
+	 *
+	 * @param activeEntities the active entities
+	 */
 	public void init(List<GameObject> activeEntities) {
 		updateState(activeEntities);
 	}
 	
+	/**
+	 * Move.
+	 */
 	public void move(){
 		if (moveDir == null) return;
 		
@@ -95,6 +139,9 @@ public abstract class Actor extends GameObject{
 		moveDir = null;
 	}
 	
+	/**
+	 * Update attack status.
+	 */
 	protected void updateAttackStatus() {
 		//canAttack = !(nearbyActors.isEmpty());
 		//nearbyActors.clear();
@@ -106,14 +153,29 @@ public abstract class Actor extends GameObject{
 //		}
 	}
 	
+	/**
+	 * Gets the can attack.
+	 *
+	 * @return the can attack
+	 */
 	public boolean getCanAttack() {	
 		return canAttack;
 	}
 	
+	/**
+	 * Gets the move conditions.
+	 *
+	 * @return the move conditions
+	 */
 	public boolean[] getMoveConditions() {
 		return moveConditions;
 	}
 	
+	/**
+	 * Gets the above room.
+	 *
+	 * @return the above room
+	 */
 	public boolean getAboveRoom() {
 		boolean _aboveRoom = aboveRoom;
 		aboveRoom = false;
@@ -121,6 +183,9 @@ public abstract class Actor extends GameObject{
 		return _aboveRoom;
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.Game_Objects.GameObject#update(java.util.List)
+	 */
 	@Override
 	public void update(List<GameObject> activeEntities) {
 		//move();

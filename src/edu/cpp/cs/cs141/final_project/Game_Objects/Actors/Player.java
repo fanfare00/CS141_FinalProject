@@ -8,45 +8,84 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.Room;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.Powerup;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
+// TODO: Auto-generated Javadoc
 /**
  * The {@link Actor} that the user controls.
  */
 public class Player extends Actor{
+	
+	/** The is invincible. */
 	private boolean isInvincible;
 
+	/** The Constant PLAYER_NAME. */
 	private static final String PLAYER_NAME = "Player";
+	
+	/** The Constant PLAYER_SYMBOL. */
 	private static final char PLAYER_SYMBOL = 'P';
 	
 	
+	/** The look dir. */
 	private Direction lookDir;
+	
+	/** The can look. */
 	private boolean canLook = true;
+	
+	/** The has died recently. */
 	private boolean hasDiedRecently = true;
 	
+	/** The starting row. */
 	private int startingRow;
+	
+	/** The starting col. */
 	private int startingCol;
 	
+	/** The remaining lives. */
 	private int remainingLives;
+	
+	/** The remaining ammo. */
 	private int remainingAmmo;
+	
+	/** The remaining turns invincible. */
 	private int remainingTurnsInvincible = 0;
 
+	/** The has radar. */
 	private boolean hasRadar;
 	
+	/** The found intel. */
 	private boolean foundIntel;
 	
+	/** The revealed enemy. */
 	private boolean revealedEnemy;
 	
+	/** The killed enemy. */
 	private boolean killedEnemy;
 	
+	/** The missed enemy. */
 	private boolean missedEnemy;
 	
+	/** The has made first move. */
 	public boolean hasMadeFirstMove;
+	
+	/** The has looked room. */
 	public boolean hasLookedRoom;
+	
+	/** The has used powerup. */
 	public boolean hasUsedPowerup;
 	
+	/** The old powerup. */
 	public Powerup oldPowerup;
 	
+	/** The adjacent enemy direction. */
 	public Direction adjacentEnemyDirection;
 	
+	/**
+	 * Instantiates a new player.
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @param maxLives the max lives
+	 * @param maxAmmo the max ammo
+	 */
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
 		this.startingRow = row;
@@ -61,11 +100,19 @@ public class Player extends Actor{
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Sets the look dir.
+	 *
+	 * @param dir the new look dir
+	 */
 	public void setLookDir(Direction dir) {
 		this.lookDir = dir;
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor#updateState(java.util.List)
+	 */
 	@Override
 	public void updateState(List<GameObject> activeEntities) {
 
@@ -96,6 +143,11 @@ public class Player extends Actor{
 		this.moveConditions = _moveConditions;
 	}
 	
+	/**
+	 * Look.
+	 *
+	 * @param activeEntities the active entities
+	 */
 	public void look(List<GameObject> activeEntities) {
 		revealNearby(activeEntities);
 		
@@ -129,6 +181,9 @@ public class Player extends Actor{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor#attack(edu.cpp.cs.cs141.final_project.Utilities.Direction)
+	 */
 	public void attack(Direction dir) {
 		this.canAttack = false;
 		Actor targetedEnemy = null;
@@ -193,6 +248,11 @@ public class Player extends Actor{
 	}
 	
 	
+	/**
+	 * Reveal nearby.
+	 *
+	 * @param activeEntities the active entities
+	 */
 	public void revealNearby(List<GameObject> activeEntities) {
 		for (GameObject obj : activeEntities) {
 			if(obj.equals(this)) continue;
@@ -210,18 +270,36 @@ public class Player extends Actor{
 		//hasRadar = false;
 	}
 	
+	/**
+	 * Sets the remaining lives.
+	 *
+	 * @param remainingLives the new remaining lives
+	 */
 	public void setRemainingLives(int remainingLives){
 		this.remainingLives = remainingLives;
 	}
 	
+	/**
+	 * Gets the can look.
+	 *
+	 * @return the can look
+	 */
 	public boolean getCanLook() {
 		return this.canLook;
 	}
 	
+	/**
+	 * Gets the checks for died recently.
+	 *
+	 * @return the checks for died recently
+	 */
 	public boolean getHasDiedRecently() {
 		return this.hasDiedRecently;
 	}
 	
+	/**
+	 * Reset.
+	 */
 	public void reset() {
 		if (!isInvincible){
 			this.row = startingRow;
@@ -232,6 +310,9 @@ public class Player extends Actor{
 		}
 	}
 	
+	/**
+	 * Update powerup.
+	 */
 	public void updatePowerup() {
 		if (remainingTurnsInvincible == 0) isInvincible = false;
 		
@@ -244,6 +325,9 @@ public class Player extends Actor{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor#update(java.util.List)
+	 */
 	@Override
 	public void update(List<GameObject> activeEntities) {
 		currentPowerup = null;
@@ -275,75 +359,158 @@ public class Player extends Actor{
 		}
 	}
 
+	/**
+	 * Gets the remaining lives.
+	 *
+	 * @return the remaining lives
+	 */
 	public int getRemainingLives() {
 		return remainingLives;
 	}
 	
+	/**
+	 * Gets the remaining ammo.
+	 *
+	 * @return the remaining ammo
+	 */
 	public int getRemainingAmmo() {
 		return remainingAmmo;
 	}
 
+	/**
+	 * Sets the remaining ammo.
+	 *
+	 * @param extraAmmoAmount the new remaining ammo
+	 */
 	public void setRemainingAmmo(int extraAmmoAmount) {
 		remainingAmmo += extraAmmoAmount;
 		
 	}
 
+	/**
+	 * Sets the invincibility turns.
+	 *
+	 * @param invincibilityTurns the new invincibility turns
+	 */
 	public void setInvincibilityTurns(int invincibilityTurns) {
 		remainingTurnsInvincible += invincibilityTurns;
 		isInvincible = true;
 	}
 	
+	/**
+	 * Gets the invincibility turns.
+	 *
+	 * @return the invincibility turns
+	 */
 	public int getInvincibilityTurns() {
 		return remainingTurnsInvincible;
 	}
 
+	/**
+	 * Sets the checks for radar.
+	 *
+	 * @param b the new checks for radar
+	 */
 	public void setHasRadar(boolean b) {
 		this.hasRadar = true;
 	}
 	
+	/**
+	 * Gets the current powerup.
+	 *
+	 * @return the current powerup
+	 */
 	public Powerup getCurrentPowerup() {
 		return this.currentPowerup;
 	}
 
+	/**
+	 * Sets the current powerup.
+	 *
+	 * @param obj the new current powerup
+	 */
 	public void setCurrentPowerup(Powerup obj) {
 		this.currentPowerup = obj;
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor#getCanAttack()
+	 */
 	@Override
 	public boolean getCanAttack() {	
 		return remainingAmmo > 0 ;
 	}
 	
+	/**
+	 * Found intel.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean foundIntel() {
 		return foundIntel;
 	}
 	
+	/**
+	 * Gets the checks if is invincible.
+	 *
+	 * @return the checks if is invincible
+	 */
 	public boolean getIsInvincible() {
 		// TODO Auto-generated method stub
 		return isInvincible;
 	}
 
+	/**
+	 * Checks for revealed enemy.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasRevealedEnemy() {
 		return revealedEnemy;
 	}
 
+	/**
+	 * Sets the revealed enemy.
+	 *
+	 * @param revealedEnemy the new revealed enemy
+	 */
 	public void setRevealedEnemy(boolean revealedEnemy) {
 		this.revealedEnemy = revealedEnemy;
 	}
 
+	/**
+	 * Checks for killed enemy.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasKilledEnemy() {
 		return killedEnemy;
 	}
 
+	/**
+	 * Sets the killed enemy.
+	 *
+	 * @param killedEnemy the new killed enemy
+	 */
 	public void setKilledEnemy(boolean killedEnemy) {
 		this.killedEnemy = killedEnemy;
 	}
 
+	/**
+	 * Checks for missed enemy.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasMissedEnemy() {
 		return missedEnemy;
 	}
 
+	/**
+	 * Sets the missed enemy.
+	 *
+	 * @param missedEnemy the new missed enemy
+	 */
 	public void setMissedEnemy(boolean missedEnemy) {
 		this.missedEnemy = missedEnemy;
 	}

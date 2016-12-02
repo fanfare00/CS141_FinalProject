@@ -3,8 +3,17 @@ package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UISelectionState.
+ */
 public class UISelectionState extends TextUIState {
 
+	/**
+	 * Instantiates a new UI selection state.
+	 *
+	 * @param app the app
+	 */
 	public UISelectionState(Application app) {
 		super(app);
 		
@@ -17,6 +26,9 @@ public class UISelectionState extends TextUIState {
 		key_2.setActive(true);
 	}
 	
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States.TextUIState#update(boolean[])
+	 */
 	public void update(boolean[] activeDirections) {	
 		key_3.setActive(false);
 		key_4.setActive(false);

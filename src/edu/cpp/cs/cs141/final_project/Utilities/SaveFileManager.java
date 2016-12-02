@@ -4,12 +4,15 @@ package edu.cpp.cs.cs141.final_project.Utilities;
 import java.io.*;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The class responsible for managing save data. It contains static methods for saving and restoring the state of the game.
  *
  */
 public abstract class SaveFileManager
 {
+	
+	/** The Constant FILE_NAME. */
 	public static final String FILE_NAME = "save_data";
 	
 	/**
