@@ -45,6 +45,8 @@ public class Player extends Actor{
 	
 	public Powerup oldPowerup;
 	
+	public Direction adjacentEnemyDirection;
+	
 	public Player(int row, int col, int maxLives, int maxAmmo) {
 		super(row, col);
 		this.startingRow = row;
@@ -84,8 +86,7 @@ public class Player extends Actor{
 			for(Direction dir : Direction.values()) {
 				if (checkCollision( obj, dir) && obj instanceof Actor) { 
 					_moveConditions[dir.ordinal()] = false;
-					//nearbyActors.add((Actor) obj);
-					this.updateAttackStatus();
+					this.adjacentEnemyDirection = dir;
 				}
 				else if (checkCollision( obj, dir) && !(obj instanceof Powerup)) _moveConditions[dir.ordinal()] = false;
 			}
@@ -93,11 +94,6 @@ public class Player extends Actor{
 		}
 		
 		this.moveConditions = _moveConditions;
-	}
-	
-	protected void updateAttackStatus(Enemy obj) {
-		
-
 	}
 	
 	public void look(List<GameObject> activeEntities) {
@@ -231,6 +227,7 @@ public class Player extends Actor{
 			this.col = startingCol;
 			this.remainingLives-=1;
 			this.hasDiedRecently = true;
+			//this.canAttack = true;
 		}
 	}
 	

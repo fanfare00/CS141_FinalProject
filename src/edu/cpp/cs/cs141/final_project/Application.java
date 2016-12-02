@@ -22,6 +22,7 @@ public class Application {
 	private boolean hasMadeUIChoice;
 	
 	
+	
 	public Application(IUserInterface UI, Game game) {
 		this.UI = UI;
 		this.game = game;
@@ -312,6 +313,10 @@ public class Application {
 
 		game.setTurnBased(flag);
 		game.togglePause(flag);
+	}
+
+	public Enum<Direction> getEnemyDirection() {
+		return game.getPlayer().adjacentEnemyDirection;
 	}
 
 }

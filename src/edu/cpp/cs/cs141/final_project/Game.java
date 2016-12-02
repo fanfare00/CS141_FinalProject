@@ -56,7 +56,9 @@ public class Game {
 		spawnPlayer();
 		spawnRooms();
 		spawnPowerups();
-		spawnEnemies();
+		//spawnEnemies();
+		Enemy enemy = new Enemy(7, 0);
+		activeEntities.add(enemy);
 		spawnBriefcase();
 		
 		initializeEntities();
