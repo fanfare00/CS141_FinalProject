@@ -105,7 +105,6 @@ public class Player extends Actor{
 				
 				if (checkCollision(obj, lookDir.row()*2, lookDir.col()*2)) { 
 					obj.setIsLookedAt(true);
-					System.out.println("test");
 					
 					if (obj instanceof Enemy) {
 						revealedEnemy = true;

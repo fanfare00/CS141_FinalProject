@@ -56,9 +56,9 @@ public class Game {
 		spawnPlayer();
 		spawnRooms();
 		spawnPowerups();
-		//spawnEnemies();
-		Enemy enemy = new Enemy(7, 0);
-		activeEntities.add(enemy);
+		spawnEnemies();
+//		Enemy enemy = new Enemy(7, 0);
+//		activeEntities.add(enemy);
 		spawnBriefcase();
 		
 		initializeEntities();
@@ -260,7 +260,6 @@ public class Game {
 			
 			obj.setVisible(flag);
 			if(obj.isLookedAt()) {
-				System.out.println("tes2t");
 				obj.setVisible(true);
 			}
 		}
