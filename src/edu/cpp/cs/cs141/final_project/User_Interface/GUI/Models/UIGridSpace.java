@@ -95,7 +95,7 @@ public class UIGridSpace extends JComponent{
 		g.setColor(Color.BLACK);
 		if (model instanceof RoomModel) g.fill(rect);
 		
-		if (isLookedAt) {
+		if (isLookedAt && !app.getDeathStatus()) {
 			g.setColor(new Color(255, 255, 189));
 			g.fillOval(xLoc, yLoc, WIDTH, HEIGHT);
 		}

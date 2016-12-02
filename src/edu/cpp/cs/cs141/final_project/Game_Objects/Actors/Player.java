@@ -123,6 +123,8 @@ public class Player extends Actor{
 				}
 			}
 			canLook = false;
+			hasDiedRecently = false;
+			hasMadeFirstMove = true;
 		}
 		
 	}
@@ -226,7 +228,7 @@ public class Player extends Actor{
 			this.col = startingCol;
 			this.remainingLives-=1;
 			this.hasDiedRecently = true;
-			//this.canAttack = true;
+			this.canLook = true;
 		}
 	}
 	
