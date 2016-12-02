@@ -19,18 +19,9 @@ package edu.cpp.cs.cs141.final_project.User_Interface.GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Graphics2D;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -38,7 +29,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -49,55 +39,93 @@ import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.ButtonHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.KeyboardHandler;
 import edu.cpp.cs.cs141.final_project.Commands.Command;
-import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
-import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
-import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Enemy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GraphicalUserInterface.
+ */
+@SuppressWarnings("serial")
 public class GraphicalUserInterface extends JFrame implements IUserInterface, Runnable{
 	
+	/** The Constant FRAME_WIDTH. */
 	private static final int FRAME_WIDTH = 800;
+	
+	/** The Constant FRAME_HEIGHT. */
 	private static final int FRAME_HEIGHT = 600;
 	
+	/** The Constant GRID_WIDTH. */
 	private static final int GRID_WIDTH = 450;
+	
+	/** The Constant GRID_HEIGHT. */
 	private static final int GRID_HEIGHT = 450;
 	
+	/** The Constant GRID_X. */
 	private static final int GRID_X = ((FRAME_WIDTH+10)/3) - (GRID_WIDTH/2);
+	
+	/** The Constant GRID_Y. */
 	private static final int GRID_Y = ((FRAME_HEIGHT+10)/2) - (GRID_HEIGHT/2) - 50;
 
 	
+	/** The Constant FPS. */
 	private static final int FPS = 30;
 	
+	/** The back buffer. */
 	BufferedImage backBuffer; 
 	
+	/** The insets. */
 	Insets insets; 
 	
+	/** The grid. */
 	UIGrid grid;
 	
 	//private char grid[][];
 	
-    Graphics2D g; 
+    /** The g. */
+	Graphics2D g; 
+    
+    /** The bbg. */
     Graphics2D bbg;
     
+    /** The command. */
     Command command;
     
+    /** The is running. */
     private boolean isRunning;
     
     
+    /** The app. */
     Application app;
     
+    /** The alert label. */
     JLabel alertLabel;
+    
+    /** The instruction label. */
     JLabel instructionLabel;
     
+    /** The ammo label. */
     JLabel ammoLabel;
+    
+    /** The lives label. */
     JLabel livesLabel;
     
+    /** The right panel. */
     JPanel rightPanel;
+    
+    /** The top panel. */
     JPanel topPanel;
+    
+    /** The bot panel. */
     JPanel botPanel;
+    
+    /** The menu panel. */
     JPanel menuPanel;
     
+    /** The life counter. */
     private int lifeCounter = 3;
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#init(edu.cpp.cs.cs141.final_project.Application)
+	 */
 	@Override
 	public void init(Application app) {
 		this.app = app;
@@ -138,6 +166,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 	
+	/**
+	 * Setup menu buttons.
+	 */
 	private void setupMenuButtons() {
 		JButton newGameButton = new JButton("New Game");
 		newGameButton.setSize(160, 35);
@@ -188,6 +219,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 
 	}
 	
+	/**
+	 * Setup and display labels.
+	 */
 	private void setupAndDisplayLabels() {
 		alertLabel = new JLabel(" ");
 		alertLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -316,6 +350,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 	
+	/**
+	 * Setup and display panels.
+	 */
 	private void setupAndDisplayPanels() {
 
 		topPanel = new JPanel();
@@ -373,6 +410,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		this.add(menuPanel);
 	}
 	
+	/**
+	 * Draw.
+	 */
 	public void draw() {
 		drawBackground();
 		drawGrid();
@@ -381,6 +421,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 	
+	/**
+	 * Update counters.
+	 */
 	private void updateCounters() {
 		
 		if (app.getPlayerLives() == 3) livesLabel.setIcon(new ImageIcon("res/3lives.png"));
@@ -399,6 +442,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {	
 		while(!app.getPaused()){ 
 			long time = System.currentTimeMillis(); 
@@ -422,6 +468,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#update()
+	 */
 	@Override
 	public void update() {
 		if (!isRunning) { 
@@ -431,6 +480,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#createGrid(int, int)
+	 */
 	@Override
 	public void createGrid(int rows, int cols) {
 		//grid = new char[rows][cols];
@@ -438,12 +490,18 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		grid.create(new char[rows][cols]);
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#addToGrid(int, int, char)
+	 */
 	@Override
 	public void addToGrid(int row, int col, char symbol) {
 		//grid[row][col] = symbol;
 		grid.add(row, col, symbol);
 	}
 	
+	/**
+	 * Draw background.
+	 */
 	private void drawBackground() {
         bbg.setColor(Color.BLACK); 
         bbg.fillRect(5, 25, FRAME_WIDTH, FRAME_HEIGHT); 
@@ -468,11 +526,17 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
         
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#drawGrid()
+	 */
 	@Override
 	public void drawGrid() {
 		grid.draw(bbg, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#toggleMenuState()
+	 */
 	@Override
 	public void toggleMenuState() {
 		if (isRunning) {
@@ -483,35 +547,53 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#toggleMoveState()
+	 */
 	@Override
 	public void toggleMoveState() {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#toggleLookState()
+	 */
 	@Override
 	public void toggleLookState() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#toggleShootState()
+	 */
 	@Override
 	public void toggleShootState() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#getAndHandleInput()
+	 */
 	@Override
 	public void getAndHandleInput() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#setStatusText(java.lang.String)
+	 */
 	@Override
 	public void setStatusText(String string) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#setAlertText(java.lang.String)
+	 */
 	@Override
 	public void setAlertText(String string) {
 	
@@ -524,6 +606,9 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.cpp.cs.cs141.final_project.User_Interface.IUserInterface#resetGrid()
+	 */
 	@Override
 	public void resetGrid() {
 		grid.resetGrid();

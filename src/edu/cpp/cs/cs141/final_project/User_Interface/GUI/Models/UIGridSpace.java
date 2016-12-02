@@ -21,13 +21,10 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
 import edu.cpp.cs.cs141.final_project.Application;
-import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.KeyboardHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.MouseHandler;
 
 import javax.swing.JComponent;
@@ -37,6 +34,7 @@ import javax.swing.JFrame;
 /**
  * The Class UIGridSpace.
  */
+@SuppressWarnings("serial")
 public class UIGridSpace extends JComponent{
 	
 	/** The x loc. */
@@ -56,9 +54,6 @@ public class UIGridSpace extends JComponent{
 	
 	/** The col. */
 	public int col;
-	
-	/** The Constant COLOR. */
-	private static final Color COLOR = Color.GRAY;
 	
 	/** The model. */
 	public Model model;

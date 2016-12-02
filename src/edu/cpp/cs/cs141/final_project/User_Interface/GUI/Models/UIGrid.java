@@ -16,12 +16,10 @@
  */
 package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import edu.cpp.cs.cs141.final_project.Application;

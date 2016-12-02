@@ -23,7 +23,6 @@ public class Player extends Actor{
 	/** The Constant PLAYER_SYMBOL. */
 	private static final char PLAYER_SYMBOL = 'P';
 	
-	
 	/** The look dir. */
 	private Direction lookDir;
 	

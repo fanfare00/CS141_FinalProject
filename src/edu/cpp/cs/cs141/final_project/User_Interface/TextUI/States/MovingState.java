@@ -18,7 +18,6 @@ package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
-import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 // TODO: Auto-generated Javadoc

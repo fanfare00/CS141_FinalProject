@@ -51,6 +51,7 @@ public abstract class SaveFileManager
 	 */
 	public static List<?> load() {
 		try {
+			@SuppressWarnings("resource")
 			ObjectInputStream o = new ObjectInputStream(new FileInputStream(FILE_NAME));
 			
 			return (List<?>) o.readObject();

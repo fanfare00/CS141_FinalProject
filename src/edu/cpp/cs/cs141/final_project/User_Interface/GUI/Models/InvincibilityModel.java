@@ -16,7 +16,6 @@
  */
 package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 

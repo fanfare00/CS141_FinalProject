@@ -201,9 +201,8 @@ public class Application {
 	}
 	
 	/**
-	 * Returns a warning to the user if input is invalid and tries again.
+	 * Sends a warning to the user if input is invalid and tries again.
 	 *
-	 * @return the new command
 	 */
 	public void getNewCommand() {
 		UI.setStatusText("Invalid Entry - See the above list for valid commands.");

@@ -18,18 +18,12 @@ package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.SwingUtilities;
 
 import edu.cpp.cs.cs141.final_project.Application;
-import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.EmptyModel;
-import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.OpenRoomModel;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.PlayerModel;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGridSpace;
-import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
 // TODO: Auto-generated Javadoc
 /**

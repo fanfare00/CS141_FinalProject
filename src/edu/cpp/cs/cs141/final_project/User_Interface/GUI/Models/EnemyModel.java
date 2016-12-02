@@ -16,13 +16,9 @@
  */
 package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.image.ImageObserver;
 
-import javax.swing.ImageIcon;
 
 // TODO: Auto-generated Javadoc
 /**
