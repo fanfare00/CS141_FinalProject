@@ -18,7 +18,7 @@ TEAM:
    The Constructors
       James McCarthy (C)
       Owen Dugmore
-      Rigoberto Canales
+      Rigoberto Canales Maldonado
       Yash Bhure
 
 
