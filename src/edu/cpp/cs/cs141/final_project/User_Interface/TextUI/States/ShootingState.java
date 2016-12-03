@@ -58,7 +58,8 @@ public class ShootingState extends TextUIState {
 	 */
 	@Override
 	public void update(boolean[] activeDirections) {	
-		activeDirections[app.getEnemyDirection().ordinal()] = true;
+		
+		if (app.getEnemyDirection() != null) activeDirections[app.getEnemyDirection().ordinal()] = true;
 		
 		key_1.setActive(false);
 		key_2.setActive(false);
