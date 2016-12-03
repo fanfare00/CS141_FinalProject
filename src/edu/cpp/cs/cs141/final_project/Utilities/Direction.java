@@ -16,28 +16,28 @@
  */
 package edu.cpp.cs.cs141.final_project.Utilities;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Enum Direction.
+ * A direction Enum for easier handling of row/col direction changes.
  */
 public enum Direction {
     
-    /** The up. */
+    /** The UP enum */
     UP 		(-1,  0),
     
-    /** The left. */
+    /** The left enum. */
     LEFT	( 0, -1),
     
-    /** The down. */
+    /** The down enum. */
     DOWN	( 1,  0),
     
-    /** The right. */
+    /** The right enum. */
     RIGHT	( 0,  1);
 	
-	/** The row. */
+	/** row. */
 	final int row;
 	
-	/** The col. */
+	/** column. */
 	final int col;
 	
 	/**
@@ -54,14 +54,14 @@ public enum Direction {
 	/**
 	 * Row.
 	 *
-	 * @return the int
+	 * @return the int row
 	 */
 	public int row(){return row;}
 	
 	/**
 	 * Col.
 	 *
-	 * @return the int
+	 * @return the int col
 	 */
 	public int col(){return col;}
 	

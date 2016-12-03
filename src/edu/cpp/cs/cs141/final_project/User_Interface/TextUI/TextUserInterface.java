@@ -24,10 +24,11 @@ import edu.cpp.cs.cs141.final_project.User_Interface.UIState;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States.*;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class TextUserInterface.
+ * The text UI class handles inputs from the player and sets the
+ * corresponding commands that the user makes to the application
+ * for processing. The UI class displays information based on
+ * the state of the game through the application class.
  */
 public class TextUserInterface implements IUserInterface
 {

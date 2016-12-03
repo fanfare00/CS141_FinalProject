@@ -18,9 +18,9 @@ package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 
 import java.awt.Graphics2D;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Interface Model.
+ * The Interface Model represents a model of any object inside a grid space.
  */
 public interface Model {
 	

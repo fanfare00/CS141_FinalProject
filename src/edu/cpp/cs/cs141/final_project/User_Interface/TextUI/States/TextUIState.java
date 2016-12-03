@@ -25,9 +25,9 @@ import edu.cpp.cs.cs141.final_project.User_Interface.UIState;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.InputHandler;
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities.Key;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class TextUIState.
+ * The Class TextUIState is a base class for all states and contains generic schema.
  */
 public class TextUIState implements UIState {
 	

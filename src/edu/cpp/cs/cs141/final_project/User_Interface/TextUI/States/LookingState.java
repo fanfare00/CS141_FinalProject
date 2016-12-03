@@ -21,9 +21,9 @@ import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class LookingState.
+ * The Class LookingState is the state the UI will be in when the player is selecting a direction to shoot..
  */
 public class LookingState extends TextUIState {
 

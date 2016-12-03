@@ -22,9 +22,9 @@ import java.util.List;
 import edu.cpp.cs.cs141.final_project.Application;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class InputHandler.
+ * The Class InputHandler validates user inputs and executes commands.
  */
 public class InputHandler {	
 	

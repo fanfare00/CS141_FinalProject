@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * {@link Room}s can hold intel, which the player is searching for.
  */

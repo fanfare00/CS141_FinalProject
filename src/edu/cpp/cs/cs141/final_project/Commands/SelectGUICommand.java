@@ -5,7 +5,7 @@ package edu.cpp.cs.cs141.final_project.Commands;
 
 import edu.cpp.cs.cs141.final_project.Application;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SelectGUICommand.
  */

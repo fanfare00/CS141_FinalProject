@@ -25,9 +25,9 @@ import javax.swing.JFrame;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class UIGrid.
+ * The Class UIGrid handles the visual side and data side of displaying each individual space.
  */
 public class UIGrid {
 

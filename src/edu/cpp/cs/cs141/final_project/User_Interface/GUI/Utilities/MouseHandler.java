@@ -25,9 +25,9 @@ import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.PlayerModel;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGridSpace;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class MouseHandler.
+ * The Class MouseHandler handles inputs from the mouse, updates the way the UI a bit, and also sends commands.
  */
 public class MouseHandler implements MouseListener {
 	

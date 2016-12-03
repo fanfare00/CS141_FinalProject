@@ -8,7 +8,7 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.Room;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.Powerup;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The {@link Actor} that the user controls.
  */

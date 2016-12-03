@@ -18,7 +18,7 @@ package edu.cpp.cs.cs141.final_project;
 
 import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.TextUserInterface;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The entry point for the Java application.
  */

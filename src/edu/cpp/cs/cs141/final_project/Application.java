@@ -25,9 +25,13 @@ import edu.cpp.cs.cs141.final_project.User_Interface.TextUI.TextUserInterface;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 import edu.cpp.cs.cs141.final_project.Utilities.SaveFileManager;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The {@link Application} class receives commands from the UI and controls the game.
+ * This class represents handles inputs from the UI and updates the game
+ * based on those inputs, it also changes the state of the UI to take   
+ * depending on what is happening in the game. This class also contains
+ * the main process of the program within it's update method.
+ * 
  */
 public class Application {
 	

@@ -6,9 +6,9 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Player;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class ExtraAmmo.
+ * The Class ExtraAmmo is a powerup that gives the player 1 extra shots when consumed.
  */
 public class ExtraAmmo extends Powerup {
 	

@@ -19,7 +19,9 @@ package edu.cpp.cs.cs141.final_project.User_Interface;
 import edu.cpp.cs.cs141.final_project.Application;
 
 /**
- * The interface for user interfaces. The UI displays the details of the game to the user.
+ * The UI interface is designed to be used for both a text
+ * and graphical UI, these methods are shared between both
+ * for swapability while running on the application class.
  */
 public interface IUserInterface {
 	

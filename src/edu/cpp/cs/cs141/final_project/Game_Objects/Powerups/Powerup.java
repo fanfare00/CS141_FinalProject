@@ -3,9 +3,9 @@ package edu.cpp.cs.cs141.final_project.Game_Objects.Powerups;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The interface for Powerups. Powerups can be consumed by the player and have different effects.
+ * The abstract class for Powerups. Powerups can be consumed by the player and have different effects.
  */
 public abstract class Powerup extends GameObject {
 

@@ -20,7 +20,7 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class EnemyModel.
  */

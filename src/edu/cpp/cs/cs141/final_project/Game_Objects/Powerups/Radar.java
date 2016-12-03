@@ -6,9 +6,9 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Player;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class Radar.
+ * The Class Radar reveals the location of the intel for 1 turn.
  */
 public class Radar extends Powerup{
 

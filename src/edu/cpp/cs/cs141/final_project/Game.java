@@ -30,9 +30,11 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The game engine. It stores the game state and controls the mechanics of the game.
+ * The game engine. It stores the game state and controls the date and
+ *  mechanics of the game. It stores and manipulates game objects and
+ *  has resolves calls from the application class.
  */
 public class Game {
 

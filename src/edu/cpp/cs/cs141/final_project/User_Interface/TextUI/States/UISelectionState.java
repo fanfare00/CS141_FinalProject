@@ -19,9 +19,9 @@ package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class UISelectionState.
+ * The Class UISelectionState is the state the UI will be in when user is initially chosing a UI style.
  */
 public class UISelectionState extends TextUIState {
 

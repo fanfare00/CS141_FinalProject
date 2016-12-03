@@ -40,9 +40,8 @@ import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.ButtonHandler
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.KeyboardHandler;
 import edu.cpp.cs.cs141.final_project.Commands.Command;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GraphicalUserInterface.
+ * A Graphical version of the UI for extra credit.
  */
 @SuppressWarnings("serial")
 public class GraphicalUserInterface extends JFrame implements IUserInterface, Runnable{

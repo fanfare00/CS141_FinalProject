@@ -30,9 +30,9 @@ import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Utilities.MouseHandler;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class UIGridSpace.
+ * The Class UIGridSpace represents the spaces that make up the grid in the GUI.
  */
 @SuppressWarnings("serial")
 public class UIGridSpace extends JComponent{

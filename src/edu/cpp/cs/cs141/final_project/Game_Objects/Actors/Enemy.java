@@ -11,7 +11,7 @@ import javax.swing.SwingUtilities;
 import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * A hostile {@link Actor} that tries to attack the {@link Player}.
  * @author oadug

@@ -20,9 +20,9 @@ import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class MovingState.
+ * The Class MovingState  is the state the UI will be in when the player is selecting a direction to shoot..
  */
 public class MovingState extends TextUIState {
 	

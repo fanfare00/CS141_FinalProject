@@ -19,9 +19,9 @@ package edu.cpp.cs.cs141.final_project.Commands;
 import edu.cpp.cs.cs141.final_project.Application;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Interface Command.
+ * The Interface Command represents the basic function of any command to be sent to the application.
  */
 public interface Command {
 	

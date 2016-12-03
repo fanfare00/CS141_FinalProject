@@ -6,7 +6,7 @@ package edu.cpp.cs.cs141.final_project.Commands;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class LookCommand.
  */

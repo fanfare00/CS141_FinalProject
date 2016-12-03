@@ -6,7 +6,7 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.*;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Actor;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Actors.Player;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The invincibility powerup. This makes the consumer invincible for 5 turns.
  */

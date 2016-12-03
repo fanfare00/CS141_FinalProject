@@ -24,9 +24,9 @@ import javax.swing.JFrame;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class ButtonHandler.
+ * The Class ButtonHandler handles menu button inputs and sends commands to application.
  */
 public class ButtonHandler implements ActionListener{
 	

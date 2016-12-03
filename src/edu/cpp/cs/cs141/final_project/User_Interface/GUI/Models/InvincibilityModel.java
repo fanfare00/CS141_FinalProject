@@ -19,7 +19,7 @@ package edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class InvincibilityModel.
  */
@@ -35,9 +35,6 @@ public class InvincibilityModel implements Model{
 		
 		int innerX = x + (width/4) - innerWidth/2;
 		int innerY = y + (height - 10) - innerHeight/2;
-
-		//g.setColor(Color.MAGENTA);
-		//g.fillOval(innerX, innerY, innerWidth, innerHeight);
 		
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("res/star.png"), innerX, innerY, innerWidth, innerHeight, null);
 		

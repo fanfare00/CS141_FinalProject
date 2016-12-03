@@ -25,9 +25,8 @@ import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGrid;
 import edu.cpp.cs.cs141.final_project.User_Interface.GUI.Models.UIGridSpace;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class KeyboardHandler.
+ * The Class KeyboardHandler handles inputs from the keyboard and sends commands to application.
  */
 public class KeyboardHandler implements KeyListener{
 	

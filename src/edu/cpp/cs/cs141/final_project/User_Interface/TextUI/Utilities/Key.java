@@ -6,25 +6,25 @@ package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.Utilities;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.Command;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class Key.
+ * The Class Key .
  */
 public class Key {
 	
-	/** The symbol. */
+	/** The symbol to check for validity. */
 	private char symbol;
 	
-	/** The text. */
+	/** The text associated with command. */
 	private String text;
 	
-	/** The command. */
+	/** The command assigned to key. */
 	private Command command;
 	
-	/** The is active. */
+	/** Whether key has validity if entered. */
 	private boolean isActive = false;
 	
-	/** The is visible. */
+	/** Whether key appears on command list. */
 	private boolean isVisible = true;
 	
 	/**

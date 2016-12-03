@@ -19,9 +19,9 @@ package edu.cpp.cs.cs141.final_project.User_Interface.TextUI.States;
 import edu.cpp.cs.cs141.final_project.Application;
 import edu.cpp.cs.cs141.final_project.Commands.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class MenuState.
+ * The Class MenuState is the state the UI will be in when the player is selecting an option from the menu
  */
 public class MenuState extends TextUIState{
 	
