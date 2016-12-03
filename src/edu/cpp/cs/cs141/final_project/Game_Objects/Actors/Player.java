@@ -243,7 +243,7 @@ public class Player extends Actor{
 			nearbyActors.clear();
 	    }
 	    
-	    this.remainingAmmo -= 1;
+	    if (remainingAmmo > 0) this.remainingAmmo -= 1;
 	}
 	
 	

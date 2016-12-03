@@ -77,10 +77,6 @@ public class KeyboardHandler implements KeyListener{
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			
-		}
-		
 		if (e.getKeyCode() == KeyEvent.VK_9) app.toggleDebugMode();
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			if (!app.getGameOverStatus()) app.setPaused(!app.getPaused());
@@ -95,7 +91,9 @@ public class KeyboardHandler implements KeyListener{
 			frame.dispose();
 		}
 		
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) grid.setCanShoot(true);
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if (app.getPlayerAmmo() > 0) grid.setCanShoot(true);
+		}
 	}
 
 	/* (non-Javadoc)

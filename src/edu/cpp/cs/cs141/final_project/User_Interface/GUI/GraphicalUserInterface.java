@@ -161,7 +161,6 @@ public class GraphicalUserInterface extends JFrame implements IUserInterface, Ru
 		setupAndDisplayLabels();
 		setupMenuButtons();
 		
-		
 		this.getContentPane().setBackground(Color.BLACK);
 		
 		this.addKeyListener(new KeyboardHandler(grid, app, this));
