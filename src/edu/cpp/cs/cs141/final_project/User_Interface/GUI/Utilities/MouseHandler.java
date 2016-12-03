@@ -57,10 +57,10 @@ public class MouseHandler implements MouseListener {
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) throws NullPointerException{
 		UIGridSpace oldSpace = null;
 		grid.unlookAllSpaces();
-		
+
 		if (grid.hasUpdated) {	
 			oldSpace = grid.getPlayerSpace();
 		
@@ -76,13 +76,19 @@ public class MouseHandler implements MouseListener {
 			}
 			
 			if (app.getLookStatus() && space != grid.getPlayerSpace()) {
-				if ((SwingUtilities.isRightMouseButton(e)) && ((app.getDirectionalConditions()[grid.getMoveDirection(oldSpace, space).ordinal()])) | (app.getRoomCheckCondition())) {
-					space.isOpen = true;
-					app.playerLook(grid.getMoveDirection(oldSpace, space));
-					grid.revealLookedSpace(space, grid.getMoveDirection(oldSpace, space));
-					grid.hasUpdated = false;
+				try {
+					if ((SwingUtilities.isRightMouseButton(e)) && ((app.getDirectionalConditions()[grid.getMoveDirection(oldSpace, space).ordinal()])) | (app.getRoomCheckCondition())) {
+						space.isOpen = true;
+						app.playerLook(grid.getMoveDirection(oldSpace, space));
+						grid.revealLookedSpace(space, grid.getMoveDirection(oldSpace, space));
+						grid.hasUpdated = false;
+					}
+				} catch (NullPointerException doNothing) {
+					//System.out.println("hey");
 				}
 			}
+				
+			
 		}
 	}
 
