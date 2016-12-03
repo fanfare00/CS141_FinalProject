@@ -1,3 +1,19 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodríguez
+ *
+ * Assignment: Final Project
+ *
+ * Description: Spies vs. Ninjas is a game created to satisfy the requirements, 
+ *    as outlined on Blackboard, for professor Edwin Rodríguez's CS141 class at 
+ *    Cal Poly Pomona.
+ *
+ * Team: The Constructors
+ *   James McCarthy (C)
+ * 	 Owen Dugmore
+ * 	 Rigoberto Canales
+ *   Yash Bhure
+ */
 package edu.cpp.cs.cs141.final_project.Game_Objects.Actors;
 
 import java.util.ArrayList;
@@ -7,7 +23,6 @@ import edu.cpp.cs.cs141.final_project.Game_Objects.GameObject;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Fixtures.Room;
 import edu.cpp.cs.cs141.final_project.Game_Objects.Powerups.Powerup;
 import edu.cpp.cs.cs141.final_project.Utilities.Direction;
-
 
 /**
  * A {@link GameObject} that is capable of moving around.
