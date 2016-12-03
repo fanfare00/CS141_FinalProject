@@ -104,8 +104,9 @@ public class Application {
 		game = new Game();
 		loadGameData();
 		UI.createGrid(Game.GAME_ROWS, Game.GAME_COLS);
+		UI.toggleMoveState();
 		redrawUI();
-		UI.update();
+		if (UI instanceof TextUserInterface) UI.update();
 		
 		paused = false;
 	}
